@@ -6,3 +6,4 @@ void HardCoded(Hospital& hospital);
 
 
 #endif
+
