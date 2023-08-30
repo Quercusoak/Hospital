@@ -2,9 +2,8 @@
 
 //---------------------------------------------------------------//
 Nurse::Nurse(const char* name, float yrs_of_experience)
-	: name(nullptr), Staff(name)
+	: Staff(name), yrs_of_experience(yrs_of_experience)
 {
-	this->setExperience(yrs_of_experience);
 }
 
 //---------------------------------------------------------------//
@@ -16,7 +15,6 @@ void Nurse::setExperience(float experience)
 //---------------------------------------------------------------//
 Nurse::~Nurse()
 {
-	delete[]name;
 }
 
 
