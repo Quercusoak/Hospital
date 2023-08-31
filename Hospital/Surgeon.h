@@ -19,7 +19,7 @@ public:
 
 	virtual void toOS(std::ostream& os) const override 
 	{  
-		os << ", Job - Surgeon, Specialty - " << m_specialty << ", Number of Surgeries Performed: " << num_surgeries;
+		os << ", Specialty - " << m_specialty << ", Number of Surgeries Performed: " << num_surgeries;
 	}
 
 };
