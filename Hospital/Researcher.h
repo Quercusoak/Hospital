@@ -39,7 +39,7 @@ public:
 	void toOSArticles(std::ostream& os) const
 	{
 		os << endl << "Articles: " << endl;
-		for (int i = 0; i < m_numArticles; i++) {
+		for (unsigned int i = 0; i < m_numArticles; i++) {
 			cout << i + 1 << ")" << getArticle(i) << "\n";
 		}
 	}

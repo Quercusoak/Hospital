@@ -19,7 +19,7 @@ Researcher::~Researcher()
 }
 
 //---------------------------------------------------------------//
-void Researcher::addArticle(Article& data) 
+void Researcher::addArticle(Article& data)
 {
 	bool checkRepeats = true;
 	for (unsigned int i = 0; i < m_numArticles; i++)
@@ -34,3 +34,4 @@ void Researcher::addArticle(Article& data)
 		m_articles[m_numArticles] = &data;
 		m_numArticles++;
 	}
+}
