@@ -34,15 +34,3 @@ void Researcher::addArticle(Article& data)
 		m_articles[m_numArticles] = &data;
 		m_numArticles++;
 	}
-}
-
-//---------------------------------------------------------------//
-Researcher::Researcher(const Staff& base) : Staff(base)
-{
-	m_numArticles = 0;
-	m_maxArticles = 1;
-	m_articles = new Article * [m_maxArticles];
-}
-
-
-
