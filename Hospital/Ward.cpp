@@ -7,15 +7,12 @@ Ward::Ward(const char* ward_name)
 	name = new char[strlen(ward_name) + 1];
 	strcpy(name, ward_name);
 
-	num_nurses = 0;
-	max_nurse_size = 1;
-	nurses = new Nurse * [max_nurse_size];
-	nurses[0] = nullptr;
+	num_staff = 0;
+	max_staff = 1;
+	staff = new Staff * [max_staff];
+	staff[0] = nullptr;
 
 	num_doctors = 0;
-	max_doctors_size = 1;
-	doctors = new Doctor * [max_doctors_size];
-	doctors[0] = nullptr;
 
 	num_patients = 0;
 	max_patients_size = 1;
@@ -29,37 +26,10 @@ Ward::Ward(const char* ward_name)
 Ward::~Ward()
 {
 	delete[]name;
-	delete[] nurses;
-	delete[] doctors;
+	delete[] staff;
 	delete[] patients;
 }
 
-//---------------------------------------------------------------//
-void Ward::AddNurse(Nurse& nurse)
-{
-	if (num_nurses == max_nurse_size)
-	{
-		max_nurse_size *= 2;
-		nurses = (Nurse**)rerealloc(nurses, sizeof(Nurse*), num_nurses,  max_nurse_size);
-	}
-
-	nurses[num_nurses] = &nurse;
-	num_nurses++;
-
-}
-
-//---------------------------------------------------------------//
-void Ward::AddDoctor(Doctor& doctor)
-{
-	if (num_doctors == max_doctors_size)
-	{
-		max_doctors_size *= 2;
-		doctors = (Doctor**)rerealloc(doctors, sizeof(Doctor*), num_doctors, max_doctors_size);
-	}
-
-	doctors[num_doctors] = &doctor;
-	num_doctors++;
-}
 
 //---------------------------------------------------------------//
 void Ward::AddPatient(Patient& patient)
@@ -72,4 +42,49 @@ void Ward::AddPatient(Patient& patient)
 
 	patients[num_patients] = &patient;
 	num_patients++;
+}
+
+
+//---------------------------------------------------------------//
+void Ward::AddStaff(Staff& newStaff)
+{
+	if (num_staff == max_staff)
+	{
+		max_staff *= 2;
+		staff = (Staff**)rerealloc(staff, sizeof(Staff*), num_staff, max_staff);
+	}
+
+	staff[num_staff] = &newStaff;
+	num_staff++;
+
+	if (typeid(newStaff) == typeid(Doctor&))
+		num_doctors++;
+
+}
+
+//----------------------------------------------------------------------------------------------------//
+void Ward::AddNurse(const char* name, float yrs_of_experience)
+{
+	if (num_staff == max_staff)
+	{
+		max_staff *= 2;
+		staff = (Staff**)rerealloc(staff, sizeof(Staff*), num_staff, max_staff);
+	}
+
+	staff[num_staff] = new 	Nurse(name, yrs_of_experience);
+	num_staff++;
+}
+
+//----------------------------------------------------------------------------------------------------//
+void Ward::AddDoctor(const char* name, const char* specialty)
+{
+	if (num_staff == max_staff)
+	{
+		max_staff *= 2;
+		staff = (Staff**)rerealloc(staff, sizeof(Staff*), num_staff, max_staff);
+	}
+
+	staff[num_staff] = new 	Doctor(name, specialty);
+	num_staff++;
+	num_doctors++;
 }

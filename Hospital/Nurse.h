@@ -2,12 +2,12 @@
 #define __NURSE_H
 
 #include "Staff.h"
-//added to branch
+
 class Nurse : public Staff
 {
 private:
 	float yrs_of_experience;
-	
+
 public:
 	Nurse(const char* name, float yrs_of_experience);
 	Nurse(Nurse&) = delete;
@@ -22,8 +22,8 @@ public:
 
 	friend std::ostream& operator<<(std::ostream& os, const Nurse& nurse)
 	{
-		os << "Name - " << nurse.name << ", worker Id - " << nurse.workerId << ", Job - Nurse, Experience - " 
-			<< nurse.yrs_of_experience << " Years.";
+		os << "Name - " << nurse.name << ", worker id - " << nurse.workerId << ", Job - Nurse, Experience - "
+			<< nurse.yrs_of_experience << " years." << endl;
 		return os;
 	}
 
