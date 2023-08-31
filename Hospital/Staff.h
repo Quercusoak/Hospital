@@ -20,6 +20,7 @@ public:
 	unsigned int getWorkerID()		const { return workerId; }
 
 	Staff(const Staff&);
+	Staff(Staff&&);
 	virtual ~Staff();
 
 

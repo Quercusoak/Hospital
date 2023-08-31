@@ -19,6 +19,12 @@ Staff::Staff(const Staff& other) :Person(other.getName()), workerId(counter)
 }
 
 //--------------------------------------------------------------------------------//
+Staff::Staff(Staff&& other) :Person(other.getName()), workerId(counter)
+{
+	other.name = nullptr;
+}
+
+//--------------------------------------------------------------------------------//
 Staff::~Staff()
 {
 	counter--;

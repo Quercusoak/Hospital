@@ -51,7 +51,7 @@ void addResearcherArticle(Hospital& hospital);
 
 
 
-Ward& chooseWard(Hospital&);
+unsigned int chooseWard(Hospital&);
 
 
 Doctor& chooseDoctor(Ward&);

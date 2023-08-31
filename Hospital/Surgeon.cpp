@@ -7,6 +7,13 @@ Surgeon::Surgeon(const char* name, const char* specialty)
 	num_surgeries = 0;
 }
 
+
+//---------------------------------------------------------------//
+Surgeon::Surgeon(Doctor&& other) :Doctor(other),Staff(other.getName())
+{
+	num_surgeries = 0;
+}
+
 //---------------------------------------------------------------//
 void Surgeon::operator++()
 {

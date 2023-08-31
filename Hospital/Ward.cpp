@@ -46,30 +46,23 @@ void Ward::AddPatient(Patient& patient)
 
 
 //---------------------------------------------------------------//
-void Ward::AddStaff(Staff& newStaff)
+void Ward::AddStaff(Staff&& newStaff)
 {
-	if (num_staff == max_staff)
-	{
-		max_staff *= 2;
-		staff = (Staff**)rerealloc(staff, sizeof(Staff*), num_staff, max_staff);
-	}
+	checkMaxSizeReached();
 
 	staff[num_staff] = &newStaff;
 	num_staff++;
 
-	if (typeid(newStaff) == typeid(Doctor&))
+	if (typeid(newStaff) == typeid(Doctor))
+	{
 		num_doctors++;
-
+	}
 }
 
 //----------------------------------------------------------------------------------------------------//
 void Ward::AddNurse(const char* name, float yrs_of_experience)
 {
-	if (num_staff == max_staff)
-	{
-		max_staff *= 2;
-		staff = (Staff**)rerealloc(staff, sizeof(Staff*), num_staff, max_staff);
-	}
+	checkMaxSizeReached();
 
 	staff[num_staff] = new 	Nurse(name, yrs_of_experience);
 	num_staff++;
@@ -78,13 +71,30 @@ void Ward::AddNurse(const char* name, float yrs_of_experience)
 //----------------------------------------------------------------------------------------------------//
 void Ward::AddDoctor(const char* name, const char* specialty)
 {
+	checkMaxSizeReached();
+
+	staff[num_staff] = new 	Doctor(name, specialty);
+	num_staff++;
+	num_doctors++;
+}
+
+//----------------------------------------------------------------------------------------------------//
+void Ward::AddSurgeon(Doctor&& doctor)
+{
+	checkMaxSizeReached();
+
+	staff[num_staff] = new Surgeon(std::move(doctor));
+	num_staff++;
+	num_doctors++;
+}
+
+
+//----------------------------------------------------------------------------------------------------//
+void Ward::checkMaxSizeReached()
+{
 	if (num_staff == max_staff)
 	{
 		max_staff *= 2;
 		staff = (Staff**)rerealloc(staff, sizeof(Staff*), num_staff, max_staff);
 	}
-
-	staff[num_staff] = new 	Doctor(name, specialty);
-	num_staff++;
-	num_doctors++;
 }

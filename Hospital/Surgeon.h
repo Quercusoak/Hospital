@@ -10,6 +10,7 @@ protected:
 
 public:
 	Surgeon(const char* name, const char* specialty);
+	Surgeon(Doctor&&);
 	virtual ~Surgeon() {};
 
 	//each time surgeon performs surgery add to counter

@@ -4,6 +4,7 @@
 #define ERR_ID_TAKEN "id already in system"
 #define ERR_NO_WARDS "No ward had been added to hospital yet, please enter a ward first."
 #define ERR_NO_DOCTORS_IN_WARD "Ward is understaffed, and therefore, cannot add patient to ward, please enter a doctor to ward first"
+#define INCORRECT_DR_TYPE "Doctor type is invalid."
 
 int MenuOutPutInPut()
 {
@@ -57,10 +58,7 @@ void addNurse(Hospital& hospital)
 
 
 	cout << endl << "Assign " << name << " to a ward: " << endl;
-	Ward& ward = chooseWard(hospital);
-
-	
-	hospital.AddNurse(name, exp, ward);
+	hospital.getWards()[chooseWard(hospital)]->AddNurse(name, exp);
 
 	actionDone("Adding a new nurse", name, "", true);
 }
@@ -72,6 +70,10 @@ void addDoctor(Hospital& hospital)
 {
 	char specialty[MAX_STRING_INPUT];
 	char name[MAX_NAME_LENGTH];
+	unsigned int ward_num;
+	bool is_dr_type = true;
+	unsigned int dr_type;
+
 
 	cout << "Enter new doctor's name: ";
 	cleanBuffer();
@@ -82,11 +84,36 @@ void addDoctor(Hospital& hospital)
 
 
 	cout << endl << "Assign " << name << " to a ward: " << endl;
-	Ward& ward = chooseWard(hospital);
+	ward_num = chooseWard(hospital);
 
-	hospital.AddDoctor(name, specialty, ward);
+	
+	cout << "Select for Dr " << name << ":\n1)Doctor \n2)Surgeon \n3)Researcher Doctor \n4)Researcher Surgeon" << endl;
+	cin >> dr_type;
 
-	actionDone("Adding a new doctor", name, "", true);
+	switch (dr_type)
+	{
+	case 1:
+		hospital.getWards()[ward_num]->AddDoctor(name, specialty);
+		break;
+	case 2:
+		hospital.getWards()[ward_num]->AddSurgeon(Doctor(name, specialty));
+		break;
+	case 3:
+
+		hospital.getResearchCenter().AddResearcher(name);
+		break;
+	case 4:
+
+		break;
+	default:
+		is_dr_type = false;
+		break;
+	}
+
+
+	
+
+	actionDone("Adding a new doctor", name, INCORRECT_DR_TYPE, is_dr_type);
 
 }
 
@@ -127,7 +154,7 @@ void addPatient(Hospital& hospital)
 	//Select ward to add patient to:
 	bool check = hospital.getWardsNum() == 0;
 	if (!check) {
-		Ward& ward = chooseWard(hospital);
+		Ward& ward = *hospital.getWards()[chooseWard(hospital)];
 
 		//Patient can't be added to a ward without doctors in it:
 		check = ward.getDoctorsNum() == 0;
@@ -166,7 +193,7 @@ void addPatient(Hospital& hospital)
 
 
 //----------------------------------------------------------------------------------------------------//
-Ward& chooseWard(Hospital& hospital)
+unsigned int chooseWard(Hospital& hospital)
 {
 	unsigned int ward_num, num_of_wards_in_hospital = hospital.getWardsNum();
 
@@ -177,7 +204,7 @@ Ward& chooseWard(Hospital& hospital)
 		cin >> ward_num;
 	} while (ward_num < 1 || ward_num > num_of_wards_in_hospital);
 
-	return *(hospital.getWards())[ward_num - 1];
+	return ward_num - 1;
 }
 
 //----------------------------------------------------------------------------------------------------//
@@ -324,7 +351,7 @@ void searchPatient(Hospital& hospital)
 //Shows all patients who visited selected ward.
 void showPatients(Hospital& hospital)
 {
-	Ward& ward = chooseWard(hospital);
+	Ward& ward = *hospital.getWards()[chooseWard(hospital)];
 	unsigned int num_of_patients = ward.getPatientsNum();
 	Patient* patient;
 

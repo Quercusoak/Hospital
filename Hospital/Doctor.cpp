@@ -23,6 +23,14 @@ Doctor::Doctor(const Doctor& other) :Staff(other)
 }
 
 //---------------------------------------------------------------//
+Doctor::Doctor(Doctor&& other) :Staff(other)
+{
+	setSpecialty(other.getSpecialty());
+	other.setSpecialty(nullptr);
+	other.setName(nullptr);
+}
+
+//---------------------------------------------------------------//
 Doctor::~Doctor()
 {
 	delete[]m_specialty;
