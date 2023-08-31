@@ -45,6 +45,7 @@ public:
 
 	const char* getName()	const { return name; }
 
+
 };
 
 #endif __HOSPITALWARD_H

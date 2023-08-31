@@ -59,6 +59,7 @@ void addNurse(Hospital& hospital)
 	cout << endl << "Assign " << name << " to a ward: " << endl;
 	Ward& ward = chooseWard(hospital);
 
+	
 	hospital.AddNurse(name, exp, ward);
 
 	actionDone("Adding a new nurse", name, "", true);
@@ -393,15 +394,16 @@ void showStaff(Hospital& hospital)
 
 //----------------------------------------------------------------------------------------------------//
 void printStaff(Staff& staff)
-{
-	if (dynamic_cast<Nurse*>(&staff))
+{	
+	Nurse* temp = dynamic_cast<Nurse*>(&staff);
+	if (temp)
 	{
-		cout << ((Nurse&)staff);
+		cout << *temp;
 	}
 	else  
 	{		
-		Doctor* tmp = dynamic_cast<Doctor*>(&staff);
-		cout << (*tmp);
+		Doctor* temp = dynamic_cast<Doctor*>(&staff);
+		cout << (*temp);
 	}
 }
 
