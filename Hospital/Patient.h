@@ -33,14 +33,18 @@ public:
 	unsigned int getID()				const { return id; }
 	const char* getGender()				const { return genderStr[(int)gender]; }
 	const unsigned int getNumVisits()	const { return num_visits; }
-	PatientCard** getPatientCard() { return patient_card; }
+
+	PatientCard** getPatientCard()			  { return patient_card; }
 
 	void AddVisit(Date date, const char* purpose_of_visit, Doctor& doctor);
 
-	virtual void toOS(std::ostream& os) const override {
+
+	virtual void toOS(std::ostream& os) const override 
+  {
 		os << ", Gender - " << getGender() << ", Id - " << id
 			<< ", Number of visits - " << num_visits;
 	}
+
 
 	friend std::ostream& operator<<(std::ostream& os, const Patient& patient)
 	{
