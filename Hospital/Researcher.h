@@ -25,10 +25,24 @@ public:
 	Article& getArticle(int placmeant)		const { return *m_articles[placmeant]; }
 	Article** getArticles()					const { return m_articles; }
 
-	virtual void toOS(std::ostream& os) const override;
-	
 
+	virtual void toOS(std::ostream& os) const override
+	{
+		os << ", Job - Researcher" << ", Number of written Articles: "
+			<< m_numArticles << ".";
+		if (m_numArticles == 0)
+			return;
 
+		toOSArticles(os);
+	}
+
+	void toOSArticles(std::ostream& os) const
+	{
+		os << endl << "Articles: " << endl;
+		for (int i = 0; i < m_numArticles; i++) {
+			cout << i + 1 << ")" << getArticle(i) << "\n";
+		}
+	}
 };
 
 
