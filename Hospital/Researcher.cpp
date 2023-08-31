@@ -34,4 +34,3 @@ void Researcher::addArticle(Article& data)
 		m_articles[m_numArticles] = &data;
 		m_numArticles++;
 	}
-}
