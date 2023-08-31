@@ -13,18 +13,16 @@ void Doctor::setSpecialty(const char* specialty)
 Doctor::Doctor(const char* name, const char* specialty)
 	: Staff(name), m_specialty(nullptr)
 {
-	setSpecialty(specialty);
-}
+	//cout << "in Doctor::Doctor c'tor, debugging line " << name << endl;
 
-//---------------------------------------------------------------//
-Doctor::Doctor(const Doctor& other) :Staff(other)
-{
-	setSpecialty(other.getSpecialty());
+	setSpecialty(specialty);
 }
 
 //---------------------------------------------------------------//
 Doctor::~Doctor()
 {
+	//cout << "in Doctor::~Doctor d'tor, debugging line " << m_name << endl;
+
 	delete[]m_specialty;
 
 }

@@ -15,6 +15,7 @@ private:
 
 public:
 	Researcher(const char* name);
+	Researcher(const Staff& base);///unsure about necessity
 	Researcher(const Researcher&) = delete;
 	Researcher(Researcher&&) = delete;
 	virtual ~Researcher();
@@ -39,7 +40,7 @@ public:
 	void toOSArticles(std::ostream& os) const
 	{
 		os << endl << "Articles: " << endl;
-		for (unsigned int i = 0; i < m_numArticles; i++) {
+		for (int i = 0; i < m_numArticles; i++) {
 			cout << i + 1 << ")" << getArticle(i) << "\n";
 		}
 	}

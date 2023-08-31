@@ -10,9 +10,6 @@ public:
 	ResearcherDoctor(const char* name, const char* specialty)
 		:Doctor(name, specialty), Staff(name), Researcher(name) {};
 	~ResearcherDoctor() {};
-
-	virtual void toOS(std::ostream& os) const override;
-
 };
 
 
