@@ -15,7 +15,6 @@ private:
 
 public:
 	Researcher(const char* name);
-	Researcher(const Staff& base);///unsure about necessity
 	Researcher(const Researcher&) = delete;
 	Researcher(Researcher&&) = delete;
 	virtual ~Researcher();

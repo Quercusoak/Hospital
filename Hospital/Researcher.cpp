@@ -36,16 +36,9 @@ void Researcher::addArticle(Article& data)
 	}
 }
 
+
+
 //---------------------------------------------------------------//
-Researcher::Researcher(const Staff& base) : Staff(base)
-{
-	m_numArticles = 0;
-	m_maxArticles = 1;
-	m_articles = new Article * [m_maxArticles];
-}
-
-
-
 void Researcher::toOS(std::ostream& os) const 
 {
 	os << ", Job - Researcher, Specialty - " << ", Number of written Articles: "
@@ -54,7 +47,7 @@ void Researcher::toOS(std::ostream& os) const
 		return;
 
 	os << endl << "Articles: " << endl;
-	for (int i = 0; i < m_numArticles; i++) {
+	for (unsigned int i = 0; i < m_numArticles; i++) {
 		cout << i + 1 << ")" << getArticle(i) << "\n";
 	}
 }
