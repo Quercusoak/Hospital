@@ -69,6 +69,9 @@
     <ClCompile Include="Ward.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ResearcherDoctor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Article.h">
