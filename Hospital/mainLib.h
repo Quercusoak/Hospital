@@ -2,7 +2,6 @@
 #define __MAIN_LIB_H
 
 #include "Hospital.h"
-#include "Article.h"
 
 #define MAX_NAME_LENGTH 100
 #define MAX_STRING_INPUT 120
@@ -55,7 +54,7 @@ void addResearcherArticle(Hospital& hospital);
 Ward& chooseWard(Hospital&);
 
 
-Staff& chooseDocotr(Ward&);
+Doctor& chooseDoctor(Ward&);
 
 
 Researcher& chooseResearcher(ResearchCenter& research_center);
@@ -90,9 +89,6 @@ void printPatient(Patient& patient);
 
 void printPatientCard(Patient& patient);
 
-void printNurse(Nurse& nurse);
-
-void printDoctor(Doctor& doctor);
 
 void printStaff(Staff& staff);
 

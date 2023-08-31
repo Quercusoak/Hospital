@@ -77,7 +77,6 @@ void addDoctor(Hospital& hospital)
 	cin.getline(name, MAX_NAME_LENGTH);
 
 	cout << "Enter new doctor's specialty: ";
-	cleanBuffer();
 	cin.getline(specialty, MAX_STRING_INPUT);
 
 
@@ -150,7 +149,7 @@ void addPatient(Hospital& hospital)
 
 
 			//Select a doctor in selected ward:
-			Doctor& doctor = chooseDocotr(ward);
+			Doctor& doctor = chooseDoctor(ward);
 
 			patient->AddVisit(date, purpose_of_visit, doctor);
 			ward.AddPatient(*patient);
@@ -190,28 +189,29 @@ void showWards(Hospital& hospital)
 
 
 //----------------------------------------------------------------------------------------------------//
-Staff& chooseDocotr(Ward& ward)
+Doctor& chooseDoctor(Ward& ward)
 {
-	unsigned int num, num_of_doctors_in_ward = ward.getDoctorsNum();
+	unsigned int num, num_of_staff_in_ward = ward.getNumStaff();
 
 	do
 	{
 		cout << "Select doctor from list: " << endl;
 		showDoctors(ward);
 		cin >> num;
-	} while (num < 1 || num > num_of_doctors_in_ward);
+	} while (num < 1 || num > num_of_staff_in_ward);
 
-	return *ward.getStaff()[num - 1];
+	Doctor* tmp = dynamic_cast<Doctor*>(ward.getStaff()[num - 1]);
+	return *tmp;
 }
 
 //----------------------------------------------------------------------------------------------------//
 void showDoctors(Ward& ward)
 {
-	unsigned int num_doctors = ward.getDoctorsNum();
+	unsigned int num_doctors = ward.getNumStaff();
 
 	for (unsigned int i = 0; i < num_doctors; i++)
 	{
-		if (typeid(ward.getStaff()[i]) == typeid(Doctor&))
+		if (dynamic_cast<Doctor*>(ward.getStaff()[i]))
 			cout << (i + 1) << ") " << ward.getStaff()[i]->getName() << endl;
 	}
 }
@@ -374,14 +374,14 @@ void showStaff(Hospital& hospital)
 		cout << "Current Staff members: " << endl;
 		for (i = 0; i < num_wards; i++)
 		{
-			Ward& ward(*hospital.getWards()[i]); //?????????copy
+			Ward& ward(*hospital.getWards()[i]); 
 			num_staff = ward.getNumStaff();
 
 			if (num_staff > 0)
 			{
 				cout << ward.getName() << ":" << endl;
 				for (j = 0; j < num_staff; j++)
-					printStaff(*ward.getStaff()[i]);
+					printStaff(*ward.getStaff()[j]);
 			}
 		}
 	}
@@ -394,29 +394,15 @@ void showStaff(Hospital& hospital)
 //----------------------------------------------------------------------------------------------------//
 void printStaff(Staff& staff)
 {
-	if (typeid(staff) == typeid(Doctor*))
+	if (dynamic_cast<Nurse*>(&staff))
 	{
+		cout << ((Nurse&)staff);
+	}
+	else  
+	{		
 		Doctor* tmp = dynamic_cast<Doctor*>(&staff);
-		printDoctor(*tmp);
+		cout << (*tmp);
 	}
-	if (typeid(staff) == typeid(Nurse*))
-	{
-		Nurse* tmp = dynamic_cast<Nurse*>(&staff);
-		printNurse(*tmp);
-	}
-}
-
-
-//----------------------------------------------------------------------------------------------------//
-void printNurse(Nurse& nurse)
-{
-	cout << "Nurse " << nurse.getName() << ", worker ID: " << nurse.getWorkerID() << ", experience: " << nurse.getExperience() << " years." << endl;
-}
-
-//----------------------------------------------------------------------------------------------------//
-void printDoctor(Doctor& doctor)
-{
-	cout << "Docotr " << doctor.getName() << ", worker ID: " << doctor.getWorkerID() << ", specialty: " << doctor.getSpecialty() << "." << endl;
 }
 
 

@@ -29,6 +29,7 @@ public:
 		staff.toOS(os);
 		return os;
 	}
+
 };
 
 #endif // !__STAFF_H

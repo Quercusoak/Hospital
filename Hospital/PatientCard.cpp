@@ -11,7 +11,8 @@ void PatientCard::setPurpose(const char* purpose)
 }
 
 //---------------------------------------------------------------//
-PatientCard::PatientCard(Date date, const char* purpose_of_visit, Doctor& doctor): m_date(date.getYear(),date.getMonth(),date.getDay())
+PatientCard::PatientCard(Date date, const char* purpose_of_visit, Doctor& doctor)
+	: m_date(date.getYear(),date.getMonth(),date.getDay())
 {
 	setPurpose(purpose_of_visit);
 	this->m_doctor = &doctor;

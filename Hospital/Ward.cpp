@@ -86,4 +86,5 @@ void Ward::AddDoctor(const char* name, const char* specialty)
 
 	staff[num_staff] = new 	Doctor(name, specialty);
 	num_staff++;
+	num_doctors++;
 }
