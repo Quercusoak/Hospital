@@ -5,7 +5,7 @@
 void Person::setName(const char* name)
 {
 
-	delete [](this->name);
+	delete[](this->name);
 
 	this->name = new char[strlen(name) + 1];
 	strcpy(this->name, name);
@@ -37,7 +37,7 @@ Person::Person(Person&& other)
 //---------------------------------------------------------------//
 Person::~Person()
 {
-	delete []name;
+	delete[]name;
 
 }
 
@@ -58,4 +58,3 @@ const Person& Person::operator=(Person&& other)
 	}
 	return *this;
 }
-

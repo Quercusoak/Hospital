@@ -3,8 +3,7 @@
 
 #include "BaseFunc.h"
 #include "Staff.h"
-
-class Article;
+#include "Article.h"
 
 class Researcher :virtual public Staff
 {

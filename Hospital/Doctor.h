@@ -18,6 +18,12 @@ public:
 
 	char* getSpecialty()		const { return m_specialty; }
 
+	friend std::ostream& operator<<(std::ostream& os, const Doctor& doctor)
+	{
+		os << "Docotr " << doctor.getName() << ", worker ID: " << doctor.getWorkerID() << ", specialty: " << doctor.getSpecialty() << "." << endl;
+		return os;
+	}
+
 };
 
 

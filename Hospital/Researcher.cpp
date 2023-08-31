@@ -22,7 +22,7 @@ Researcher::~Researcher()
 void Researcher::addArticle(Article& data) 
 {
 	bool checkRepeats = true;
-	for (int i = 0; i < m_numArticles; i++)
+	for (unsigned int i = 0; i < m_numArticles; i++)
 		if (m_articles[i] == &data) checkRepeats = false;
 	if (checkRepeats) {
 		if (m_numArticles == m_maxArticles) {

@@ -8,15 +8,10 @@ Hospital::Hospital()
 	wards = new Ward*[max_wards];
 	wards[0] = nullptr;
 
-	num_nurses = 0;
-	max_nurse_size = 1;
-	nurses = new Nurse * [max_nurse_size];
-	nurses[0] = nullptr;
-
-	num_doctors = 0;
-	max_doctors_size = 1;
-	doctors = new Doctor * [max_doctors_size];
-	doctors[0] = nullptr;
+	//num_staff = 0;
+	//max_staff = 1;
+	staff = new Staff* * [max_wards];
+	staff[0] = nullptr;
 
 	num_patients = 0;
 	max_patients = 1;
@@ -28,57 +23,37 @@ Hospital::Hospital()
 Hospital::~Hospital()
 {
 	unsigned int i;
-	for (i = 0; i < num_nurses; i++)
+	for (i = 0; i < num_wards; i++)
 	{
-		delete nurses[i];
+		delete wards[i];
+		delete staff[i];
 	}
-	for (i = 0; i < num_doctors; i++)
-	{
-		delete doctors[i];
-	}
-	delete nurses;
-	delete doctors;
+
+	delete staff;
 }
 
 //----------------------------------------------------------------------------------------------------//
 void Hospital::AddWard(const char* ward_name)
 {
-	if (num_wards == max_wards)
-	{
-		max_wards *= 2;
-		wards = (Ward**)rerealloc(wards, sizeof(Ward*),num_wards, max_wards);
-	}
+	checkMaxSizeReached();
 
 	wards[num_wards] = new Ward(ward_name);
+
+	staff[num_wards] = wards[num_wards]->getStaff();
+
 	num_wards++;
 }
 
 //----------------------------------------------------------------------------------------------------//
 void Hospital::AddNurse(const char* name, float yrs_of_experience, Ward& ward)
 {
-	if (num_nurses == max_nurse_size)
-	{
-		max_nurse_size *= 2;
-		nurses = (Nurse**)rerealloc(nurses, sizeof(Nurse*), num_nurses, max_nurse_size);
-	}
-
-	nurses[num_nurses] = new Nurse(name, yrs_of_experience);
-	ward.AddNurse(*(nurses[num_nurses]));
-	num_nurses++;
+	ward.AddNurse(name, yrs_of_experience);
 }
 
 //----------------------------------------------------------------------------------------------------//
 void Hospital::AddDoctor(const char* name, const char* specialty, Ward& ward)
 {
-	if (num_doctors == max_doctors_size)
-	{
-		max_doctors_size *= 2;
-		doctors = (Doctor**)rerealloc(doctors, sizeof(Doctor*), num_doctors, max_doctors_size);
-	}
-
-	doctors[num_doctors] = new Doctor(name, specialty);
-	ward.AddDoctor(*(doctors[num_doctors]));
-	num_doctors++;
+	ward.AddDoctor(name, specialty);
 }
 
 //----------------------------------------------------------------------------------------------------//
@@ -107,23 +82,18 @@ Patient* Hospital::addPatient(const char* name, unsigned int id, Date birth_date
 }
 
 //----------------------------------------------------------------------------------------------------//
-//function to check for duplicate worker id in hospital staff
-bool Hospital::searchWorkerId(unsigned int data) const
+void Hospital::checkMaxSizeReached()
 {
-	Researcher** researchers = this->research_center.getResearchers();
-	int maxSearch;
 
-	for (int i = 0, maxSearch = this->research_center.getNum_researchers(); i < maxSearch; i++)
-		if (researchers[i]->getWorkerID() == data) 
-			return false;
+	if (num_wards == max_wards)
+	{
+		max_wards *= 2;
+		wards = (Ward**)rerealloc(wards, sizeof(Ward*), num_wards, max_wards);
+	}
 
-	for (int i = 0, maxSearch = this->num_doctors; i < maxSearch; i++)
-		if (this->doctors[i]->getWorkerID() == data) 
-			return false;
-
-	for (int i = 0, maxSearch = this->num_nurses; i < maxSearch; i++)
-		if (this->nurses[i]->getWorkerID() == data)
-			return false;
-	
-	return true;
+	/*if (num_staff == max_staff)
+	{
+		max_staff *= 2;
+		staff = (Staff***)rerealloc(staff, sizeof(Staff**), num_staff, max_staff);
+	}*/
 }
