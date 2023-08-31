@@ -47,6 +47,8 @@ void Hospital::AddWard(const char* ward_name)
 //----------------------------------------------------------------------------------------------------//
 void Hospital::AddNurse(const char* name, float yrs_of_experience, Ward& ward)
 {
+	//Nurse* nurse = new Nurse(name, yrs_of_experience);
+	//ward.AddStaff(*nurse);
 	ward.AddNurse(name, yrs_of_experience);
 }
 

@@ -18,9 +18,13 @@ public:
 
 	char* getSpecialty()		const { return m_specialty; }
 
+
+	virtual void toOS(std::ostream& os) const override { os << ", Job - Doctor, Specialty - " << m_specialty << "."; }
+
 	friend std::ostream& operator<<(std::ostream& os, const Doctor& doctor)
 	{
-		os << "Docotr " << doctor.getName() << ", worker ID: " << doctor.getWorkerID() << ", specialty: " << doctor.getSpecialty() << "." << endl;
+		os << "Name - " << doctor.name << ", worker id - " << doctor.workerId << ", Job - Doctor, Specialty - "
+			<< doctor.m_specialty << ".";
 		return os;
 	}
 

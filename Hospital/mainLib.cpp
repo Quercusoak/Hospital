@@ -59,6 +59,7 @@ void addNurse(Hospital& hospital)
 	cout << endl << "Assign " << name << " to a ward: " << endl;
 	Ward& ward = chooseWard(hospital);
 
+	
 	hospital.AddNurse(name, exp, ward);
 
 	actionDone("Adding a new nurse", name, "", true);
@@ -309,7 +310,8 @@ void searchPatient(Hospital& hospital)
 	}
 
 	//patient's name:
-	cout << "Patient: " << patient->getName() << endl;
+	cout << *patient << endl;
+
 
 	//Patient's visits data from card:
 	printPatientCard(*patient);
@@ -337,14 +339,15 @@ void showPatients(Hospital& hospital)
 	for (unsigned int i = 0; i < num_of_patients; i++)
 	{
 		patient = ward.getPatients()[i];
-		printPatient(*patient);
+		cout << *patient;
+		//printPatient(*patient);
 	}
 
 	returningMainMenu();
 
 }
 
-//----------------------------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------------------------------// TO BE DEL
 void printPatient(Patient& patient)
 {
 	cout << patient.getName() << ", " << patient.getGender() << ", ID: " << patient.getID() << endl;
@@ -381,7 +384,8 @@ void showStaff(Hospital& hospital)
 			{
 				cout << ward.getName() << ":" << endl;
 				for (j = 0; j < num_staff; j++)
-					printStaff(*ward.getStaff()[j]);
+					cout << *ward.getStaff()[j] << endl;
+					//printStaff(*ward.getStaff()[j]);
 			}
 		}
 	}
@@ -391,17 +395,18 @@ void showStaff(Hospital& hospital)
 }
 
 
-//----------------------------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------------------------------// TO BE DEL
 void printStaff(Staff& staff)
-{
-	if (dynamic_cast<Nurse*>(&staff))
+{	
+	Nurse* temp = dynamic_cast<Nurse*>(&staff);
+	if (temp)
 	{
-		cout << ((Nurse&)staff);
+		cout << *temp;
 	}
 	else  
 	{		
-		Doctor* tmp = dynamic_cast<Doctor*>(&staff);
-		cout << (*tmp);
+		Doctor* temp = dynamic_cast<Doctor*>(&staff);
+		cout << (*temp);
 	}
 }
 
@@ -415,14 +420,15 @@ void showResearchers(Hospital& hospital)
 	cout << "Current Researchers: " << endl;
 
 	for (unsigned int i = 0; i < numToPrint; i++)
-		printResearcher(*((research_center.getResearchers())[i]));
+		cout << *((research_center.getResearchers())[i]);
+		//printResearcher(*((research_center.getResearchers())[i]));
 
 	returningMainMenu();
 
 }
 
 //----------------------------------------------------------------------------------------------------//
-void printResearcher(Researcher& researcher)
+/*void printResearcher(Researcher& researcher)
 {
 	int num_articles = researcher.getNumArticles();
 
@@ -436,19 +442,19 @@ void printResearcher(Researcher& researcher)
 	cout << "Articles:" << endl;
 
 	for (int i = 0; i < num_articles; i++) {
-		cout << i + 1 << ")" << "\n"
-			<< "Magazine Name - " << researcher.getArticle(i)->getMagazineName() << "\n"
-			<< "Article Name - " << researcher.getArticle(i)->getArticleName() << "\n"
-			<< "Date - ";
-		printDate(researcher.getArticle(i)->getDate());
+		//cout << i + 1 << ")" << "\n"
+			//<< "Magazine Name - " << researcher.getArticle(i)->getMagazineName() << "\n"
+			//<< "Article Name - " << researcher.getArticle(i)->getArticleName() << "\n"
+			//<< "Date - ";
+		//printDate(researcher.getArticle(i)->getDate());
 	}
 	cout << endl;
-}
+}*/
 
-//----------------------------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------------------------------// TO BE DEL
 void printDate(const Date& date)
 {
-	cout << date.getDay() << "-" << date.getMonth() << "-" << date.getYear() << endl;
+	cout << date << endl;
 }
 
 //----------------------------------------------------------------------------------------------------//

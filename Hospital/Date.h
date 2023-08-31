@@ -22,6 +22,12 @@ public:
 	unsigned short getYear() const;
 	unsigned short getMonth() const;
 	unsigned short getDay() const;
+
+	friend std::ostream& operator<<(std::ostream& os, const Date& date)
+	{
+		os << date.getDay() << "-" << date.getMonth() << "-" << date.getYear();
+		return os;
+	}
 };
 
 #endif __DATE_H

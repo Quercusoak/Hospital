@@ -23,8 +23,12 @@ public:
 	void addArticle(Article& data);
 
 	int getNumArticles()					const { return m_numArticles; }
-	Article* getArticle(int placmeant)		const { return m_articles[placmeant]; }
+	Article& getArticle(int placmeant)		const { return *m_articles[placmeant]; }
 	Article** getArticles()					const { return m_articles; }
+
+	virtual void toOS(std::ostream& os) const override;
+	
+
 
 };
 
