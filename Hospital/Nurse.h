@@ -6,18 +6,27 @@
 class Nurse : public Staff
 {
 private:
-	char* name;
 	float yrs_of_experience;
-	
+
 public:
 	Nurse(const char* name, float yrs_of_experience);
 	Nurse(Nurse&) = delete;
 	Nurse(Nurse&&) = delete;
-	~Nurse();
+	virtual ~Nurse();
 
 	void setExperience(float);
 
 	float getExperience();
+
+	virtual void toOS(std::ostream& os) const override { os << ", Job - Nurse, Experience - " << yrs_of_experience << " Years."; }
+
+	friend std::ostream& operator<<(std::ostream& os, const Nurse& nurse)
+	{
+		os << "Name - " << nurse.name << ", worker id - " << nurse.workerId << ", Job - Nurse, Experience - "
+			<< nurse.yrs_of_experience << " years.";
+		return os;
+	}
+
 };
 
 #endif __NURSE_H

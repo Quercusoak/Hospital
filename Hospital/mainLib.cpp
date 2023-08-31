@@ -190,7 +190,7 @@ void showWards(Hospital& hospital)
 
 
 //----------------------------------------------------------------------------------------------------//
-Doctor& chooseDocotr(Ward& ward)
+Staff& chooseDocotr(Ward& ward)
 {
 	unsigned int num, num_of_doctors_in_ward = ward.getDoctorsNum();
 
@@ -201,7 +201,7 @@ Doctor& chooseDocotr(Ward& ward)
 		cin >> num;
 	} while (num < 1 || num > num_of_doctors_in_ward);
 
-	return *ward.getDoctors()[num - 1];
+	return *ward.getStaff()[num - 1];
 }
 
 //----------------------------------------------------------------------------------------------------//
@@ -211,7 +211,8 @@ void showDoctors(Ward& ward)
 
 	for (unsigned int i = 0; i < num_doctors; i++)
 	{
-		cout << (i + 1) << ") " << ward.getDoctors()[i]->getName() << endl;
+		if (typeid(ward.getStaff()[i]) == typeid(Doctor&))
+			cout << (i + 1) << ") " << ward.getStaff()[i]->getName() << endl;
 	}
 }
 
@@ -365,26 +366,44 @@ void printPatientCard(Patient& patient)
 //----------------------------------------------------------------------------------------------------//
 void showStaff(Hospital& hospital)
 {
-	unsigned int i, num_nurses = hospital.getNumNurses(), num_doctors = hospital.getNumDoctors();
+	unsigned int i,j, num_wards = hospital.getWardsNum(), num_staff;
 
-	cout << "Current Staff members: " << endl;
 
-	if (num_doctors > 0)
+	if (num_wards > 0)
 	{
-		cout << "Doctors: " << endl;
-		for (i = 0; i < num_doctors; i++)
-			printDoctor(*hospital.getDoctors()[i]);
-	}
+		cout << "Current Staff members: " << endl;
+		for (i = 0; i < num_wards; i++)
+		{
+			Ward& ward(*hospital.getWards()[i]); //?????????copy
+			num_staff = ward.getNumStaff();
 
-	if (num_nurses > 0)
-	{
-		cout << "\nNurses: " << endl;
-		for (i = 0; i < num_nurses; i++)
-			printNurse(*hospital.getNurses()[i]);
+			if (num_staff > 0)
+			{
+				cout << ward.getName() << ":" << endl;
+				for (j = 0; j < num_staff; j++)
+					printStaff(*ward.getStaff()[i]);
+			}
+		}
 	}
 
 	returningMainMenu();
 
+}
+
+
+//----------------------------------------------------------------------------------------------------//
+void printStaff(Staff& staff)
+{
+	if (typeid(staff) == typeid(Doctor*))
+	{
+		Doctor* tmp = dynamic_cast<Doctor*>(&staff);
+		printDoctor(*tmp);
+	}
+	if (typeid(staff) == typeid(Nurse*))
+	{
+		Nurse* tmp = dynamic_cast<Nurse*>(&staff);
+		printNurse(*tmp);
+	}
 }
 
 

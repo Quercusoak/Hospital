@@ -3,7 +3,6 @@
 #include "mainLib.h"
 
 void HardCoded(Hospital& hospital);
-void newthing();
 
 
 #endif

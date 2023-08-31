@@ -81,11 +81,13 @@ void HardCoded(Hospital& hospital)
 
 	newPatient = hospital.addPatient(PATIENT_1, PATIENT_1_ID, birth, 0);
 
-	newPatient->AddVisit(date1, PATIENT_1_REASON_VISIT1, *(hospital.getDoctors()[0]));
+	Doctor* tmp = dynamic_cast<Doctor*>(hospital.getWards()[0]->getStaff()[0]);
+	newPatient->AddVisit(date1, PATIENT_1_REASON_VISIT1, *tmp);
 
 	hospital.getWards()[0]->AddPatient(*newPatient);
 
-	newPatient->AddVisit(date2, PATIENT_1_REASON_VISIT2, *(hospital.getDoctors()[2]));
+	tmp = dynamic_cast<Doctor*>(hospital.getWards()[0]->getStaff()[1]);
+	newPatient->AddVisit(date2, PATIENT_1_REASON_VISIT2, *tmp);
 
 	hospital.getResearchCenter().AddResearcher(RESEARCHER_1);
 	

@@ -25,8 +25,15 @@ protected:
 public:
 	char* getName()				const { return name; }
 
-	
+	virtual void toOS(std::ostream& os) const {}
+
+	friend std::ostream& operator<<(std::ostream& os, const Person& person)
+	{
+		os << "Name - " << person.name;
+		person.toOS(os);
+		return os;
+	}
+
 };
 
 #endif // !__PERSON_H
-

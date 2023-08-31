@@ -55,7 +55,7 @@ void addResearcherArticle(Hospital& hospital);
 Ward& chooseWard(Hospital&);
 
 
-Doctor& chooseDocotr(Ward&);
+Staff& chooseDocotr(Ward&);
 
 
 Researcher& chooseResearcher(ResearchCenter& research_center);
@@ -93,6 +93,8 @@ void printPatientCard(Patient& patient);
 void printNurse(Nurse& nurse);
 
 void printDoctor(Doctor& doctor);
+
+void printStaff(Staff& staff);
 
 void searchPatient(Hospital& hospital);
 

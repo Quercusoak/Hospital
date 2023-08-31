@@ -49,5 +49,4 @@ void Patient::setDate(Date date)
 //---------------------------------------------------------------//
 Patient::~Patient()
 {
-	delete[]name;
 }
