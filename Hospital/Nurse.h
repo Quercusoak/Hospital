@@ -23,7 +23,7 @@ public:
 	friend std::ostream& operator<<(std::ostream& os, const Nurse& nurse)
 	{
 		os << "Name - " << nurse.name << ", worker id - " << nurse.workerId << ", Job - Nurse, Experience - "
-			<< nurse.yrs_of_experience << " years." << endl;
+			<< nurse.yrs_of_experience << " years.";
 		return os;
 	}
 

@@ -43,3 +43,18 @@ Researcher::Researcher(const Staff& base) : Staff(base)
 	m_maxArticles = 1;
 	m_articles = new Article * [m_maxArticles];
 }
+
+
+
+void Researcher::toOS(std::ostream& os) const 
+{
+	os << ", Job - Researcher, Specialty - " << ", Number of written Articles: "
+		<< m_numArticles << ".";
+	if (m_numArticles == 0)
+		return;
+
+	os << endl << "Articles: " << endl;
+	for (int i = 0; i < m_numArticles; i++) {
+		cout << i + 1 << ")" << getArticle(i) << "\n";
+	}
+}
