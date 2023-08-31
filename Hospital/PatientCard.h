@@ -7,16 +7,16 @@
 
 class PatientCard
 {
-protected:
+private:
 	Date m_date;
 	char* m_purpose_of_visit;
 	Doctor* m_doctor;
 
 public:
 	PatientCard(Date date, const char* purpose_of_visit, Doctor& doctor);
-	PatientCard(const PatientCard&);
-	PatientCard(PatientCard&&);
-	virtual ~PatientCard();
+	PatientCard(PatientCard&) = delete;
+	PatientCard(PatientCard&&) = delete;
+	~PatientCard();
 
 
 	void setPurpose(const char* purpose);
@@ -24,10 +24,6 @@ public:
 	Date getDate()					const { return m_date; }
 	const char* getPurpose()		const { return m_purpose_of_visit; }
 	Doctor& getDoctor()				const { return *m_doctor; }
-
-
-	const PatientCard& operator=(const PatientCard&);
-	const PatientCard& operator=(PatientCard&&);
 
 };
 

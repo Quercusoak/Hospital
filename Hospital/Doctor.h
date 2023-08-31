@@ -10,7 +10,7 @@ protected:
 
 public:
 	Doctor(const char* name, const char* specialty);
-	Doctor(const Doctor&) = delete;
+	Doctor(const Doctor&);
 	Doctor(Doctor&&) = delete;
 	virtual ~Doctor();
 

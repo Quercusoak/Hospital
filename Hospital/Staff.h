@@ -18,6 +18,8 @@ private:
 public:
 	unsigned int getNumOfWorkers()	const { return counter - 1000; }
 	unsigned int getWorkerID()		const { return workerId; }
+
+	Staff(const Staff&);
 	virtual ~Staff();
 
 
