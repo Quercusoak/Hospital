@@ -3,7 +3,7 @@
 
 #include "Doctor.h"
 
-class Surgeon : virtual protected Doctor
+class Surgeon : virtual public Doctor
 {
 protected:
 	int num_surgeries;
@@ -17,6 +17,10 @@ public:
 
 	const int getNumSurgeriesPerformed() { return num_surgeries; }
 
+	virtual void toOS(std::ostream& os) const override
+	{
+		os << ", Specialty - " << m_specialty << ", Number of Surgeries Performed: " << num_surgeries;
+	}
 };
 
 #endif
