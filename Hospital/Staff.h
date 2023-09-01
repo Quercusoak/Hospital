@@ -10,7 +10,8 @@ protected:
 	unsigned int workerId;
 
 	Staff(const char*);
-
+	Staff(const Staff&); //completly useless, only workerId here, and therefore, normal cpy would had worked...
+	virtual ~Staff();
 
 private:
 	static unsigned int counter;
@@ -18,9 +19,6 @@ private:
 public:
 	unsigned int getNumOfWorkers()	const { return counter - 1000; }
 	unsigned int getWorkerID()		const { return workerId; }
-
-	Staff(const Staff&);
-	virtual ~Staff();
 
 
 

@@ -17,6 +17,12 @@ Hospital::Hospital()
 	max_patients = 1;
 	patients = new Patient * [max_patients];
 	patients[0] = nullptr;
+
+	wards_doctors = 0;
+	wards_researchers = 0;
+	wards_nurses = 0;
+
+
 }
 
 //----------------------------------------------------------------------------------------------------//
@@ -37,7 +43,7 @@ void Hospital::AddWard(const char* ward_name)
 {
 	checkMaxSizeReached();
 
-	wards[num_wards] = new Ward(ward_name);
+	wards[num_wards] = new Ward(ward_name, wards_doctors, wards_researchers, wards_nurses);
 
 	staff[num_wards] = wards[num_wards]->getStaff();
 
@@ -47,8 +53,7 @@ void Hospital::AddWard(const char* ward_name)
 //----------------------------------------------------------------------------------------------------//
 void Hospital::AddNurse(const char* name, float yrs_of_experience, Ward& ward)
 {
-	//Nurse* nurse = new Nurse(name, yrs_of_experience);
-	//ward.AddStaff(*nurse);
+	
 	ward.AddNurse(name, yrs_of_experience);
 }
 

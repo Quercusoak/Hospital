@@ -15,6 +15,7 @@ private:
 
 public:
 	Researcher(const char* name);
+	Researcher(const Staff& base);///unsure about necessity
 	Researcher(const Researcher&) = delete;
 	Researcher(Researcher&&) = delete;
 	virtual ~Researcher();
@@ -25,6 +26,8 @@ public:
 	Article& getArticle(int placmeant)		const { return *m_articles[placmeant]; }
 	Article** getArticles()					const { return m_articles; }
 
+
+	
 
 	virtual void toOS(std::ostream& os) const override
 	{
