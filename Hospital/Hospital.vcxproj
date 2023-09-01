@@ -30,6 +30,7 @@
     <ClCompile Include="Nurse.cpp" />
     <ClCompile Include="Patient.cpp" />
     <ClCompile Include="PatientCard.cpp" />
+    <ClCompile Include="PatientCardOperation.cpp" />
     <ClCompile Include="Person.cpp" />
     <ClCompile Include="ResearchCenter.cpp" />
     <ClCompile Include="Researcher.cpp" />
@@ -51,6 +52,7 @@
     <ClInclude Include="Nurse.h" />
     <ClInclude Include="Patient.h" />
     <ClInclude Include="PatientCard.h" />
+    <ClInclude Include="PatientCardOperation.h" />
     <ClInclude Include="Person.h" />
     <ClInclude Include="ResearchCenter.h" />
     <ClInclude Include="Researcher.h" />
