@@ -19,7 +19,7 @@ public:
 	unsigned int getRoom_Number()		const { return room_number; }
 	bool isFasting()					const { return fasting; }
  
-	void addSurgery(unsigned int num_of_surgery) { num_of_surgery++; }
+	void addSurgery();
 };
 
 #endif // !__PATIENT_CARD_OPERATION_H

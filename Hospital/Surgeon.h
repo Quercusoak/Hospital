@@ -23,7 +23,7 @@ public:
 		os << ", Specialty - " << m_specialty << ", Number of Surgeries Performed: " << num_surgeries;
 	}
 	
-	friend void PatientCardOperation::addSurgery(unsigned int num_of_surgery);
+	void addSurgery() { num_surgeries++; }
 };
 
 #endif
