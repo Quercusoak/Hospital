@@ -95,14 +95,14 @@ void addDoctor(Hospital& hospital)
 		ward.AddDoctor(name, specialty);
 		break;
 	case 2:
-		ward.AddDoctor(Surgeon(name, specialty));
+		ward.AddStaff(Surgeon(name, specialty));
 		break;
 	case 3:
-		ward.AddDoctor(ResearcherDoctor(name, specialty));
+		ward.AddStaff(ResearcherDoctor(name, specialty));
 		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
 		break;
 	case 4:
-		ward.AddDoctor(SurgeonResearcher(name, specialty));
+		ward.AddStaff(SurgeonResearcher(name, specialty));
 		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff()] - 1));
 		break;
 	default:
