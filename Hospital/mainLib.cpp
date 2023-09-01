@@ -375,12 +375,6 @@ void showPatients(Hospital& hospital)
 
 }
 
-//----------------------------------------------------------------------------------------------------// TO BE DEL
-void printPatient(Patient& patient)
-{
-	cout << patient.getName() << ", " << patient.getGender() << ", ID: " << patient.getID() << endl;
-}
-
 //----------------------------------------------------------------------------------------------------//
 void printPatientCard(Patient& patient)
 {
@@ -437,30 +431,6 @@ void showResearchers(Hospital& hospital)
 	returningMainMenu();
 
 }
-
-//----------------------------------------------------------------------------------------------------//
-/*void printResearcher(Researcher& researcher)
-{
-	int num_articles = researcher.getNumArticles();
-
-	cout << "Researcher " << researcher.getName() << ", worker ID: " << researcher.getWorkerID()
-		<< ", number of written Articles: " << num_articles << endl;
-
-	if (num_articles == 0)
-		return;
-
-
-	cout << "Articles:" << endl;
-
-	for (int i = 0; i < num_articles; i++) {
-		//cout << i + 1 << ")" << "\n"
-			//<< "Magazine Name - " << researcher.getArticle(i)->getMagazineName() << "\n"
-			//<< "Article Name - " << researcher.getArticle(i)->getArticleName() << "\n"
-			//<< "Date - ";
-		//printDate(researcher.getArticle(i)->getDate());
-	}
-	cout << endl;
-}*/
 
 //----------------------------------------------------------------------------------------------------// TO BE DEL
 void printDate(const Date& date)

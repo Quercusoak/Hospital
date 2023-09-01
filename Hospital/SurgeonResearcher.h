@@ -18,7 +18,7 @@ public:
 	virtual void toOS(std::ostream& os) const override
 	{
 		os << ", Job - Surgeon Researcher ";
-		((Surgeon)(*this)).toOS(os);
+		((Surgeon&)(*this)).toOS(os);
 		this->toOSArticles(os);
 	}
 };
