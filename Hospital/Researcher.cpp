@@ -37,7 +37,7 @@ void Researcher::addArticle(Article& data)
 }
 
 //---------------------------------------------------------------//
-Researcher::Researcher(const Staff& base) : Staff(base)
+Researcher::Researcher(Researcher&& other) : Staff(std::move(other))
 {
 	m_numArticles = 0;
 	m_maxArticles = 1;

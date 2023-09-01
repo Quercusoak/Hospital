@@ -28,7 +28,6 @@ int MenuOutPutInPut();
 
 
 
-
 void addWard(Hospital& hospital);
 
 
@@ -45,8 +44,6 @@ void addResearcher(Hospital& hospital);
 
 
 void addResearcherArticle(Hospital& hospital);
-
-
 
 
 
@@ -82,7 +79,6 @@ void showResearchers(Hospital& hospital);
 
 
 
-
 void printDate(const Date& date);
 
 void printPatient(Patient& patient);
@@ -90,7 +86,6 @@ void printPatient(Patient& patient);
 void printPatientCard(Patient& patient);
 
 
-void printStaff(Staff& staff);
 
 void searchPatient(Hospital& hospital);
 

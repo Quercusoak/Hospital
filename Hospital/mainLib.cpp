@@ -4,6 +4,7 @@
 #define ERR_ID_TAKEN "id already in system"
 #define ERR_NO_WARDS "No ward had been added to hospital yet, please enter a ward first."
 #define ERR_NO_DOCTORS_IN_WARD "Ward is understaffed, and therefore, cannot add patient to ward, please enter a doctor to ward first"
+#define INCORRECT_DR_TYPE "Doctor type is invalid."
 
 int MenuOutPutInPut()
 {
@@ -57,10 +58,7 @@ void addNurse(Hospital& hospital)
 
 
 	cout << endl << "Assign " << name << " to a ward: " << endl;
-	Ward& ward = chooseWard(hospital);
-
-	
-	hospital.AddNurse(name, exp, ward);
+	chooseWard(hospital).AddNurse(name, exp);
 
 	actionDone("Adding a new nurse", name, "", true);
 }
@@ -72,6 +70,9 @@ void addDoctor(Hospital& hospital)
 {
 	char specialty[MAX_STRING_INPUT];
 	char name[MAX_NAME_LENGTH];
+	bool is_dr_type = true;
+	unsigned int dr_type;
+
 
 	cout << "Enter new doctor's name: ";
 	cleanBuffer();
@@ -84,9 +85,33 @@ void addDoctor(Hospital& hospital)
 	cout << endl << "Assign " << name << " to a ward: " << endl;
 	Ward& ward = chooseWard(hospital);
 
-	hospital.AddDoctor(name, specialty, ward);
+	
+	cout << "Select for Dr " << name << ":\n1)Doctor \n2)Surgeon \n3)Researcher Doctor \n4)Researcher Surgeon" << endl;
+	cin >> dr_type;
 
-	actionDone("Adding a new doctor", name, "", true);
+	switch (dr_type)
+	{
+	case 1:
+		ward.AddDoctor(name, specialty);
+		break;
+	case 2:
+		ward.AddDoctor(Surgeon(name, specialty));
+		break;
+	case 3:
+		ward.AddDoctor(ResearcherDoctor(name, specialty));
+		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
+		break;
+	case 4:
+		ward.AddDoctor(SurgeonResearcher(name, specialty));
+		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff()] - 1));
+		break;
+	default:
+		is_dr_type = false;
+		break;
+	}
+
+
+	actionDone("Adding a new doctor", name, INCORRECT_DR_TYPE, is_dr_type);
 
 }
 
@@ -177,7 +202,7 @@ Ward& chooseWard(Hospital& hospital)
 		cin >> ward_num;
 	} while (ward_num < 1 || ward_num > num_of_wards_in_hospital);
 
-	return *(hospital.getWards())[ward_num - 1];
+	return *hospital.getWards()[ward_num - 1];
 }
 
 //----------------------------------------------------------------------------------------------------//
@@ -385,29 +410,12 @@ void showStaff(Hospital& hospital)
 				cout << ward.getName() << ":" << endl;
 				for (j = 0; j < num_staff; j++)
 					cout << *ward.getStaff()[j] << endl;
-					//printStaff(*ward.getStaff()[j]);
 			}
 		}
 	}
 
 	returningMainMenu();
 
-}
-
-
-//----------------------------------------------------------------------------------------------------// TO BE DEL
-void printStaff(Staff& staff)
-{	
-	Nurse* temp = dynamic_cast<Nurse*>(&staff);
-	if (temp)
-	{
-		cout << *temp;
-	}
-	else  
-	{		
-		Doctor* temp = dynamic_cast<Doctor*>(&staff);
-		cout << (*temp);
-	}
 }
 
 

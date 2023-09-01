@@ -13,6 +13,8 @@ void Doctor::setSpecialty(const char* specialty)
 Doctor::Doctor(const char* name, const char* specialty)
 	: Staff(name), m_specialty(nullptr)
 {
+	cout << "Doctor c'tor	" << this->workerId << endl; //to del
+
 	setSpecialty(specialty);
 }
 
@@ -20,6 +22,15 @@ Doctor::Doctor(const char* name, const char* specialty)
 Doctor::Doctor(const Doctor& other) :Staff(other)
 {
 	setSpecialty(other.getSpecialty());
+}
+
+//---------------------------------------------------------------//
+Doctor::Doctor(Doctor&& other) :Staff(std::move(other))
+{
+	cout << "Doctor move c'tor	" << this->workerId << endl; //to del
+
+	setSpecialty(other.getSpecialty());
+	other.m_specialty = nullptr;
 }
 
 //---------------------------------------------------------------//

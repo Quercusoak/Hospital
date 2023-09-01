@@ -31,9 +31,6 @@ public:
 	const unsigned int getWardsNum()	const { return num_wards; }
 	Ward** getWards()					const { return wards; }
 
-	void AddNurse(const char* name, float yrs_of_experience, Ward& ward);
-	void AddDoctor(const char* name, const char* specialty, Ward& ward);
-
 
 	Patient* searchPatientByID(unsigned int& id);
 	Patient* addPatient(const char* name, unsigned int id, Date birth_date, int gender);

@@ -5,6 +5,10 @@
 #include "Nurse.h"
 #include "BaseFunc.h"
 #include "Patient.h"
+#include "Surgeon.h"
+#include "SurgeonResearcher.h"
+#include "ResearcherDoctor.h"
+
 
 class Ward
 {
@@ -31,10 +35,10 @@ public:
 	Ward(Ward&&) = delete;
 	~Ward();
 
-
-	void AddStaff(Staff&);///???
+	void AddStaff(Staff&&);
 	void AddNurse(const char* name, float yrs_of_experience);
 	void AddDoctor(const char* name, const char* specialty);
+	void AddDoctor(Doctor&&);
 
 
 	Staff** getStaff()						const { return staff; }
@@ -48,6 +52,7 @@ public:
 
 	const char* getName()	const { return name; }
 
+	void checkMaxSizeReached();
 
 };
 

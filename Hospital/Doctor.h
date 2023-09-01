@@ -11,7 +11,7 @@ protected:
 public:
 	Doctor(const char* name, const char* specialty);
 	Doctor(const Doctor&);
-	Doctor(Doctor&&) = delete;
+	Doctor(Doctor&&);
 	virtual ~Doctor();
 
 	void setSpecialty(const char* specialty);
