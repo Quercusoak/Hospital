@@ -2,7 +2,8 @@
 
 
 //---------------------------------------------------------------//
-Ward::Ward(const char* ward_name)
+Ward::Ward(const char* ward_name, unsigned int& wards_doctors, unsigned int& wards_researchers, unsigned int& wards_nurses)
+	:wards_doctors(wards_doctors), wards_researchers(wards_researchers), wards_nurses(wards_nurses)
 {
 	name = new char[strlen(ward_name) + 1];
 	strcpy(name, ward_name);
@@ -73,6 +74,7 @@ void Ward::AddNurse(const char* name, float yrs_of_experience)
 
 	staff[num_staff] = new 	Nurse(name, yrs_of_experience);
 	num_staff++;
+
 }
 
 //----------------------------------------------------------------------------------------------------//
@@ -87,4 +89,5 @@ void Ward::AddDoctor(const char* name, const char* specialty)
 	staff[num_staff] = new 	Doctor(name, specialty);
 	num_staff++;
 	num_doctors++;
+	wards_doctors++;
 }

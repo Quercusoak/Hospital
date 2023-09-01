@@ -17,6 +17,10 @@ private:
 	unsigned int num_patients;
 	unsigned int max_patients;
 
+	unsigned int wards_doctors;
+	unsigned int wards_researchers;
+	unsigned int wards_nurses;
+
 public:
 	Hospital();
 	Hospital(Hospital&) = delete;
