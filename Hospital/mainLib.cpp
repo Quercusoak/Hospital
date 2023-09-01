@@ -56,6 +56,10 @@ void addNurse(Hospital& hospital)
 	cout << "Enter new nurse's years of experience: ";
 	cin >> exp;
 
+	while (exp < 0) {
+		cout << "Incorrect Value, please reenter nurse's years of experience: ";
+		cin >> exp;
+	}
 
 	cout << endl << "Assign " << name << " to a ward: " << endl;
 	chooseWard(hospital).AddNurse(name, exp);
@@ -95,14 +99,14 @@ void addDoctor(Hospital& hospital)
 		ward.AddDoctor(name, specialty);
 		break;
 	case 2:
-		ward.AddStaff(Surgeon(name, specialty));
+		ward.AddDoctor(Surgeon(name, specialty));
 		break;
 	case 3:
-		ward.AddStaff(ResearcherDoctor(name, specialty));
+		ward.AddDoctor(ResearcherDoctor(name, specialty));
 		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
 		break;
 	case 4:
-		ward.AddStaff(SurgeonResearcher(name, specialty));
+		ward.AddDoctor(SurgeonResearcher(name, specialty));
 		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff()] - 1));
 		break;
 	default:

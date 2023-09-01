@@ -51,6 +51,7 @@ const Person& Person::operator=(const Person& other)
 	return *this;
 }
 
+//---------------------------------------------------------------//
 const Person& Person::operator=(Person&& other)
 {
 	if (this != &other) {
