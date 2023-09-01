@@ -50,13 +50,18 @@ void Ward::AddStaff(Staff&& newStaff)
 {
 	checkMaxSizeReached();
 
-	staff[num_staff] = &newStaff;
-	num_staff++;
-
-	if (typeid(newStaff) == typeid(Doctor))
+	Nurse* tmp = dynamic_cast<Nurse*>(&newStaff);
+	if (tmp)
+		staff[num_staff] = new 	Nurse(std::move(*tmp));
+	else
 	{
+		Doctor* tmp = dynamic_cast<Doctor*>(&newStaff);
+		if (tmp) //has to be true since staff is either nurse or doctor
+			this->AddDoctor(std::move(*tmp));
 		num_doctors++;
 	}
+
+	num_staff++;
 }
 
 //----------------------------------------------------------------------------------------------------//
@@ -73,20 +78,40 @@ void Ward::AddDoctor(const char* name, const char* specialty)
 {
 	checkMaxSizeReached();
 
-	staff[num_staff] = new 	Doctor(name, specialty);
+	staff[num_staff] = new Doctor(name, specialty);
 	num_staff++;
 	num_doctors++;
 }
 
 //----------------------------------------------------------------------------------------------------//
-void Ward::AddSurgeon(Doctor&& doctor)
+void Ward::AddDoctor(Doctor&& doctor)
 {
 	checkMaxSizeReached();
 
-	staff[num_staff] = new Surgeon(std::move(doctor));
+	if (dynamic_cast<Researcher*>(&doctor))
+	{
+		if (dynamic_cast<Surgeon*>(&doctor)) 
+		{
+			staff[num_staff] = new SurgeonResearcher(std::move(doctor));
+		}
+		else
+		{
+			staff[num_staff] = new ResearcherDoctor(std::move(doctor));
+		}
+	}
+	else if (dynamic_cast<Surgeon*>(&doctor))
+	{	
+		staff[num_staff] = new Surgeon(std::move(doctor));
+	}
+	else
+	{	
+		staff[num_staff] = new Doctor(std::move(doctor));
+	}
+
 	num_staff++;
 	num_doctors++;
 }
+
 
 
 //----------------------------------------------------------------------------------------------------//

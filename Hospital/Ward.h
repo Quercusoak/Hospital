@@ -35,7 +35,7 @@ public:
 	void AddStaff(Staff&&);
 	void AddNurse(const char* name, float yrs_of_experience);
 	void AddDoctor(const char* name, const char* specialty);
-	void AddSurgeon(Doctor&&);
+	void AddDoctor(Doctor&&);
 
 
 	Staff** getStaff()						const { return staff; }

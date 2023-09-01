@@ -58,7 +58,7 @@ void addNurse(Hospital& hospital)
 
 
 	cout << endl << "Assign " << name << " to a ward: " << endl;
-	hospital.getWards()[chooseWard(hospital)]->AddNurse(name, exp);
+	chooseWard(hospital).AddNurse(name, exp);
 
 	actionDone("Adding a new nurse", name, "", true);
 }
@@ -70,7 +70,6 @@ void addDoctor(Hospital& hospital)
 {
 	char specialty[MAX_STRING_INPUT];
 	char name[MAX_NAME_LENGTH];
-	unsigned int ward_num;
 	bool is_dr_type = true;
 	unsigned int dr_type;
 
@@ -84,7 +83,7 @@ void addDoctor(Hospital& hospital)
 
 
 	cout << endl << "Assign " << name << " to a ward: " << endl;
-	ward_num = chooseWard(hospital);
+	Ward& ward = chooseWard(hospital);
 
 	
 	cout << "Select for Dr " << name << ":\n1)Doctor \n2)Surgeon \n3)Researcher Doctor \n4)Researcher Surgeon" << endl;
@@ -93,25 +92,24 @@ void addDoctor(Hospital& hospital)
 	switch (dr_type)
 	{
 	case 1:
-		hospital.getWards()[ward_num]->AddDoctor(name, specialty);
+		ward.AddDoctor(name, specialty);
 		break;
 	case 2:
-		hospital.getWards()[ward_num]->AddSurgeon(Doctor(name, specialty));
+		ward.AddDoctor(Surgeon(name, specialty));
 		break;
 	case 3:
-
-		hospital.getResearchCenter().AddResearcher(name);
+		ward.AddDoctor(ResearcherDoctor(name, specialty));
+		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff()]));
 		break;
 	case 4:
-
+		ward.AddDoctor(SurgeonResearcher(name, specialty));
+		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff()]));
 		break;
 	default:
 		is_dr_type = false;
 		break;
 	}
 
-
-	
 
 	actionDone("Adding a new doctor", name, INCORRECT_DR_TYPE, is_dr_type);
 
@@ -154,7 +152,7 @@ void addPatient(Hospital& hospital)
 	//Select ward to add patient to:
 	bool check = hospital.getWardsNum() == 0;
 	if (!check) {
-		Ward& ward = *hospital.getWards()[chooseWard(hospital)];
+		Ward& ward = chooseWard(hospital);
 
 		//Patient can't be added to a ward without doctors in it:
 		check = ward.getDoctorsNum() == 0;
@@ -193,7 +191,7 @@ void addPatient(Hospital& hospital)
 
 
 //----------------------------------------------------------------------------------------------------//
-unsigned int chooseWard(Hospital& hospital)
+Ward& chooseWard(Hospital& hospital)
 {
 	unsigned int ward_num, num_of_wards_in_hospital = hospital.getWardsNum();
 
@@ -204,7 +202,7 @@ unsigned int chooseWard(Hospital& hospital)
 		cin >> ward_num;
 	} while (ward_num < 1 || ward_num > num_of_wards_in_hospital);
 
-	return ward_num - 1;
+	return *hospital.getWards()[ward_num - 1];
 }
 
 //----------------------------------------------------------------------------------------------------//
@@ -351,7 +349,7 @@ void searchPatient(Hospital& hospital)
 //Shows all patients who visited selected ward.
 void showPatients(Hospital& hospital)
 {
-	Ward& ward = *hospital.getWards()[chooseWard(hospital)];
+	Ward& ward = chooseWard(hospital);
 	unsigned int num_of_patients = ward.getPatientsNum();
 	Patient* patient;
 
@@ -412,29 +410,12 @@ void showStaff(Hospital& hospital)
 				cout << ward.getName() << ":" << endl;
 				for (j = 0; j < num_staff; j++)
 					cout << *ward.getStaff()[j] << endl;
-					//printStaff(*ward.getStaff()[j]);
 			}
 		}
 	}
 
 	returningMainMenu();
 
-}
-
-
-//----------------------------------------------------------------------------------------------------// TO BE DEL
-void printStaff(Staff& staff)
-{	
-	Nurse* temp = dynamic_cast<Nurse*>(&staff);
-	if (temp)
-	{
-		cout << *temp;
-	}
-	else  
-	{		
-		Doctor* temp = dynamic_cast<Doctor*>(&staff);
-		cout << (*temp);
-	}
 }
 
 

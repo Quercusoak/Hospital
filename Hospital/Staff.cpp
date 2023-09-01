@@ -9,6 +9,8 @@ unsigned int Staff::counter = 1000;
 Staff::Staff(const char* name)
 	:Person(name), workerId(counter)
 {
+	cout << "Staff c'tor	" << this->workerId << endl; //to del
+
 	counter++;
 }
 
@@ -19,8 +21,9 @@ Staff::Staff(const Staff& other) :Person(other.getName()), workerId(counter)
 }
 
 //--------------------------------------------------------------------------------//
-Staff::Staff(Staff&& other) :Person(other.getName()), workerId(counter)
+Staff::Staff(Staff&& other) :Person(other.getName()), workerId(other.getWorkerID())
 {
+	cout << "Staff move c'tor	" << this->workerId << endl; //to del
 	other.name = nullptr;
 }
 

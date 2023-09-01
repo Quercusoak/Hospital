@@ -33,3 +33,15 @@ void ResearchCenter::AddResearcher(const char* name)
 }
 
 
+//---------------------------------------------------------------//
+void ResearchCenter::AddResearcherDoctor(Researcher& other)
+{
+	if (num_researchers == max_researchers)
+	{
+		max_researchers *= 2;
+		researchers = (Researcher**)rerealloc(researchers, sizeof(Researcher*), num_researchers, max_researchers);
+	}
+
+	researchers[num_researchers] = &other;
+	num_researchers++;
+}
