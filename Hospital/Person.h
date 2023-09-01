@@ -23,7 +23,7 @@ protected:
 	void setName(const char* name);
 
 public:
-	char* getName()				const { return name; }
+	const char* getName()				const { return name; }
 
 	virtual void toOS(std::ostream& os) const {}
 
