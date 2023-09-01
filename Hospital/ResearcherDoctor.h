@@ -19,10 +19,10 @@ public:
 
 	virtual void toOS(std::ostream& os) const override
 	{
-		os << ", Job - Researcher Doctor, Specialty - " << m_specialty << ", ";
+		os << ", Job - Researcher Doctor, Specialty - " << m_specialty << ".";
 		if (this->getNumArticles() > 0)
 		{
-			os << ", Number of written Articles:" << this->getNumArticles();
+			os << "Number of written Articles:" << this->getNumArticles() << endl;
 			this->toOSArticles(os);
 		}
 	}
