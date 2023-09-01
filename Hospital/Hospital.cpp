@@ -8,8 +8,7 @@ Hospital::Hospital()
 	wards = new Ward*[max_wards];
 	wards[0] = nullptr;
 
-	//num_staff = 0;
-	//max_staff = 1;
+
 	staff = new Staff* * [max_wards];
 	staff[0] = nullptr;
 
@@ -51,19 +50,7 @@ void Hospital::AddWard(const char* ward_name)
 }
 
 //----------------------------------------------------------------------------------------------------//
-void Hospital::AddNurse(const char* name, float yrs_of_experience, Ward& ward)
-{
-	
-	ward.AddNurse(name, yrs_of_experience);
-}
 
-//----------------------------------------------------------------------------------------------------//
-void Hospital::AddDoctor(const char* name, const char* specialty, Ward& ward)
-{
-	ward.AddDoctor(name, specialty);
-}
-
-//----------------------------------------------------------------------------------------------------//
 Patient* Hospital::searchPatientByID(unsigned int& id)
 {
 	for (unsigned int i = 0; i < num_patients; i++)
@@ -97,10 +84,4 @@ void Hospital::checkMaxSizeReached()
 		max_wards *= 2;
 		wards = (Ward**)rerealloc(wards, sizeof(Ward*), num_wards, max_wards);
 	}
-
-	/*if (num_staff == max_staff)
-	{
-		max_staff *= 2;
-		staff = (Staff***)rerealloc(staff, sizeof(Staff**), num_staff, max_staff);
-	}*/
 }

@@ -67,14 +67,14 @@ void HardCoded(Hospital& hospital)
 	hospital.AddWard(WARD3);
 
 
-	hospital.AddDoctor(DOC_1, DOC_1Specilaty, *(hospital.getWards()[0]));
-	hospital.AddDoctor(DOC_2, DOC_2Specilaty, *(hospital.getWards()[0]));
-	hospital.AddDoctor(DOC_3, DOC_3Specilaty, *(hospital.getWards()[2]));
+	hospital.getWards()[0]->AddDoctor(DOC_1, DOC_1Specilaty);
+	hospital.getWards()[0]->AddDoctor(DOC_2, DOC_2Specilaty);
+	hospital.getWards()[2]->AddDoctor(DOC_3, DOC_3Specilaty);
 
 
-	hospital.AddNurse(NURSE_1, NURSE_1_EXP, *(hospital.getWards()[0]));
-	hospital.AddNurse(NURSE_2, NURSE_2_EXP, *(hospital.getWards()[2]));
-	hospital.AddNurse(NURSE_3, NURSE_3_EXP, *(hospital.getWards()[2]));
+	hospital.getWards()[0]->AddNurse(NURSE_1, NURSE_1_EXP);
+	hospital.getWards()[2]->AddNurse(NURSE_2, NURSE_2_EXP);
+	hospital.getWards()[2]->AddNurse(NURSE_3, NURSE_3_EXP);
 
 
 	Patient* newPatient;

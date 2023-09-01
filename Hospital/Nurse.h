@@ -11,7 +11,7 @@ private:
 public:
 	Nurse(const char* name, float yrs_of_experience);
 	Nurse(Nurse&) = delete;
-	Nurse(Nurse&&) = delete;
+	Nurse(Nurse&&);
 	virtual ~Nurse();
 
 	void setExperience(float);

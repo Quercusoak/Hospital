@@ -10,8 +10,6 @@ protected:
 	unsigned int workerId;
 
 	Staff(const char*);
-	Staff(const Staff&); //completly useless, only workerId here, and therefore, normal cpy would had worked...
-	virtual ~Staff();
 
 private:
 	static unsigned int counter;
@@ -20,6 +18,9 @@ public:
 	unsigned int getNumOfWorkers()	const { return counter - 1000; }
 	unsigned int getWorkerID()		const { return workerId; }
 
+	Staff(const Staff&);
+	Staff(Staff&&);
+	virtual ~Staff();
 
 
 	friend std::ostream& operator<<(std::ostream& os, const Staff& staff)

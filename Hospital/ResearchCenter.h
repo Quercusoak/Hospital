@@ -17,6 +17,7 @@ public:
 	~ResearchCenter();
 
 	void AddResearcher(const char* name);
+	void AddResearcherDoctor(Researcher&);
 
 
 	Researcher** getResearchers()	const { return researchers; }
