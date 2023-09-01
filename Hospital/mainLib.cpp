@@ -56,6 +56,10 @@ void addNurse(Hospital& hospital)
 	cout << "Enter new nurse's years of experience: ";
 	cin >> exp;
 
+	while (exp < 0) {
+		cout << "Incorrect Value, please reenter nurse's years of experience: ";
+		cin >> exp;
+	}
 
 	cout << endl << "Assign " << name << " to a ward: " << endl;
 	chooseWard(hospital).AddNurse(name, exp);
@@ -95,10 +99,10 @@ void addDoctor(Hospital& hospital)
 		ward.AddDoctor(name, specialty);
 		break;
 	case 2:
-		ward.AddStaff(Surgeon(name, specialty));
+		ward.AddDoctor(Surgeon(name, specialty));
 		break;
 	case 3:
-		ward.AddStaff(ResearcherDoctor(name, specialty));
+		ward.AddDoctor(ResearcherDoctor(name, specialty));
 		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
 		break;
 	case 4:
@@ -371,12 +375,6 @@ void showPatients(Hospital& hospital)
 
 }
 
-//----------------------------------------------------------------------------------------------------// TO BE DEL
-void printPatient(Patient& patient)
-{
-	cout << patient.getName() << ", " << patient.getGender() << ", ID: " << patient.getID() << endl;
-}
-
 //----------------------------------------------------------------------------------------------------//
 void printPatientCard(Patient& patient)
 {
@@ -433,30 +431,6 @@ void showResearchers(Hospital& hospital)
 	returningMainMenu();
 
 }
-
-//----------------------------------------------------------------------------------------------------//
-/*void printResearcher(Researcher& researcher)
-{
-	int num_articles = researcher.getNumArticles();
-
-	cout << "Researcher " << researcher.getName() << ", worker ID: " << researcher.getWorkerID()
-		<< ", number of written Articles: " << num_articles << endl;
-
-	if (num_articles == 0)
-		return;
-
-
-	cout << "Articles:" << endl;
-
-	for (int i = 0; i < num_articles; i++) {
-		//cout << i + 1 << ")" << "\n"
-			//<< "Magazine Name - " << researcher.getArticle(i)->getMagazineName() << "\n"
-			//<< "Article Name - " << researcher.getArticle(i)->getArticleName() << "\n"
-			//<< "Date - ";
-		//printDate(researcher.getArticle(i)->getDate());
-	}
-	cout << endl;
-}*/
 
 //----------------------------------------------------------------------------------------------------// TO BE DEL
 void printDate(const Date& date)

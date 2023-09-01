@@ -17,9 +17,7 @@ Hospital::Hospital()
 	patients = new Patient * [max_patients];
 	patients[0] = nullptr;
 
-	wards_doctors = 0;
-	wards_researchers = 0;
-	wards_nurses = 0;
+
 
 
 }
@@ -42,7 +40,7 @@ void Hospital::AddWard(const char* ward_name)
 {
 	checkMaxSizeReached();
 
-	wards[num_wards] = new Ward(ward_name, wards_doctors, wards_researchers, wards_nurses);
+	wards[num_wards] = new Ward(ward_name);
 
 	staff[num_wards] = wards[num_wards]->getStaff();
 

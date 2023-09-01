@@ -25,12 +25,9 @@ private:
 	unsigned int num_patients;
 	unsigned int max_patients_size;
 
-	unsigned int& wards_doctors;
-	unsigned int& wards_researchers;
-	unsigned int& wards_nurses;
 
 public:
-	Ward(const char* ward_name, unsigned int& wards_doctors, unsigned int& wards_researchers, unsigned int& wards_nurses);
+	Ward(const char* ward_name);
 	Ward(const Ward&) = delete;
 	Ward(Ward&&) = delete;
 	~Ward();
