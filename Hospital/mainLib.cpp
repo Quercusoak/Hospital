@@ -106,8 +106,8 @@ void addDoctor(Hospital& hospital)
 		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
 		break;
 	case 4:
-		ward.AddDoctor(SurgeonResearcher(name, specialty));
-		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff()] - 1));
+		ward.AddStaff(SurgeonResearcher(name, specialty));
+		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
 		break;
 	default:
 		is_dr_type = false;
@@ -120,7 +120,6 @@ void addDoctor(Hospital& hospital)
 }
 
 //----------------------------------------------------------------------------------------------------//
-//Creates and adds to hospital if new patient, if returning patient- only adds visit to patients card and in visited ward patien array
 void addPatient(Hospital& hospital)
 {
 	unsigned int gender, id;
