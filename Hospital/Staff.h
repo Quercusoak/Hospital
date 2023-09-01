@@ -11,7 +11,6 @@ protected:
 
 	Staff(const char*);
 
-
 private:
 	static unsigned int counter;
 
@@ -22,7 +21,6 @@ public:
 	Staff(const Staff&);
 	Staff(Staff&&);
 	virtual ~Staff();
-
 
 
 	friend std::ostream& operator<<(std::ostream& os, const Staff& staff)

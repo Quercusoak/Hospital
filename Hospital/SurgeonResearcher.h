@@ -15,7 +15,6 @@ public:
 	{
 	}
 
-
 	virtual void toOS(std::ostream& os) const override
 	{
 		os << ", Job - Surgeon Researcher ";
