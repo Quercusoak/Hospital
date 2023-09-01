@@ -99,11 +99,11 @@ void addDoctor(Hospital& hospital)
 		break;
 	case 3:
 		ward.AddDoctor(ResearcherDoctor(name, specialty));
-		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff()]));
+		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
 		break;
 	case 4:
 		ward.AddDoctor(SurgeonResearcher(name, specialty));
-		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff()]));
+		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff()] - 1));
 		break;
 	default:
 		is_dr_type = false;
