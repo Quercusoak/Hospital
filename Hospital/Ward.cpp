@@ -109,8 +109,7 @@ void Ward::AddDoctor(Doctor&& doctor)
 		staff[num_staff] = new Doctor(std::move(doctor));
 	}
 
-	num_staff++;
-	num_doctors++;
+	
 
 }
 

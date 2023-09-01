@@ -99,14 +99,14 @@ void addDoctor(Hospital& hospital)
 		ward.AddDoctor(name, specialty);
 		break;
 	case 2:
-		ward.AddDoctor(Surgeon(name, specialty));
+		ward.AddStaff(Surgeon(name, specialty));
 		break;
 	case 3:
-		ward.AddDoctor(ResearcherDoctor(name, specialty));
+		ward.AddStaff(ResearcherDoctor(name, specialty));
 		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
 		break;
 	case 4:
-		ward.AddDoctor(SurgeonResearcher(name, specialty));
+		ward.AddStaff(SurgeonResearcher(name, specialty));
 		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
 		break;
 	default:
@@ -425,7 +425,7 @@ void showResearchers(Hospital& hospital)
 	cout << "Current Researchers: " << endl;
 
 	for (unsigned int i = 0; i < numToPrint; i++)
-		cout << *((research_center.getResearchers())[i]);
+		cout << *((research_center.getResearchers())[i]) << endl;
 		//printResearcher(*((research_center.getResearchers())[i]));
 
 	returningMainMenu();
@@ -487,5 +487,14 @@ void checkDate(unsigned short* year, unsigned short* month, unsigned short* day)
 	}
 
 	cleanBuffer();
+}
+
+
+//----------------------------------------------------------------------------------------------------//
+void AddStaffMemberToWard(Hospital& hospital)
+{
+
+	Ward& ward = chooseWard(hospital);
+
 
 }
