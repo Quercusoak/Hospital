@@ -47,6 +47,9 @@ public:
 	const unsigned int getPatientsNum()		const { return num_patients; }
 	Patient* const* getPatients()			const { return patients; }
 
+	void operator+=(const Staff& other);
+	void operator+=(Staff&& other);
+
 	const char* getName()	const { return name; }
 
 	void checkMaxSizeReached();
