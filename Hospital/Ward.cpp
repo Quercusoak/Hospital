@@ -2,8 +2,8 @@
 
 
 //---------------------------------------------------------------//
-Ward::Ward(const char* ward_name, unsigned int& wards_doctors, unsigned int& wards_researchers, unsigned int& wards_nurses)
-	:wards_doctors(wards_doctors), wards_researchers(wards_researchers), wards_nurses(wards_nurses)
+Ward::Ward(const char* ward_name)
+	
 {
 	name = new char[strlen(ward_name) + 1];
 	strcpy(name, ward_name);
@@ -59,6 +59,7 @@ void Ward::AddStaff(Staff&& newStaff)
 		Doctor* tmp = dynamic_cast<Doctor*>(&newStaff);
 		if (tmp) //has to be true since staff is either nurse or doctor
 			this->AddDoctor(std::move(*tmp));
+		num_doctors++;
 	}
 
 	num_staff++;
@@ -108,6 +109,7 @@ void Ward::AddDoctor(Doctor&& doctor)
 		staff[num_staff] = new Doctor(std::move(doctor));
 	}
 
+	num_staff++;
 	num_doctors++;
 
 }
