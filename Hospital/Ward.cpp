@@ -59,7 +59,6 @@ void Ward::AddStaff(Staff&& newStaff)
 		Doctor* tmp = dynamic_cast<Doctor*>(&newStaff);
 		if (tmp) //has to be true since staff is either nurse or doctor
 			this->AddDoctor(std::move(*tmp));
-		num_doctors++;
 	}
 
 	num_staff++;
@@ -109,7 +108,6 @@ void Ward::AddDoctor(Doctor&& doctor)
 		staff[num_staff] = new Doctor(std::move(doctor));
 	}
 
-	num_staff++;
 	num_doctors++;
 
 }

@@ -2,7 +2,7 @@
 #define __PATIENT_CARD_OPERATION_H
 
 
-
+#include "Surgeon.h"
 #include "PatientCard.h"
 
 class PatientCardOperation : public PatientCard
@@ -12,14 +12,14 @@ protected:
 	bool fasting;
 
 public:
-	PatientCardOperation(Date date, const char* purpose_of_visit, Doctor& doctor, unsigned int room_number, bool fasting);
-	PatientCardOperation(PatientCard& card, unsigned int room_number, bool fasting);
+	PatientCardOperation(Date date, const char* purpose_of_visit, Surgeon& doctor, unsigned int room_number, bool fasting);
 	virtual ~PatientCardOperation();
 
 
 	unsigned int getRoom_Number()		const { return room_number; }
 	bool isFasting()					const { return fasting; }
  
+	void addSurgery(unsigned int num_of_surgery) { num_of_surgery++; }
 };
 
 #endif // !__PATIENT_CARD_OPERATION_H
