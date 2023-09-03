@@ -108,10 +108,6 @@ void Ward::AddDoctor(Doctor&& doctor)
 	{	
 		staff[num_staff] = new Doctor(std::move(doctor));
 	}
-
-	num_staff++;
-	num_doctors++;
-
 }
 
 
@@ -124,4 +120,11 @@ void Ward::checkMaxSizeReached()
 		max_staff *= 2;
 		staff = (Staff**)rerealloc(staff, sizeof(Staff*), num_staff, max_staff);
 	}
+}
+
+
+//----------------------------------------------------------------------------------------------------//
+void Ward::operator+=(Staff&& other)
+{
+	AddStaff(std::move(other));
 }

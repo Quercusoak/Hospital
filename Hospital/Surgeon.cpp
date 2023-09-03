@@ -23,3 +23,10 @@ void Surgeon::operator++()
 {
 	num_surgeries++;
 }
+
+// --------------------------------------------------------------------------------//
+void Surgeon::toOS(std::ostream& os) const
+{
+	Doctor::toOS(os);
+	os << ", Number of Surgeries Performed: " << num_surgeries;
+}

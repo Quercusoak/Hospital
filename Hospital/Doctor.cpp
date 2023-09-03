@@ -18,11 +18,11 @@ Doctor::Doctor(const char* name, const char* specialty)
 	setSpecialty(specialty);
 }
 
-//---------------------------------------------------------------//
-Doctor::Doctor(const Doctor& other) :Staff(other)
-{
-	setSpecialty(other.getSpecialty());
-}
+////---------------------------------------------------------------//
+//Doctor::Doctor(const Doctor& other) :Staff(other)
+//{
+//	setSpecialty(other.getSpecialty());
+//}
 
 //---------------------------------------------------------------//
 Doctor::Doctor(Doctor&& other) :Staff(std::move(other))
