@@ -21,7 +21,9 @@ int MenuOutPutInPut()
 	cout << " (7)- Show all patients conntected to a ward" << endl;
 	cout << " (8)- Show all hospital workers" << endl;
 	cout << " (9)- Show all hospital reserachers" << endl;
-	cout << "(10)- search patient using his ID" << endl;
+	cout << "(10)- Search patient using his ID" << endl;
+	cout << "(11)- Add a new staff member to a ward" << endl;
+	cout << "(12)- Compare two researchers" << endl;
 
 	cin >> ret;
 
@@ -49,22 +51,22 @@ void addNurse(Hospital& hospital)
 	float exp;
 	char name[MAX_NAME_LENGTH];
 
-	cout << "Enter new nurse's name: ";
-	cleanBuffer();
-	cin.getline(name, MAX_NAME_LENGTH);
+	if (hospital.getWardsNum() > 0)
+	{
+		cout << "Enter new nurse's name: ";
+		cleanBuffer();
+		cin.getline(name, MAX_NAME_LENGTH);
 
-	cout << "Enter new nurse's years of experience: ";
-	cin >> exp;
+		exp = getExperience();
 
-	while (exp < 0) {
-		cout << "Incorrect Value, please reenter nurse's years of experience: ";
-		cin >> exp;
+
+		cout << endl << "Assign " << name << " to a ward: " << endl;
+		chooseWard(hospital).AddNurse(name, exp);
+
+		actionDone("Adding a new nurse", name, "", true);
 	}
-
-	cout << endl << "Assign " << name << " to a ward: " << endl;
-	chooseWard(hospital).AddNurse(name, exp);
-
-	actionDone("Adding a new nurse", name, "", true);
+	else
+		actionDone("Adding a new nurse", "", ERR_NO_WARDS, false);
 }
 
 //----------------------------------------------------------------------------------------------------//
@@ -76,45 +78,49 @@ void addDoctor(Hospital& hospital)
 	bool is_dr_type = true;
 	unsigned int dr_type;
 
-
-	cout << "Enter new doctor's name: ";
-	cleanBuffer();
-	cin.getline(name, MAX_NAME_LENGTH);
-
-	cout << "Enter new doctor's specialty: ";
-	cin.getline(specialty, MAX_STRING_INPUT);
-
-
-	cout << endl << "Assign " << name << " to a ward: " << endl;
-	Ward& ward = chooseWard(hospital);
-
-	
-	cout << "Select for Dr " << name << ":\n1)Doctor \n2)Surgeon \n3)Researcher Doctor \n4)Researcher Surgeon" << endl;
-	cin >> dr_type;
-
-	switch (dr_type)
+	if (hospital.getWardsNum() > 0)
 	{
-	case 1:
-		ward.AddDoctor(name, specialty);
-		break;
-	case 2:
-		ward.AddDoctor(Surgeon(name, specialty));
-		break;
-	case 3:
-		ward.AddDoctor(ResearcherDoctor(name, specialty));
-		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
-		break;
-	case 4:
-		ward.AddDoctor(SurgeonResearcher(name, specialty));
-		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
-		break;
-	default:
-		is_dr_type = false;
-		break;
+		cout << "Enter new doctor's name: ";
+		cleanBuffer();
+		cin.getline(name, MAX_NAME_LENGTH);
+
+		cout << "Enter new doctor's specialty: ";
+		cin.getline(specialty, MAX_STRING_INPUT);
+
+
+		cout << endl << "Assign " << name << " to a ward: " << endl;
+		Ward& ward = chooseWard(hospital);
+
+
+		cout << "Select for Dr " << name << ":\n1)Doctor \n2)Surgeon \n3)Researcher Doctor \n4)Researcher Surgeon" << endl;
+		cin >> dr_type;
+
+		switch (dr_type)
+		{
+		case 1:
+			ward.AddDoctor(name, specialty);
+			break;
+		case 2:
+			ward.AddStaff(Surgeon(name, specialty));
+			break;
+		case 3:
+			ward.AddStaff(ResearcherDoctor(name, specialty));
+			hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
+			break;
+		case 4:
+			ward.AddStaff(SurgeonResearcher(name, specialty));
+			hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
+			break;
+		default:
+			is_dr_type = false;
+			break;
+		}
+
+
+		actionDone("Adding a new doctor", name, INCORRECT_DR_TYPE, is_dr_type);
 	}
-
-
-	actionDone("Adding a new doctor", name, INCORRECT_DR_TYPE, is_dr_type);
+	else
+		actionDone("Adding a new doctor", "", ERR_NO_WARDS, false);
 
 }
 
@@ -414,9 +420,9 @@ void addResearcherArticle(Hospital& hospital)
 		checkDate(&year, &month, &day);
 
 		cout << "Please enter Magazine Name: ";
-		cin >> magazineName;
+		cin.getline(magazineName, MAX_NAME_LENGTH);
 		cout << "Please enter Article Name: ";
-		cin >> articleName;
+		cin.getline(articleName, MAX_NAME_LENGTH);
 
 		Date publicationDate(year, month, day);
 		Article* article = new Article(publicationDate, magazineName, articleName);
@@ -515,7 +521,7 @@ void showStaff(Hospital& hospital)
 
 			if (num_staff > 0)
 			{
-				cout << ward.getName() << ":" << endl;
+				cout << endl << ward.getName() << " ward:" << endl;
 				for (j = 0; j < num_staff; j++)
 					cout << *ward.getStaff()[j] << endl;
 			}
@@ -535,7 +541,7 @@ void showResearchers(Hospital& hospital)
 	cout << "Current Researchers: " << endl;
 
 	for (unsigned int i = 0; i < numToPrint; i++)
-		cout << *((research_center.getResearchers())[i]);
+		cout << *((research_center.getResearchers())[i]) << endl;
 		//printResearcher(*((research_center.getResearchers())[i]));
 
 	returningMainMenu();
@@ -569,7 +575,7 @@ void actionDone(const char* actionName, const char* objectName, const char* reas
 //Print returning to main menu msg.
 void returningMainMenu()
 {
-	cout << "Returning to main menu...\n\n"
+	cout << "\nReturning to main menu...\n\n"
 		<< "---Hospital Menu---" << endl;
 }
 
@@ -597,5 +603,111 @@ void checkDate(unsigned short* year, unsigned short* month, unsigned short* day)
 	}
 
 	cleanBuffer();
+}
 
+
+//----------------------------------------------------------------------------------------------------//
+void AddStaffMemberToWard(Hospital& hospital)
+{
+	unsigned int answer;
+	char name[MAX_NAME_LENGTH];
+	char specialty[MAX_STRING_INPUT];
+	bool error = false;
+	unsigned int dr_type;
+
+	if (hospital.getWardsNum() > 0)
+	{
+		Ward& ward = chooseWard(hospital);
+
+		cout << "Add a new staff member to " << ward.getName() << " ward:\n1 - Nurse\n2 - Doctor" << endl;
+		cin >> answer;
+
+		cout << "Enter new staff member's name: ";
+		cleanBuffer();
+		cin.getline(name, MAX_NAME_LENGTH);
+
+		switch (answer)
+		{
+		case 1:
+			ward += Nurse(name, getExperience());
+			break;
+		case 2:
+			cout << "Enter new doctor's specialty: ";
+			cin.getline(specialty, MAX_STRING_INPUT);
+			cout << "Select for Dr " << name << ":\n1)Doctor \n2)Surgeon \n3)Researcher Doctor \n4)Researcher Surgeon" << endl;
+			cin >> dr_type;
+
+			switch (dr_type)
+			{
+			case 1:
+				ward += Doctor(name, specialty);
+				break;
+			case 2:
+				ward += Surgeon(name, specialty);
+				break;
+			case 3:
+				ward += ResearcherDoctor(name, specialty);
+				hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
+				break;
+			case 4:
+				ward += SurgeonResearcher(name, specialty);
+				hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
+				break;
+			default:
+				error = true;
+				break;
+			}
+			break;
+		default:
+			error = true;
+			break;
+		}
+
+		actionDone("Adding new staff member ", name, "Invalid selection", !error);
+	}
+	else
+		actionDone("Adding new staff member ", "", ERR_NO_WARDS, false);
+
+}
+
+//----------------------------------------------------------------------------------------------------//
+float getExperience()
+{
+	float exp;
+	cout << "Enter new nurse's years of experience: ";
+	cin >> exp;
+
+	while (exp < 0) {
+		cout << "Incorrect Value, please reenter nurse's years of experience: ";
+		cin >> exp;
+	}
+	return exp;
+}
+
+
+//----------------------------------------------------------------------------------------------------//
+void compareResearchers(Hospital& hospital)
+{
+	ResearchCenter& RC = hospital.getResearchCenter();
+	int num_researchers = RC.getNum_researchers();
+
+	if (num_researchers > 0)
+	{
+		cout << "Select researchers to compare: " << endl;
+		cout << "First researcher: ";
+		Researcher& first = chooseResearcher(RC);
+
+		cout << "Second researcher: ";
+		Researcher& second = chooseResearcher(RC);
+
+		int res = first > second;
+		if (res > 0)
+			cout << "Researcher " << first.getName() << " has written more articles." << endl;
+		else if (res < 0)
+			cout << "Researcher " << second.getName() << " has written more articles." << endl;
+		else
+			cout << "Both researchers wrote " << first.getNumArticles() << " articles." << endl;
+	}
+	else
+		cout << "No researchers in research center.";
 }

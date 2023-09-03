@@ -27,8 +27,19 @@ Ward::Ward(const char* ward_name)
  //deletes pointer array but not objects since those are part of hospital
 Ward::~Ward()
 {
+	unsigned int i;
+
 	delete[]name;
+
+	for (i = 0; i < num_staff; ++i)
+	{
+		if (!(dynamic_cast<Researcher*>(staff[i]))) //researchers will be deleted in research center
+			delete staff[i];
+	}
 	delete[] staff;
+
+	for (i = 0; i < num_patients; ++i)
+		delete patients[i];
 	delete[] patients;
 }
 
@@ -111,10 +122,6 @@ void Ward::AddDoctor(Doctor&& doctor)
 	{	
 		staff[num_staff] = new Doctor(std::move(doctor));
 	}
-
-	num_staff++;
-	num_doctors++;
-
 }
 
 
@@ -127,4 +134,11 @@ void Ward::checkMaxSizeReached()
 		max_staff *= 2;
 		staff = (Staff**)rerealloc(staff, sizeof(Staff*), num_staff, max_staff);
 	}
+}
+
+
+//----------------------------------------------------------------------------------------------------//
+void Ward::operator+=(Staff&& other)
+{
+	AddStaff(std::move(other));
 }

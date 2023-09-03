@@ -25,6 +25,12 @@ public:
 			this->toOSArticles(os);
 		}
 	}
+
+	SurgeonResearcher(const char* name, const char* specialty);
+
+	SurgeonResearcher(Doctor&& other);
+
+	virtual const char* type() const override { return "Surgeon Researcher"; }
 };
 
 

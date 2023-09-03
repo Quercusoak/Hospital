@@ -8,8 +8,6 @@ private:
 	unsigned int num_wards;
 	unsigned int max_wards;
 
-	//Staff is array of pointers to the staff array in wards, each pointer - different ward
-	Staff*** staff;
 
 	ResearchCenter research_center;
 
