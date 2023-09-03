@@ -40,6 +40,12 @@ void addDoctor(Hospital& hospital);
 void addPatient(Hospital& hospital);
 
 
+void addCard(Patient& patient, Ward& ward);
+
+
+void addOperationCard(Patient& patient, Ward& ward);
+
+
 void addResearcher(Hospital& hospital);
 
 
@@ -54,6 +60,9 @@ Ward& chooseWard(Hospital&);
 Doctor& chooseDoctor(Ward&);
 
 
+Surgeon& chooseSurgeon(Ward& ward);
+
+
 Researcher& chooseResearcher(ResearchCenter& research_center);
 
 
@@ -62,28 +71,31 @@ Researcher& chooseResearcher(ResearchCenter& research_center);
 void showWards(Hospital& hospital);
 
 
-void showDoctors(Ward& ward);
+int showDoctors(Ward& ward);
+
+
+int showSurgeons(Ward& ward);
 
 
 void showPatients(Hospital& hospital);
 
 
-void showStaff(Hospital& hospital);
+void showStaff(Hospital& hospital); //
 
 
-void showResearchers(ResearchCenter& research_center);
+void showResearchers(ResearchCenter& research_center); //
 
 
-void showResearchers(Hospital& hospital);
+void showResearchers(Hospital& hospital); //
 
 
 
 
-void printDate(const Date& date);
+void printDate(const Date& date); //
 
-void printPatient(Patient& patient);
+void printPatient(Patient& patient); //
 
-void printPatientCard(Patient& patient);
+void printPatientCard(Patient& patient); //
 
 
 

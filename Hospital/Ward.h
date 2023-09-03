@@ -20,6 +20,8 @@ private:
 	unsigned int max_staff;
 
 	unsigned int num_doctors;
+	unsigned int num_surgeons;
+
 
 	Patient** patients;
 	unsigned int num_patients;
@@ -42,6 +44,8 @@ public:
 
 	const unsigned int getNumStaff()		const { return num_staff; }
 	const unsigned int getDoctorsNum()		const { return num_doctors; }
+	const unsigned int getSurgeonsNum()		const { return num_surgeons; }
+
 	
 	void AddPatient(Patient&);
 	const unsigned int getPatientsNum()		const { return num_patients; }
