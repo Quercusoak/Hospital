@@ -40,6 +40,12 @@ void addDoctor(Hospital& hospital);
 void addPatient(Hospital& hospital);
 
 
+void addCard(Patient& patient, Ward& ward);
+
+
+void addOperationCard(Patient& patient, Ward& ward);
+
+
 void addResearcher(Hospital& hospital);
 
 

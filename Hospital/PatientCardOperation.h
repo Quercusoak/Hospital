@@ -21,8 +21,12 @@ public:
  
 	virtual void toOS(std::ostream& os) const 
 	{
-		os << "Operation Visit" << endl
-			<< "Room number - " << room_number << ", Fasting - " << fasting << endl;
+		os << "		---Operation Visit---" << endl
+			<< "Room number - " << room_number << ", Fasting - ";
+		if (fasting)
+			os << "True" << endl;
+		else
+			os << "False" << endl;
 	}
 
 };

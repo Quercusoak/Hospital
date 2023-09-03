@@ -3,7 +3,7 @@
 
 #define ERR_ID_TAKEN "id already in system"
 #define ERR_NO_WARDS "No ward had been added to hospital yet, please enter a ward first."
-#define ERR_NO_DOCTORS_IN_WARD "Ward is understaffed, and therefore, cannot add patient to ward, please enter a doctor to ward first"
+#define ERR_NO_MATCH_DOCTORS_IN_WARD "Ward is understaffed, and therefore, cannot add patient to ward, please enter a matching doctor to ward first"
 #define INCORRECT_DR_TYPE "Doctor type is invalid."
 
 int MenuOutPutInPut()
@@ -121,12 +121,11 @@ void addDoctor(Hospital& hospital)
 //----------------------------------------------------------------------------------------------------//
 void addPatient(Hospital& hospital)
 {
-	unsigned int gender, id;
+	unsigned int gender, id, input;
 	unsigned short year, month, day;
-	char purpose_of_visit[MAX_STRING_INPUT];
 	char name[MAX_NAME_LENGTH];
 	Date date;
-	bool operation, fasting;
+	bool operation;
 
 	cout << "Enter patient's name: ";
 	cleanBuffer();
@@ -157,38 +156,104 @@ void addPatient(Hospital& hospital)
 	if (!check) {
 		Ward& ward = chooseWard(hospital);
 
+		cout << "Is the visit for an operation?" << endl
+			<< "1) No" << endl
+			<< "2) Yes" << endl;
+
+		cin >> input;
+		operation = input - 1;
+
+
 		//Patient can't be added to a ward without doctors in it:
-		check = ward.getDoctorsNum() == 0;
+		if (operation)
+			check = ward.getSurgeonsNum() == 0;
+		else
+			check = ward.getDoctorsNum() == 0;
 
 
 		if (!check) {
 			if (patient == nullptr)
 				patient = hospital.addPatient(name, id, date, gender - 1);
 
-			//visit date:
-			cout << "Enter date of visit in the format: year month day" << endl;
-			cin >> year >> month >> day;
-			checkDate(&year, &month, &day); //check date validity
-			date = Date(year, month, day);
-
-
-			//visit purpose:
-			cout << "Enter purpose of visit: ";
-			cin.getline(purpose_of_visit, MAX_STRING_INPUT);
-
-
-			//Select a doctor in selected ward:
-			Doctor& doctor = chooseDoctor(ward);
-
-			patient->AddVisit(date, purpose_of_visit, doctor);
-			ward.AddPatient(*patient);
-
+			if(operation)
+				addOperationCard(*patient, ward);
+			else
+				addCard(*patient, ward);
+			
 		}
 
-		actionDone("Adding new patient", name,ERR_NO_DOCTORS_IN_WARD, !check);
+		actionDone("Adding new patient", name, ERR_NO_MATCH_DOCTORS_IN_WARD, !check);
 	}
 	else
 		actionDone("Adding new patient", name,	ERR_NO_WARDS, !check);
+}
+
+
+//----------------------------------------------------------------------------------------------------//
+void addCard(Patient& patient, Ward& ward)
+{
+	unsigned short year, month, day;
+	Date date;
+	char purpose_of_visit[MAX_STRING_INPUT];
+
+	//visit date:
+	cout << "Enter date of visit in the format: year month day" << endl;
+	cin >> year >> month >> day;
+	checkDate(&year, &month, &day); //check date validity
+	date = Date(year, month, day);
+
+
+	//visit purpose:
+	cout << "Enter purpose of visit: ";
+	cin.getline(purpose_of_visit, MAX_STRING_INPUT);
+
+
+	//Select a doctor in selected ward:
+	Doctor& doctor = chooseDoctor(ward);
+
+	patient.AddVisit(date, purpose_of_visit, doctor);
+	ward.AddPatient(patient);
+}
+
+//----------------------------------------------------------------------------------------------------//
+void addOperationCard(Patient& patient, Ward& ward)
+{
+	unsigned short year, month, day;
+	Date date;
+	char purpose_of_visit[MAX_STRING_INPUT];
+	unsigned int room_number, input;
+	bool fasting;
+
+
+	//visit date:
+	cout << "Enter date of visit in the format: year month day" << endl;
+	cin >> year >> month >> day;
+	checkDate(&year, &month, &day); //check date validity
+	date = Date(year, month, day);
+
+
+	//visit purpose:
+	cout << "Enter purpose of visit: ";
+	cin.getline(purpose_of_visit, MAX_STRING_INPUT);
+
+
+	//Select a doctor in selected ward:
+	Surgeon& surgeon = chooseSurgeon(ward);
+
+
+	cout << "Enter operation room: ";
+	cin >> room_number;
+
+
+	cout << "Was fasting necessary for operation?" << endl
+		<< "1) No" << endl
+		<< "2) Yes" << endl;
+	
+	cin >> input;
+	fasting = input - 1;
+
+	patient.AddVisit(date, purpose_of_visit, surgeon, room_number, fasting);
+	ward.AddPatient(patient);
 }
 
 //----------------------------------------------------------------------------------------------------//
@@ -233,7 +298,6 @@ Doctor& chooseDoctor(Ward& ward)
 	}
 
 	Doctor* tmp = dynamic_cast<Doctor*>(ward.getStaff()[chose - 1]);
-	cout << *tmp;
 	return *tmp;
 }
 
@@ -272,7 +336,6 @@ Surgeon& chooseSurgeon(Ward& ward)
 	}
 
 	Surgeon* tmp = dynamic_cast<Surgeon*>(ward.getStaff()[chose - 1]);
-	cout << *tmp;
 	return *tmp;
 }
 
