@@ -108,9 +108,6 @@ void Ward::AddDoctor(Doctor&& doctor)
 	{	
 		staff[num_staff] = new Doctor(std::move(doctor));
 	}
-
-	
-
 }
 
 
@@ -123,4 +120,36 @@ void Ward::checkMaxSizeReached()
 		max_staff *= 2;
 		staff = (Staff**)rerealloc(staff, sizeof(Staff*), num_staff, max_staff);
 	}
+}
+
+
+//----------------------------------------------------------------------------------------------------//
+bool Ward::operator+=(Staff& other)
+{
+	bool staff_in_ward = false;
+
+
+	//search to see if staff member in ward already
+	for (unsigned int i = 0; i < num_staff; i++)
+	{
+		if (staff[i] == &other)
+			return false;
+	}
+
+	checkMaxSizeReached();
+
+	staff[num_staff] = &other;
+
+	if (dynamic_cast<Doctor*>(&other))
+		num_doctors++;
+
+	num_staff++;
+
+	return true;
+}
+
+// ----------------------------------------------------------------------------------------------------//
+void Ward::operator+=(Staff&& other)
+{
+	AddStaff(std::move(other));
 }

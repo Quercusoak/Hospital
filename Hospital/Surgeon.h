@@ -18,10 +18,7 @@ public:
 
 	const int getNumSurgeriesPerformed() { return num_surgeries; }
 
-	virtual void toOS(std::ostream& os) const override
-	{
-		os << ", Job - Surgeon, Specialty - " << m_specialty << ", Number of Surgeries Performed: " << num_surgeries;
-	}
+	virtual void toOS(std::ostream& os) const override;
 	
 	void addSurgery() { num_surgeries++; }
 };

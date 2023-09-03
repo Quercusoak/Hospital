@@ -404,7 +404,7 @@ void showStaff(Hospital& hospital)
 
 			if (num_staff > 0)
 			{
-				cout << ward.getName() << ":" << endl;
+				cout << endl << ward.getName() << " ward:" << endl;
 				for (j = 0; j < num_staff; j++)
 					cout << *ward.getStaff()[j] << endl;
 			}
@@ -493,8 +493,26 @@ void checkDate(unsigned short* year, unsigned short* month, unsigned short* day)
 //----------------------------------------------------------------------------------------------------//
 void AddStaffMemberToWard(Hospital& hospital)
 {
+	int answer;
+
+	do
+	{
+		cout << "Press 1 to add existng staff member, press 2 for new one." << endl;
+		cin >> answer;
+	} while (answer > 2 || answer < 1);
 
 	Ward& ward = chooseWard(hospital);
+
+	switch (answer)
+	{
+	case 1:
+		showStaff(hospital);
+		cin >> answer;
+		//if (answer> hospital.)
+		break;
+	default:
+		break;
+	}
 
 
 }

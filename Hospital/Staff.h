@@ -18,7 +18,7 @@ public:
 	unsigned int getNumOfWorkers()	const { return counter - 1000; }
 	unsigned int getWorkerID()		const { return workerId; }
 
-	Staff(const Staff&);
+	Staff(const Staff&) = delete;
 	Staff(Staff&&);
 	virtual ~Staff();
 
