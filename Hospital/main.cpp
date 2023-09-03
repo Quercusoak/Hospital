@@ -70,6 +70,10 @@ int main()
 			AddStaffMemberToWard(hospital);
 			break;
 
+		case 12:
+			compareResearchers(hospital);
+			break;
+
 		default:
 			actionDone("Chosing from menu", "User Input", "Entered data out of range", false);
 			loopCheck = true;

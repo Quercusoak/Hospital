@@ -21,8 +21,9 @@ int MenuOutPutInPut()
 	cout << " (7)- Show all patients conntected to a ward" << endl;
 	cout << " (8)- Show all hospital workers" << endl;
 	cout << " (9)- Show all hospital reserachers" << endl;
-	cout << "(10)- search patient using his ID" << endl;
+	cout << "(10)- Search patient using his ID" << endl;
 	cout << "(11)- Add a new staff member to a ward" << endl;
+	cout << "(12)- Compare two researchers" << endl;
 
 	cin >> ret;
 
@@ -309,9 +310,9 @@ void addResearcherArticle(Hospital& hospital)
 		checkDate(&year, &month, &day);
 
 		cout << "Please enter Magazine Name: ";
-		cin >> magazineName;
+		cin.getline(magazineName, MAX_NAME_LENGTH);
 		cout << "Please enter Article Name: ";
-		cin >> articleName;
+		cin.getline(articleName, MAX_NAME_LENGTH);
 
 		Date publicationDate(year, month, day);
 		Article* article = new Article(publicationDate, magazineName, articleName);
@@ -464,7 +465,7 @@ void actionDone(const char* actionName, const char* objectName, const char* reas
 //Print returning to main menu msg.
 void returningMainMenu()
 {
-	cout << "Returning to main menu...\n\n"
+	cout << "\nReturning to main menu...\n\n"
 		<< "---Hospital Menu---" << endl;
 }
 
@@ -571,4 +572,32 @@ float getExperience()
 		cin >> exp;
 	}
 	return exp;
+}
+
+
+//----------------------------------------------------------------------------------------------------//
+void compareResearchers(Hospital& hospital)
+{
+	ResearchCenter& RC = hospital.getResearchCenter();
+	int num_researchers = RC.getNum_researchers();
+
+	if (num_researchers > 0)
+	{
+		cout << "Select researchers to compare: " << endl;
+		cout << "First researcher: ";
+		Researcher& first = chooseResearcher(RC);
+
+		cout << "Second researcher: ";
+		Researcher& second = chooseResearcher(RC);
+
+		int res = first > second;
+		if (res > 0)
+			cout << "Researcher " << first.getName() << " has written more articles." << endl;
+		else if (res < 0)
+			cout << "Researcher " << second.getName() << " has written more articles." << endl;
+		else
+			cout << "Both researchers wrote " << first.getNumArticles() << " articles." << endl;
+	}
+	else
+		cout << "No researchers in research center.";
 }

@@ -97,6 +97,9 @@ void AddStaffMemberToWard(Hospital& hospital);
 float getExperience();
 
 
+void compareResearchers(Hospital& hospital);
+
+
 
 void checkDate(unsigned short* year, unsigned short* month, unsigned short* day);
 

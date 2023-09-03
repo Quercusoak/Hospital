@@ -45,4 +45,18 @@ Researcher::Researcher(Researcher&& other) : Staff(std::move(other))
 }
 
 
+//---------------------------------------------------------------//
+int Researcher::operator>(const Researcher& other)
+{
+	int res;
+	unsigned int otherArticles = other.getNumArticles();
 
+	if (m_numArticles > otherArticles)
+		res = 1;
+	else if (m_numArticles < otherArticles)
+		res = -1;
+	else
+		res = 0;
+
+	return res;
+}
