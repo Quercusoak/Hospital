@@ -13,7 +13,7 @@ ResearcherDoctor::ResearcherDoctor(Doctor&& other)
 // --------------------------------------------------------------------------------//
 void ResearcherDoctor::toOS(std::ostream& os) const
 {
-	os << ", Job - Researcher Doctor, Specialty - " << m_specialty << ".";
+	Doctor::toOS(os);
 	if (this->getNumArticles() > 0)
 	{
 		os << endl << "Number of written Articles:" << this->getNumArticles();

@@ -15,7 +15,7 @@ SurgeonResearcher::SurgeonResearcher(Doctor&& other)
 void SurgeonResearcher::toOS(std::ostream& os) const 
 {
 
-	os << ", Job - Surgeon Researcher ,Specialty - " << m_specialty << ", Number of Surgeries Performed: " << num_surgeries;
+	Surgeon::toOS(os);
 	if (this->getNumArticles() > 0)
 	{
 		os << "Number of written Articles:" << this->getNumArticles() << endl;

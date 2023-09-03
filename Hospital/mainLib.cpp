@@ -53,13 +53,8 @@ void addNurse(Hospital& hospital)
 	cleanBuffer();
 	cin.getline(name, MAX_NAME_LENGTH);
 
-	cout << "Enter new nurse's years of experience: ";
-	cin >> exp;
-
-	while (exp < 0) {
-		cout << "Incorrect Value, please reenter nurse's years of experience: ";
-		cin >> exp;
-	}
+	exp = getExperience();
+	
 
 	cout << endl << "Assign " << name << " to a ward: " << endl;
 	chooseWard(hospital).AddNurse(name, exp);
@@ -493,26 +488,74 @@ void checkDate(unsigned short* year, unsigned short* month, unsigned short* day)
 //----------------------------------------------------------------------------------------------------//
 void AddStaffMemberToWard(Hospital& hospital)
 {
-	int answer;
+	unsigned int answer;
+	char name[MAX_NAME_LENGTH];
+	char specialty[MAX_STRING_INPUT];
+	bool error = false;
+	unsigned int dr_type;
 
-	do
-	{
-		cout << "Press 1 to add existng staff member, press 2 for new one." << endl;
-		cin >> answer;
-	} while (answer > 2 || answer < 1);
 
 	Ward& ward = chooseWard(hospital);
+
+	cout << "Add a new staff member to " << ward.getName() << " ward:\n1 - Nurse\n2 - Doctor" << endl;
+	cin >> answer;
+
+	cout << "Enter new staff member's name: ";
+	cleanBuffer();
+	cin.getline(name, MAX_NAME_LENGTH);
 
 	switch (answer)
 	{
 	case 1:
-		showStaff(hospital);
-		cin >> answer;
-		//if (answer> hospital.)
+		ward += Nurse(name, getExperience());
+		break;
+	case 2:
+		cout << "Enter new doctor's specialty: ";
+		cin.getline(specialty, MAX_STRING_INPUT);
+		cout << "Select for Dr " << name << ":\n1)Doctor \n2)Surgeon \n3)Researcher Doctor \n4)Researcher Surgeon" << endl;
+		cin >> dr_type;
+
+		switch (dr_type)
+		{
+		case 1:
+			ward += Doctor(name, specialty);
+			break;
+		case 2:
+			ward += Surgeon(name, specialty);
+			break;
+		case 3:
+			ward += ResearcherDoctor(name, specialty);
+			hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
+			break;
+		case 4:
+			ward += SurgeonResearcher(name, specialty);
+			hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
+			break;
+		default:
+			error = true;
+			break;
+		}
 		break;
 	default:
+		error = true;
 		break;
 	}
 
 
+	actionDone("Adding new staff member ", name , "Invalid selection", !error);
+
+}
+
+//----------------------------------------------------------------------------------------------------//
+float getExperience()
+{
+	float exp;
+	cout << "Enter new nurse's years of experience: ";
+	cin >> exp;
+
+	while (exp < 0) {
+		cout << "Incorrect Value, please reenter nurse's years of experience: ";
+		cin >> exp;
+	}
+	return exp;
 }

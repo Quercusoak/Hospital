@@ -47,7 +47,6 @@ public:
 	const unsigned int getPatientsNum()		const { return num_patients; }
 	Patient* const* getPatients()			const { return patients; }
 
-	bool operator+=(Staff& other);
 	void operator+=(Staff&& other);
 
 	const char* getName()	const { return name; }

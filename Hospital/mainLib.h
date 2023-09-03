@@ -92,7 +92,10 @@ void searchPatient(Hospital& hospital);
 void printResearcher(Researcher& researcher);
 
 
+
 void AddStaffMemberToWard(Hospital& hospital);
+float getExperience();
+
 
 
 void checkDate(unsigned short* year, unsigned short* month, unsigned short* day);

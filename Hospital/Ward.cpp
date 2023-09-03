@@ -124,31 +124,6 @@ void Ward::checkMaxSizeReached()
 
 
 //----------------------------------------------------------------------------------------------------//
-bool Ward::operator+=(Staff& other)
-{
-	bool staff_in_ward = false;
-
-
-	//search to see if staff member in ward already
-	for (unsigned int i = 0; i < num_staff; i++)
-	{
-		if (staff[i] == &other)
-			return false;
-	}
-
-	checkMaxSizeReached();
-
-	staff[num_staff] = &other;
-
-	if (dynamic_cast<Doctor*>(&other))
-		num_doctors++;
-
-	num_staff++;
-
-	return true;
-}
-
-// ----------------------------------------------------------------------------------------------------//
 void Ward::operator+=(Staff&& other)
 {
 	AddStaff(std::move(other));

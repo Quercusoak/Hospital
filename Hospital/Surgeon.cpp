@@ -27,5 +27,6 @@ void Surgeon::operator++()
 // --------------------------------------------------------------------------------//
 void Surgeon::toOS(std::ostream& os) const
 {
-	os << ", Job - Surgeon, Specialty - " << m_specialty << ", Number of Surgeries Performed: " << num_surgeries;
+	Doctor::toOS(os);
+	os << ", Number of Surgeries Performed: " << num_surgeries;
 }

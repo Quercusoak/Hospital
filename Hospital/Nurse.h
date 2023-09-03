@@ -18,7 +18,7 @@ public:
 
 	float getExperience();
 
-	virtual void toOS(std::ostream& os) const override { os << ", Job - Nurse, Experience - " << yrs_of_experience << " Years."; }
+	virtual void toOS(std::ostream& os) const override { os << ", Experience - " << yrs_of_experience << " Years."; }
 
 	friend std::ostream& operator<<(std::ostream& os, const Nurse& nurse)
 	{
