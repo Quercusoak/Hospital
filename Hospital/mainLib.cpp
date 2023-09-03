@@ -106,7 +106,7 @@ void addDoctor(Hospital& hospital)
 		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
 		break;
 	case 4:
-		ward.AddStaff(SurgeonResearcher(name, specialty));
+		ward.AddDoctor(SurgeonResearcher(name, specialty));
 		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
 		break;
 	default:
