@@ -22,6 +22,7 @@ int MenuOutPutInPut()
 	cout << " (8)- Show all hospital workers" << endl;
 	cout << " (9)- Show all hospital reserachers" << endl;
 	cout << "(10)- search patient using his ID" << endl;
+	cout << "(11)- Add a new staff member to a ward" << endl;
 
 	cin >> ret;
 
@@ -49,17 +50,22 @@ void addNurse(Hospital& hospital)
 	float exp;
 	char name[MAX_NAME_LENGTH];
 
-	cout << "Enter new nurse's name: ";
-	cleanBuffer();
-	cin.getline(name, MAX_NAME_LENGTH);
+	if (hospital.getWardsNum() > 0)
+	{
+		cout << "Enter new nurse's name: ";
+		cleanBuffer();
+		cin.getline(name, MAX_NAME_LENGTH);
 
-	exp = getExperience();
-	
+		exp = getExperience();
 
-	cout << endl << "Assign " << name << " to a ward: " << endl;
-	chooseWard(hospital).AddNurse(name, exp);
 
-	actionDone("Adding a new nurse", name, "", true);
+		cout << endl << "Assign " << name << " to a ward: " << endl;
+		chooseWard(hospital).AddNurse(name, exp);
+
+		actionDone("Adding a new nurse", name, "", true);
+	}
+	else
+		actionDone("Adding a new nurse", "", ERR_NO_WARDS, false);
 }
 
 
@@ -72,45 +78,49 @@ void addDoctor(Hospital& hospital)
 	bool is_dr_type = true;
 	unsigned int dr_type;
 
-
-	cout << "Enter new doctor's name: ";
-	cleanBuffer();
-	cin.getline(name, MAX_NAME_LENGTH);
-
-	cout << "Enter new doctor's specialty: ";
-	cin.getline(specialty, MAX_STRING_INPUT);
-
-
-	cout << endl << "Assign " << name << " to a ward: " << endl;
-	Ward& ward = chooseWard(hospital);
-
-	
-	cout << "Select for Dr " << name << ":\n1)Doctor \n2)Surgeon \n3)Researcher Doctor \n4)Researcher Surgeon" << endl;
-	cin >> dr_type;
-
-	switch (dr_type)
+	if (hospital.getWardsNum() > 0)
 	{
-	case 1:
-		ward.AddDoctor(name, specialty);
-		break;
-	case 2:
-		ward.AddStaff(Surgeon(name, specialty));
-		break;
-	case 3:
-		ward.AddStaff(ResearcherDoctor(name, specialty));
-		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
-		break;
-	case 4:
-		ward.AddStaff(SurgeonResearcher(name, specialty));
-		hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
-		break;
-	default:
-		is_dr_type = false;
-		break;
+		cout << "Enter new doctor's name: ";
+		cleanBuffer();
+		cin.getline(name, MAX_NAME_LENGTH);
+
+		cout << "Enter new doctor's specialty: ";
+		cin.getline(specialty, MAX_STRING_INPUT);
+
+
+		cout << endl << "Assign " << name << " to a ward: " << endl;
+		Ward& ward = chooseWard(hospital);
+
+
+		cout << "Select for Dr " << name << ":\n1)Doctor \n2)Surgeon \n3)Researcher Doctor \n4)Researcher Surgeon" << endl;
+		cin >> dr_type;
+
+		switch (dr_type)
+		{
+		case 1:
+			ward.AddDoctor(name, specialty);
+			break;
+		case 2:
+			ward.AddStaff(Surgeon(name, specialty));
+			break;
+		case 3:
+			ward.AddStaff(ResearcherDoctor(name, specialty));
+			hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
+			break;
+		case 4:
+			ward.AddStaff(SurgeonResearcher(name, specialty));
+			hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
+			break;
+		default:
+			is_dr_type = false;
+			break;
+		}
+
+
+		actionDone("Adding a new doctor", name, INCORRECT_DR_TYPE, is_dr_type);
 	}
-
-
-	actionDone("Adding a new doctor", name, INCORRECT_DR_TYPE, is_dr_type);
+	else
+		actionDone("Adding a new doctor", "", ERR_NO_WARDS, false);
 
 }
 
@@ -494,55 +504,58 @@ void AddStaffMemberToWard(Hospital& hospital)
 	bool error = false;
 	unsigned int dr_type;
 
-
-	Ward& ward = chooseWard(hospital);
-
-	cout << "Add a new staff member to " << ward.getName() << " ward:\n1 - Nurse\n2 - Doctor" << endl;
-	cin >> answer;
-
-	cout << "Enter new staff member's name: ";
-	cleanBuffer();
-	cin.getline(name, MAX_NAME_LENGTH);
-
-	switch (answer)
+	if (hospital.getWardsNum() > 0)
 	{
-	case 1:
-		ward += Nurse(name, getExperience());
-		break;
-	case 2:
-		cout << "Enter new doctor's specialty: ";
-		cin.getline(specialty, MAX_STRING_INPUT);
-		cout << "Select for Dr " << name << ":\n1)Doctor \n2)Surgeon \n3)Researcher Doctor \n4)Researcher Surgeon" << endl;
-		cin >> dr_type;
+		Ward& ward = chooseWard(hospital);
 
-		switch (dr_type)
+		cout << "Add a new staff member to " << ward.getName() << " ward:\n1 - Nurse\n2 - Doctor" << endl;
+		cin >> answer;
+
+		cout << "Enter new staff member's name: ";
+		cleanBuffer();
+		cin.getline(name, MAX_NAME_LENGTH);
+
+		switch (answer)
 		{
 		case 1:
-			ward += Doctor(name, specialty);
+			ward += Nurse(name, getExperience());
 			break;
 		case 2:
-			ward += Surgeon(name, specialty);
-			break;
-		case 3:
-			ward += ResearcherDoctor(name, specialty);
-			hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
-			break;
-		case 4:
-			ward += SurgeonResearcher(name, specialty);
-			hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
+			cout << "Enter new doctor's specialty: ";
+			cin.getline(specialty, MAX_STRING_INPUT);
+			cout << "Select for Dr " << name << ":\n1)Doctor \n2)Surgeon \n3)Researcher Doctor \n4)Researcher Surgeon" << endl;
+			cin >> dr_type;
+
+			switch (dr_type)
+			{
+			case 1:
+				ward += Doctor(name, specialty);
+				break;
+			case 2:
+				ward += Surgeon(name, specialty);
+				break;
+			case 3:
+				ward += ResearcherDoctor(name, specialty);
+				hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
+				break;
+			case 4:
+				ward += SurgeonResearcher(name, specialty);
+				hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
+				break;
+			default:
+				error = true;
+				break;
+			}
 			break;
 		default:
 			error = true;
 			break;
 		}
-		break;
-	default:
-		error = true;
-		break;
+
+		actionDone("Adding new staff member ", name, "Invalid selection", !error);
 	}
-
-
-	actionDone("Adding new staff member ", name , "Invalid selection", !error);
+	else
+		actionDone("Adding new staff member ", "", ERR_NO_WARDS, false);
 
 }
 
