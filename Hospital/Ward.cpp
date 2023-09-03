@@ -14,6 +14,7 @@ Ward::Ward(const char* ward_name)
 	staff[0] = nullptr;
 
 	num_doctors = 0;
+	num_surgeons = 0;
 
 	num_patients = 0;
 	max_patients_size = 1;
@@ -94,6 +95,7 @@ void Ward::AddDoctor(Doctor&& doctor)
 		if (dynamic_cast<Surgeon*>(&doctor)) 
 		{
 			staff[num_staff] = new SurgeonResearcher(std::move(doctor));
+			num_surgeons++;
 		}
 		else
 		{
@@ -103,6 +105,7 @@ void Ward::AddDoctor(Doctor&& doctor)
 	else if (dynamic_cast<Surgeon*>(&doctor))
 	{	
 		staff[num_staff] = new Surgeon(std::move(doctor));
+		num_surgeons++;
 	}
 	else
 	{	

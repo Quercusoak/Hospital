@@ -11,7 +11,7 @@ public:
 		:Surgeon(name, specialty), Doctor(name, specialty), Researcher(name), Staff(name) {};
 
 	SurgeonResearcher(Doctor&& other)
-		:Surgeon(std::move(other)), Doctor(std::move(other)), Researcher(other.getName()), Staff(std::move(other))
+		:Surgeon(std::move(other)), Doctor(std::move(other)), Researcher(other.getName()), Staff(std::move(other)) 
 	{
 	}
 

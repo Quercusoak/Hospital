@@ -29,6 +29,19 @@ public:
 	const PatientCard& operator=(const PatientCard&);
 	const PatientCard& operator=(PatientCard&&);
 
+
+	virtual void toOS(std::ostream& os) const {}
+
+	friend std::ostream& operator<<(std::ostream& os, const PatientCard& patientCard)
+	{
+		os << "-------------------------------------------------------------" << endl
+			<< "Date - " << patientCard.m_date << endl
+			<< "Doctor visited - " << patientCard.getDoctor().getName() << endl
+			<< "Reason for visit - " << patientCard.m_purpose_of_visit << endl;
+		patientCard.toOS(os);
+		os << "-------------------------------------------------------------";
+		return os;
+	}
 };
 
 
