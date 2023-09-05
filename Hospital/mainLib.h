@@ -89,23 +89,16 @@ void showResearchers(ResearchCenter& research_center); //
 void showResearchers(Hospital& hospital); //
 
 
-
+void PrintResearcherDoctors(Hospital& hospital);
 
 void printDate(const Date& date); //
-
-void printPatient(Patient& patient); //
 
 void printPatientCard(Patient& patient); //
 
 
-
 void searchPatient(Hospital& hospital);
 
-void printResearcher(Researcher& researcher);
 
-
-
-void AddStaffMemberToWard(Hospital& hospital);
 float getExperience();
 
 

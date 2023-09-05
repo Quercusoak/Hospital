@@ -2,7 +2,7 @@
 #define __PATIENT_H
 
 #include "PatientCardOperation.h"
-#include "Person.h" //recived from other include....
+#include "Person.h"
 
 
 class Patient : public Person

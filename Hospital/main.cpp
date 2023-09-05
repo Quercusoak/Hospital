@@ -67,7 +67,7 @@ int main()
 			break;
 
 		case 11:
-			AddStaffMemberToWard(hospital);
+			PrintResearcherDoctors(hospital);
 			break;
 
 		case 12:
