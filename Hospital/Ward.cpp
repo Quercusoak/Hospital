@@ -38,9 +38,6 @@ Ward::~Ward()
 	}
 	delete[] staff;
 
-	for (i = 0; i < num_patients; ++i)
-		delete patients[i];
-	delete[] patients;
 }
 
 

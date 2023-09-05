@@ -284,7 +284,7 @@ void showWards(Hospital& hospital)
 //----------------------------------------------------------------------------------------------------//
 Doctor& chooseDoctor(Ward& ward)
 {
-	unsigned int num, num_doctors = ward.getDoctorsNum();
+	unsigned int i, num, num_doctors = ward.getDoctorsNum();
 
 	do
 	{
@@ -294,7 +294,7 @@ Doctor& chooseDoctor(Ward& ward)
 	} while (num < 1 || num > num_doctors);
 
 	int chose = 0;
-	for (int i = 0; i < num; i++, chose++) {
+	for (i = 0; i < num; i++, chose++) {
 		if (!dynamic_cast<Doctor*>(ward.getStaff()[chose]))
 			i--;
 	}
@@ -304,7 +304,7 @@ Doctor& chooseDoctor(Ward& ward)
 }
 
 //----------------------------------------------------------------------------------------------------//
-int showDoctors(Ward& ward)
+void showDoctors(Ward& ward)
 {
 	unsigned int num_doctors = ward.getDoctorsNum();
 
@@ -316,13 +316,12 @@ int showDoctors(Ward& ward)
 		else
 			ret--;
 	}
-	return ret;
 }
 
 //----------------------------------------------------------------------------------------------------//
 Surgeon& chooseSurgeon(Ward& ward)
 {
-	unsigned int num, num_surgeons = ward.getSurgeonsNum();
+	unsigned int i, num, num_surgeons = ward.getSurgeonsNum();
 
 	do
 	{
@@ -332,7 +331,7 @@ Surgeon& chooseSurgeon(Ward& ward)
 	} while (num < 1 || num > num_surgeons);
 
 	int chose = 0;
-	for (int i = 0; i < num; i++, chose++) {
+	for (i = 0; i < num; i++, chose++) {
 		if (!dynamic_cast<Surgeon*>(ward.getStaff()[chose]))
 			i--;
 	}
@@ -342,7 +341,7 @@ Surgeon& chooseSurgeon(Ward& ward)
 }
 
 //----------------------------------------------------------------------------------------------------//
-int showSurgeons(Ward& ward)
+void showSurgeons(Ward& ward)
 {
 	unsigned int num_surgeon = ward.getSurgeonsNum();
 
@@ -354,7 +353,6 @@ int showSurgeons(Ward& ward)
 		else
 			ret--;
 	}
-	return ret;
 }
 
 //----------------------------------------------------------------------------------------------------//

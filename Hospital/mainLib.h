@@ -21,7 +21,9 @@
 	7	- Show all patients conntected to a ward
 	8	- Show all hospital workers
 	9	- Show all hospital reserachers
-	10	- search patient using his ID*/
+	10	- search patient using his ID
+	11  - Print all researcher doctors
+	12  - Compare two researchers*/
 
 int MenuOutPutInPut();
 
@@ -71,10 +73,10 @@ Researcher& chooseResearcher(ResearchCenter& research_center);
 void showWards(Hospital& hospital);
 
 
-int showDoctors(Ward& ward);
+void showDoctors(Ward& ward);
 
 
-int showSurgeons(Ward& ward);
+void showSurgeons(Ward& ward);
 
 
 void showPatients(Hospital& hospital);
