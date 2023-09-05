@@ -12,8 +12,6 @@ Researcher::Researcher(const char* name): Staff(name)
 //---------------------------------------------------------------//
 Researcher::~Researcher()
 {
-	//cout << "in Researcher::~Researcher d'tor, debugging line " << m_name << endl;
-
 	for (unsigned int i = 0; i < m_numArticles; i++) delete m_articles[i];
 	delete[]m_articles;
 }
