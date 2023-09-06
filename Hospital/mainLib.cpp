@@ -5,6 +5,8 @@
 #define ERR_NO_WARDS "No ward had been added to hospital yet, please enter a ward first."
 #define ERR_NO_MATCH_DOCTORS_IN_WARD "Ward is understaffed, and therefore, cannot add patient to ward, please enter a matching doctor to ward first"
 #define INCORRECT_DR_TYPE "Doctor type is invalid."
+#define ERR_NOT_ENOUGH_RESEARCHERS "Too few reserachers."
+
 
 int MenuOutPutInPut()
 {
@@ -526,7 +528,7 @@ void showPatients(Hospital& hospital)
 	for (unsigned int i = 0; i < num_of_patients; i++)
 	{
 		patient = ward.getPatients()[i];
-		cout << *patient;
+		cout << *patient << endl;
 	}
 
 	returningToMenu();
@@ -665,8 +667,8 @@ void compareResearchers(Hospital& hospital)
 {
 	ResearchCenter& RC = hospital.getResearchCenter();
 	int num_researchers = RC.getNum_researchers();
-
-	if (num_researchers > 0)
+	bool check = true;
+	if (num_researchers > 1)
 	{
 		cout << "Select researchers to compare: " << endl;
 		cout << "First researcher: ";
@@ -684,9 +686,10 @@ void compareResearchers(Hospital& hospital)
 			cout << "Both researchers wrote " << first.getNumArticles() << " articles." << endl;
 	}
 	else
-		cout << "No researchers in research center.";
+		check = false;
 
-	returningToMenu();
+
+	actionDone("Comparing researchers", "Research Center", ERR_NOT_ENOUGH_RESEARCHERS, check);
 }
 
 
