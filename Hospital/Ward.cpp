@@ -44,14 +44,20 @@ Ward::~Ward()
 //---------------------------------------------------------------//
 void Ward::AddPatient(Patient& patient)
 {
-	if (num_patients == max_patients_size)
-	{
-		max_patients_size *= 2;
-		this->patients = (Patient**)rerealloc(this->patients, sizeof(Patient*), num_patients, max_patients_size);
-	}
+	bool check = true;
+	for (int i = 0; i < num_patients; i++)
+		if (&patient == patients[i]) check = false;
+	
+	if (check) {
+		if (num_patients == max_patients_size)
+		{
+			max_patients_size *= 2;
+			this->patients = (Patient**)rerealloc(this->patients, sizeof(Patient*), num_patients, max_patients_size);
+		}
 
-	patients[num_patients] = &patient;
-	num_patients++;
+		patients[num_patients] = &patient;
+		num_patients++;
+	}
 }
 
 
