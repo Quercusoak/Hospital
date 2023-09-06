@@ -9,10 +9,16 @@ Hospital::Hospital()
 	wards[0] = nullptr;
 
 
+	staff = new Staff* * [max_wards];
+	staff[0] = nullptr;
+
 	num_patients = 0;
 	max_patients = 1;
 	patients = new Patient * [max_patients];
 	patients[0] = nullptr;
+
+
+
 
 }
 
@@ -23,14 +29,10 @@ Hospital::~Hospital()
 	for (i = 0; i < num_wards; i++)
 	{
 		delete wards[i];
+		delete staff[i];
 	}
-	delete[] wards;
 
-	for  (i = 0; i < num_patients; i++)
-	{
-		delete patients[i];
-	}
-	delete[] patients;
+	delete[] staff;
 }
 
 //----------------------------------------------------------------------------------------------------//
@@ -39,6 +41,8 @@ void Hospital::AddWard(const char* ward_name)
 	checkMaxSizeReached();
 
 	wards[num_wards] = new Ward(ward_name);
+
+	staff[num_wards] = wards[num_wards]->getStaff();
 
 	num_wards++;
 }

@@ -7,7 +7,7 @@ Nurse::Nurse(const char* name, float yrs_of_experience)
 }
 
 //---------------------------------------------------------------//
-Nurse::Nurse(Nurse&& other) :Staff(std::move(other))
+Nurse::Nurse(Nurse&& other) :Staff(other)
 {
 	yrs_of_experience = other.getExperience();
 }

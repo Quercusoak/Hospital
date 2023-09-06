@@ -1,7 +1,7 @@
 #ifndef __PATIENT_H
 #define __PATIENT_H
 
-#include "PatientCardOperation.h"
+#include "PatientCard.h"
 #include "Person.h"
 
 
@@ -37,7 +37,6 @@ public:
 	PatientCard** getPatientCard()			  { return patient_card; }
 
 	void AddVisit(Date date, const char* purpose_of_visit, Doctor& doctor);
-	void AddVisit(Date date, const char* purpose_of_visit, Surgeon& surgeon, int roomNumber, bool fasting);
 
 
 	virtual void toOS(std::ostream& os) const override 

@@ -4,6 +4,8 @@
 Surgeon::Surgeon(const char* name, const char* specialty)
 	:Doctor(name, specialty), Staff(name)
 {
+	cout << "Surgeon c'tor	" << this->workerId << endl; //to del
+
 	num_surgeries = 0;
 }
 
@@ -11,6 +13,8 @@ Surgeon::Surgeon(const char* name, const char* specialty)
 //---------------------------------------------------------------//
 Surgeon::Surgeon(Doctor&& other) :Doctor(std::move(other)),Staff(std::move(other))
 {
+	cout << "Surgeon move c'tor	 "<< this->workerId << endl; //to del
+
 	num_surgeries = 0;
 }
 
@@ -18,11 +22,4 @@ Surgeon::Surgeon(Doctor&& other) :Doctor(std::move(other)),Staff(std::move(other
 void Surgeon::operator++()
 {
 	num_surgeries++;
-}
-
-// --------------------------------------------------------------------------------//
-void Surgeon::toOS(std::ostream& os) const
-{
-	Doctor::toOS(os);
-	os << ", Number of Surgeries Performed: " << num_surgeries;
 }

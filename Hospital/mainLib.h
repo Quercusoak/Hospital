@@ -21,9 +21,7 @@
 	7	- Show all patients conntected to a ward
 	8	- Show all hospital workers
 	9	- Show all hospital reserachers
-	10	- search patient using his ID
-	11  - Print all researcher doctors
-	12  - Compare two researchers*/
+	10	- search patient using his ID*/
 
 int MenuOutPutInPut();
 
@@ -42,12 +40,6 @@ void addDoctor(Hospital& hospital);
 void addPatient(Hospital& hospital);
 
 
-void addCard(Patient& patient, Ward& ward);
-
-
-void addOperationCard(Patient& patient, Ward& ward);
-
-
 void addResearcher(Hospital& hospital);
 
 
@@ -62,9 +54,6 @@ Ward& chooseWard(Hospital&);
 Doctor& chooseDoctor(Ward&);
 
 
-Surgeon& chooseSurgeon(Ward& ward);
-
-
 Researcher& chooseResearcher(ResearchCenter& research_center);
 
 
@@ -76,35 +65,33 @@ void showWards(Hospital& hospital);
 void showDoctors(Ward& ward);
 
 
-void showSurgeons(Ward& ward);
-
-
 void showPatients(Hospital& hospital);
 
 
-void showStaff(Hospital& hospital); //
+void showStaff(Hospital& hospital);
 
 
-void showResearchers(ResearchCenter& research_center); //
+void showResearchers(ResearchCenter& research_center);
 
 
-void showResearchers(Hospital& hospital); //
+void showResearchers(Hospital& hospital);
 
 
-void PrintResearcherDoctors(Hospital& hospital);
 
-void printDate(const Date& date); //
 
-void printPatientCard(Patient& patient); //
+void printDate(const Date& date);
+
+void printPatient(Patient& patient);
+
+void printPatientCard(Patient& patient);
+
 
 
 void searchPatient(Hospital& hospital);
 
+void printResearcher(Researcher& researcher);
 
-float getExperience();
 
-
-void compareResearchers(Hospital& hospital);
 
 
 

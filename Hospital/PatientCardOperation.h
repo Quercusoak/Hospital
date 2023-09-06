@@ -19,16 +19,7 @@ public:
 	unsigned int getRoom_Number()		const { return room_number; }
 	bool isFasting()					const { return fasting; }
  
-	virtual void toOS(std::ostream& os) const 
-	{
-		os << "		---Operation Visit---" << endl
-			<< "Room number - " << room_number << ", Fasting - ";
-		if (fasting)
-			os << "True" << endl;
-		else
-			os << "False" << endl;
-	}
-
+	void addSurgery();
 };
 
 #endif // !__PATIENT_CARD_OPERATION_H

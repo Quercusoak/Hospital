@@ -12,6 +12,8 @@ Researcher::Researcher(const char* name): Staff(name)
 //---------------------------------------------------------------//
 Researcher::~Researcher()
 {
+	//cout << "in Researcher::~Researcher d'tor, debugging line " << m_name << endl;
+
 	for (unsigned int i = 0; i < m_numArticles; i++) delete m_articles[i];
 	delete[]m_articles;
 }
@@ -43,18 +45,4 @@ Researcher::Researcher(Researcher&& other) : Staff(std::move(other))
 }
 
 
-//---------------------------------------------------------------//
-int Researcher::operator>(const Researcher& other)
-{
-	int res;
-	unsigned int otherArticles = other.getNumArticles();
 
-	if (m_numArticles > otherArticles)
-		res = 1;
-	else if (m_numArticles < otherArticles)
-		res = -1;
-	else
-		res = 0;
-
-	return res;
-}
