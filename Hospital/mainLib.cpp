@@ -10,20 +10,57 @@ int MenuOutPutInPut()
 {
 	int ret;
 
-	cout << "Please chose an option from the Menu:" << endl;
-	cout << " (0)- Exit program" << endl;
-	cout << " (1)- Add a new ward to hospital" << endl;
-	cout << " (2)- Add nurse to hospital" << endl;
-	cout << " (3)- Add doctor to hospital" << endl;
-	cout << " (4)- Add patient visit" << endl;
-	cout << " (5)- Add researcher to hospital" << endl;
-	cout << " (6)- Add article to researcher" << endl;
-	cout << " (7)- Show all patients conntected to a ward" << endl;
-	cout << " (8)- Show all hospital workers" << endl;
-	cout << " (9)- Show all hospital reserachers" << endl;
-	cout << "(10)- Search patient using his ID" << endl;
-	cout << "(11)- Print all researcher doctors" << endl;
-	cout << "(12)- Compare two researchers" << endl;
+	cout << "---Main Menu---" << endl;
+	cout << "(0)- Exit program" << endl;
+	cout << "(1)- Add" << endl;
+	cout << "(2)- Show" << endl;
+	cout << "(3)- Search patient using his ID" << endl;
+	cout << "(4)- Compare two researchers" << endl;
+	cout << "Please chose an option from the Menu: ";
+
+
+	cin >> ret;
+
+	cout << endl;
+
+	return ret;
+}
+
+//----------------------------------------------------------------------------------------------------//
+int MenuAdd()
+{
+	int ret;
+
+	cout << "---Add Menu---" << endl
+		<< "(0)- return to main menu." << endl
+		<< "(1)- Add a new ward to hospital" << endl
+		<< "(2)- Add nurse to hospital" << endl
+		<< "(3)- Add doctor to hospital" << endl
+		<< "(4)- Add researcher to hospital" << endl
+		<< "(5)- Add article to researcher" << endl
+		<< "(6)- Add patient visit" << endl << endl
+		<< "Chose action to be done: ";
+
+	cin >> ret;
+
+	cout << endl;
+
+	return ret;
+}
+
+
+//----------------------------------------------------------------------------------------------------//
+int MenuPrint()
+{
+	int ret;
+
+	cout << "---Print Menu---" << endl
+		<< "(0)- return to main menu." << endl
+		<< "(1)- Show all patients conntected to a ward" << endl
+		<< "(2)- Show all hospital workers" << endl
+		<< "(3)- Show all hospital reserachers" << endl
+		<< "(4)- Show all researcher doctors" << endl
+		<< "Chose action to be done: ";
 
 	cin >> ret;
 
@@ -359,7 +396,7 @@ void showSurgeons(Ward& ward)
 Researcher& chooseResearcher(ResearchCenter& research_center, Researcher* chosen)
 {
 	unsigned int num, num_researchers = research_center.getNum_researchers();
-	if (&chosen) num_researchers--;
+	if (chosen) num_researchers--;
 	do
 	{
 		cout << "Select a researcher from list: " << endl;
@@ -466,7 +503,7 @@ void searchPatient(Hospital& hospital)
 
 	//printPatientCard(*patient);
 
-	returningMainMenu();
+	returningToMenu();
 
 }
 
@@ -492,7 +529,7 @@ void showPatients(Hospital& hospital)
 		cout << *patient;
 	}
 
-	returningMainMenu();
+	returningToMenu();
 
 }
 
@@ -531,7 +568,7 @@ void showStaff(Hospital& hospital)
 		}
 	}
 
-	returningMainMenu();
+	returningToMenu();
 }
 
 //----------------------------------------------------------------------------------------------------//
@@ -545,7 +582,7 @@ void showResearchers(Hospital& hospital)
 	for (unsigned int i = 0; i < numToPrint; i++)
 		cout << *((research_center.getResearchers())[i]) << endl;
 
-	returningMainMenu();
+	returningToMenu();
 
 }
 
@@ -569,15 +606,16 @@ void actionDone(const char* actionName, const char* objectName, const char* reas
 		<< "had been unsuccessful for - " << objectName << "\n"
 		<< "reason - " << reason << "\n";
 
-	returningMainMenu();
+	returningToMenu();
 }
 
 //----------------------------------------------------------------------------------------------------//
 //Print returning to main menu msg.
-void returningMainMenu()
+void returningToMenu()
 {
-	cout << "\nReturning to main menu...\n\n"
-		<< "---Hospital Menu---" << endl;
+	cout << endl << "Returning to menu..." << endl << endl;
+		
+	
 }
 
 //----------------------------------------------------------------------------------------------------//
@@ -648,7 +686,7 @@ void compareResearchers(Hospital& hospital)
 	else
 		cout << "No researchers in research center.";
 
-	returningMainMenu();
+	returningToMenu();
 }
 
 
@@ -674,5 +712,5 @@ void PrintResearcherDoctors(Hospital& hospital)
 			cout << *(researchers[i]) << endl;
 	}
 
-	returningMainMenu();
+	returningToMenu();
 }
