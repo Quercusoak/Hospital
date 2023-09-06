@@ -7,7 +7,7 @@
 
 class Researcher :virtual public Staff
 {
-private:
+protected:
 
 	Article** m_articles;
 	unsigned int m_maxArticles;

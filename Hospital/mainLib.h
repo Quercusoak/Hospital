@@ -65,7 +65,7 @@ Doctor& chooseDoctor(Ward&);
 Surgeon& chooseSurgeon(Ward& ward);
 
 
-Researcher& chooseResearcher(ResearchCenter& research_center);
+Researcher& chooseResearcher(ResearchCenter& research_center, Researcher* chosen);
 
 
 
@@ -85,7 +85,7 @@ void showPatients(Hospital& hospital);
 void showStaff(Hospital& hospital); //
 
 
-void showResearchers(ResearchCenter& research_center); //
+void showResearchers(ResearchCenter& research_center, Researcher* chosen); //
 
 
 void showResearchers(Hospital& hospital); //

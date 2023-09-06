@@ -356,28 +356,37 @@ void showSurgeons(Ward& ward)
 }
 
 //----------------------------------------------------------------------------------------------------//
-Researcher& chooseResearcher(ResearchCenter& research_center)
+Researcher& chooseResearcher(ResearchCenter& research_center, Researcher* chosen)
 {
 	unsigned int num, num_researchers = research_center.getNum_researchers();
-
+	if (&chosen) num_researchers--;
 	do
 	{
 		cout << "Select a researcher from list: " << endl;
-		showResearchers(research_center);
+		showResearchers(research_center, chosen);
 		cin >> num;
 	} while (num < 1 || num > num_researchers);
 
-	return *research_center.getResearchers()[num - 1];
+	int chose = 0;
+	for (unsigned int i = 0; i < num; i++, chose++) {
+		if (research_center.getResearchers()[chose] == chosen)
+			i--;
+	}
+
+	return *research_center.getResearchers()[chose - 1];
 }
 
 //----------------------------------------------------------------------------------------------------//
-void showResearchers(ResearchCenter& research_center)
+void showResearchers(ResearchCenter& research_center, Researcher* chosen)
 {
 	unsigned int num_researchers = research_center.getNum_researchers();
 
-	for (unsigned int i = 0; i < num_researchers; i++)
+	for (unsigned int i = 0, k = 0; i < num_researchers; k++, i++)
 	{
-		cout << (i + 1) << ") " << research_center.getResearchers()[i]->getName() << endl;
+		if (research_center.getResearchers()[i] == chosen)
+			k--;
+		else
+			cout << (k + 1) << ") " << research_center.getResearchers()[i]->getName() << endl;
 	}
 }
 
@@ -407,7 +416,7 @@ void addResearcherArticle(Hospital& hospital)
 
 	bool check = research_center.getNum_researchers() > 0;
 	if (check) {
-		Researcher& researcher = chooseResearcher(research_center);
+		Researcher& researcher = chooseResearcher(research_center, NULL);
 
 		cout << "Please enter publication date, in format of \"year month day\":" << endl;
 		cin >> year >> month >> day;
@@ -623,10 +632,10 @@ void compareResearchers(Hospital& hospital)
 	{
 		cout << "Select researchers to compare: " << endl;
 		cout << "First researcher: ";
-		Researcher& first = chooseResearcher(RC);
+		Researcher& first = chooseResearcher(RC, NULL);
 
 		cout << "Second researcher: ";
-		Researcher& second = chooseResearcher(RC);
+		Researcher& second = chooseResearcher(RC, &first);
 
 		int res = first > second;
 		if (res > 0)

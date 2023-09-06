@@ -20,7 +20,7 @@ void Patient::AddVisit(Date date, const char* purpose_of_visit, Doctor& doctor)
 	if (num_visits == max_visits)
 	{
 		max_visits *= 2;
-		patient_card = (PatientCard**)realloc(patient_card, sizeof(PatientCard*) * max_visits);
+		patient_card = (PatientCard**)rerealloc(patient_card, sizeof(PatientCard*), num_visits, max_visits);
 	}
 
 	patient_card[num_visits] = new PatientCard(date, purpose_of_visit, doctor);
@@ -33,7 +33,7 @@ void Patient::AddVisit(Date date, const char* purpose_of_visit, Surgeon& surgeon
 	if (num_visits == max_visits)
 	{
 		max_visits *= 2;
-		patient_card = (PatientCard**)realloc(patient_card, sizeof(PatientCard*) * max_visits);
+		patient_card = (PatientCard**)rerealloc(patient_card, sizeof(PatientCard*), num_visits, max_visits);
 	}
 
 	patient_card[num_visits] = new PatientCardOperation(date, purpose_of_visit, surgeon, roomNumber, fasting);
