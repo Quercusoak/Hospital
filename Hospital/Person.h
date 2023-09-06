@@ -2,6 +2,7 @@
 #define __PERSON_H
 
 #include <iostream>
+#include "BaseFunc.h"
 using namespace std;
 #pragma warning(disable: 4996)
 

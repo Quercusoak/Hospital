@@ -7,7 +7,7 @@
 
 class Researcher :virtual public Staff
 {
-private:
+protected:
 
 	Article** m_articles;
 	unsigned int m_maxArticles;
@@ -26,11 +26,11 @@ public:
 	Article** getArticles()					const { return m_articles; }
 
 
-	
+	int operator>(const Researcher& other);
 
 	virtual void toOS(std::ostream& os) const override
 	{
-		os << ", Job - Researcher" << ", Number of written Articles: "
+		os << ", Number of written Articles: "
 			<< m_numArticles << ".";
 		if (m_numArticles == 0)
 			return;
