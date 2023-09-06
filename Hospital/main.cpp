@@ -26,51 +26,88 @@ int main()
 		case 0:
 			cout << "Closing program..." << endl;
 			break;
+		
+
 		case 1:
-			addWard(hospital);
+			while (loopCheck)
+			{
+				loopCheck = MenuAdd();
+				switch (loopCheck) {
+				case 0:
+					cout << "Returning to main menu..." << endl;
+					break;
+
+				case 1:
+					addWard(hospital);
+					break;
+
+				case 2:
+					addNurse(hospital);
+					break;
+
+				case 3:
+					addDoctor(hospital);
+					break;
+
+				case 4:
+					addResearcher(hospital);
+					break;
+
+				case 5:
+					addResearcherArticle(hospital);
+					break;
+
+				case 6:
+					addPatient(hospital);
+					break;
+
+				default:
+					actionDone("Chosing from menu", "User Input", "Entered data out of range", false);
+					loopCheck = true;
+					break;
+				}
+			}
+			loopCheck = 1;
 			break;
 
 		case 2:
-			addNurse(hospital);
+			while (loopCheck) {
+				loopCheck = MenuPrint();
+				switch (loopCheck) {
+				case 0:
+					cout << "Returning to main menu..." << endl;
+					break;
+
+				case 1:
+					showPatients(hospital);
+					break;
+
+				case 2:
+					showStaff(hospital);
+					break;
+
+				case 3:
+					showResearchers(hospital);
+					break;
+
+				case 4:
+					PrintResearcherDoctors(hospital);
+					break;
+
+				default:
+					actionDone("Chosing from menu", "User Input", "Entered data out of range", false);
+					loopCheck = true;
+					break;
+				}
+			}
+			loopCheck = 2;
 			break;
 
 		case 3:
-			addDoctor(hospital);
-			break;
-
-		case 4:
-			addPatient(hospital);
-			break;
-
-		case 5:
-			addResearcher(hospital);
-			break;
-
-		case 6:
-			addResearcherArticle(hospital);
-			break;
-
-		case 7:
-			showPatients(hospital);
-			break;
-
-		case 8:
-			showStaff(hospital);
-			break;
-
-		case 9:
-			showResearchers(hospital);
-			break;
-
-		case 10:
 			searchPatient(hospital);
 			break;
 
-		case 11:
-			PrintResearcherDoctors(hospital);
-			break;
-
-		case 12:
+		case 4:
 			compareResearchers(hospital);
 			break;
 
@@ -82,3 +119,7 @@ int main()
 		}
 	}
 }
+
+
+
+

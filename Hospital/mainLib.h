@@ -11,21 +11,16 @@
 #define MAX_DAYS 31
 
 
-/*	0	- Exit program
-	1	- Add a new ward to hospital
-	2	- Add nurse to hospital
-	3	- Add doctor to hospital
-	4	- Add patient visit
-	5	- Add researcher to hospital
-	6	- Add article to researcher
-	7	- Show all patients conntected to a ward
-	8	- Show all hospital workers
-	9	- Show all hospital reserachers
-	10	- search patient using his ID
-	11  - Print all researcher doctors
-	12  - Compare two researchers*/
+
 
 int MenuOutPutInPut();
+
+
+int MenuAdd();
+
+
+int MenuPrint();
+
 
 
 
@@ -113,6 +108,6 @@ void checkDate(unsigned short* year, unsigned short* month, unsigned short* day)
 
 void actionDone(const char* actionName, const char* objectName, const char* reason = nullptr, bool check = true);
 
-void returningMainMenu();
+void returningToMenu();
 
 #endif
