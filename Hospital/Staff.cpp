@@ -10,8 +10,6 @@ unsigned int Staff::counter = 1000;
 Staff::Staff(const char* name)
 	:Person(name), workerId(counter)
 {
-	cout << "Staff c'tor	" << this->workerId << endl; //to del
-
 	counter++;
 }
 
@@ -19,7 +17,6 @@ Staff::Staff(const char* name)
 //--------------------------------------------------------------------------------//
 Staff::Staff(Staff&& other) :Person(other.getName()), workerId(other.getWorkerID())
 {
-	cout << "Staff move c'tor	" << this->workerId << endl; //to del
 	other.name = nullptr;
 	counter++; //rvalue staff will decrement counter upon destruction, so we wish to increment it now
 }
@@ -27,6 +24,5 @@ Staff::Staff(Staff&& other) :Person(other.getName()), workerId(other.getWorkerID
 //--------------------------------------------------------------------------------//
 Staff::~Staff()
 {
-	cout << "Staff d'tor	" << this->workerId << endl; //to del
 	counter--;
 }

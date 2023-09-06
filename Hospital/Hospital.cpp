@@ -14,9 +14,6 @@ Hospital::Hospital()
 	patients = new Patient * [max_patients];
 	patients[0] = nullptr;
 
-
-
-
 }
 
 //----------------------------------------------------------------------------------------------------//
@@ -27,8 +24,13 @@ Hospital::~Hospital()
 	{
 		delete wards[i];
 	}
-
 	delete[] wards;
+
+	for  (i = 0; i < num_patients; i++)
+	{
+		delete patients[i];
+	}
+	delete[] patients;
 }
 
 //----------------------------------------------------------------------------------------------------//

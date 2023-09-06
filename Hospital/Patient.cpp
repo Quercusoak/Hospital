@@ -61,4 +61,9 @@ void Patient::setDate(Date date)
 //---------------------------------------------------------------//
 Patient::~Patient()
 {
+	for (int i = 0; i < num_visits; i++)
+	{
+		delete patient_card[i];
+	}
+	delete[] patient_card;
 }
