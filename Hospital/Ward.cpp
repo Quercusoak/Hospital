@@ -45,7 +45,7 @@ Ward::~Ward()
 void Ward::AddPatient(Patient& patient)
 {
 	bool check = true;
-	for (int i = 0; i < num_patients; i++)
+	for (unsigned int i = 0; i < num_patients; i++)
 		if (&patient == patients[i]) check = false;
 	
 	if (check) {
