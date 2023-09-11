@@ -12,7 +12,7 @@ public:
 	Doctor(const char* name, const char* specialty);
 	Doctor(const Doctor&) = delete;
 	Doctor(Doctor&&);
-	virtual ~Doctor();// change
+	virtual ~Doctor();
 
 	void setSpecialty(const char* specialty);
 
