@@ -2,11 +2,13 @@
 #define __DOCTOR_H
 
 #include "Staff.h"
+#include <string>
+
 
 class Doctor : virtual public Staff
 {
 protected:
-	char* m_specialty;
+	string m_specialty;
 
 public:
 	Doctor(const char* name, const char* specialty);
@@ -16,7 +18,7 @@ public:
 
 	void setSpecialty(const char* specialty);
 
-	const char* getSpecialty()		const { return m_specialty; }
+	const char* getSpecialty()		const { return m_specialty.c_str(); }
 
 
 	virtual void toOS(std::ostream& os) const override { os << ", Specialty - " << m_specialty; }
