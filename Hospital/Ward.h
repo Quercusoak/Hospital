@@ -8,21 +8,17 @@
 #include "Surgeon.h"
 #include "SurgeonResearcher.h"
 #include "ResearcherDoctor.h"
-
+#include "ResearcherDoctor.h"
+#include <vector>
 
 class Ward
 {
 private:
 	char* name;
-	
+
 	Staff** staff;
-	unsigned int num_staff;
-	unsigned int max_staff;
 
-	unsigned int num_doctors;
-	unsigned int num_surgeons;
-
-
+	vector<int>n;
 	Patient** patients;
 	unsigned int num_patients;
 	unsigned int max_patients_size;
