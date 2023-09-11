@@ -8,7 +8,7 @@
 class Doctor : virtual public Staff
 {
 protected:
-	string* m_specialty;
+	string m_specialty;
 
 public:
 	Doctor(const char* name, const char* specialty);
