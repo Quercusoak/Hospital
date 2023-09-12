@@ -1,7 +1,7 @@
 #include "Surgeon.h"
 
 //---------------------------------------------------------------//
-Surgeon::Surgeon(const char* name, const char* specialty)
+Surgeon::Surgeon(const string name, const string specialty)
 	:Doctor(name, specialty), Staff(name)
 {
 	num_surgeries = 0;

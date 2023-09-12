@@ -13,7 +13,7 @@
 class Ward
 {
 private:
-	char* name;
+	string name;
 	
 	Staff** staff;
 	unsigned int num_staff;
@@ -29,14 +29,14 @@ private:
 
 
 public:
-	Ward(const char* ward_name);
+	Ward(const string ward_name);
 	Ward(const Ward&) = delete;
 	Ward(Ward&&) = delete;
 	~Ward();
 
 	void AddStaff(Staff&&);
-	void AddNurse(const char* name, float yrs_of_experience);
-	void AddDoctor(const char* name, const char* specialty);
+	void AddNurse(const string name, float yrs_of_experience);
+	void AddDoctor(const string name, const string specialty);
 	void AddDoctor(Doctor&&);
 
 
@@ -53,7 +53,7 @@ public:
 
 	void operator+=(Staff&& other);
 
-	const char* getName()	const { return name; }
+	const char* getName()	const { return name.c_str(); }
 
 	void checkMaxSizeReached();
 

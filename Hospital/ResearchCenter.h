@@ -16,7 +16,7 @@ public:
 	ResearchCenter(ResearchCenter&&) = delete;
 	~ResearchCenter();
 
-	void AddResearcher(const char* name);
+	void AddResearcher(const string name);
 	void AddResearcherDoctor(Researcher&);
 
 

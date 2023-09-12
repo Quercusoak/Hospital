@@ -7,7 +7,7 @@
 class ResearcherDoctor : public Doctor, public Researcher
 {
 public:
-	ResearcherDoctor(const char* name, const char* specialty);
+	ResearcherDoctor(const string name, const string specialty);
 
 	ResearcherDoctor(Doctor&& other);
 

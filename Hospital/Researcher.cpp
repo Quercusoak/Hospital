@@ -1,7 +1,7 @@
 #include "Researcher.h"
 
 //---------------------------------------------------------------//
-Researcher::Researcher(const char* name): Staff(name)
+Researcher::Researcher(const string name): Staff(name)
 {
 	m_numArticles = 0;
 	m_maxArticles = 1;
