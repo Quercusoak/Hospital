@@ -10,23 +10,22 @@ class Article
 {
 private:
 	Date m_publicationDate; 
-	char* magazineName;
-	char* articleName;
+	string magazineName;
+	string articleName;
 
 public:
-	Article(Date date,const char* magaine,const char* name);
-	Article(const Article&) = delete;
-	Article(Article&&) = delete;
-	~Article();
+	Article(Date date,const string magaine,const string name);
+	
 
 
-	void setMagazineName(const char* name);
-	void setArticleName(const char* name);
+	void setMagazineName(const string name) { this->magazineName = name; }
+	void setArticleName(const string name)	{ this->articleName = name; }
+	;
 
 
 	const Date getDate()			const { return m_publicationDate; }
-	const char* getMagazineName()	const { return magazineName; }
-	const char* getArticleName()	const { return articleName; }
+	const char* getMagazineName()	const { return magazineName.c_str(); }
+	const char* getArticleName()	const { return articleName.c_str(); }
 
 
 	friend std::ostream& operator<<(std::ostream& os, const Article& article)
