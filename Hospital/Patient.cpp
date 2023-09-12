@@ -16,7 +16,6 @@ Patient::Patient(Patient&& other) :Person(std::move(other))
 	setID(other.getID());
 	setGender(other.gender);
 	setDate(other.date);
-	cout << "Patient move ctor " << id << endl;
 }
 
 //---------------------------------------------------------------//

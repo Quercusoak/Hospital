@@ -60,6 +60,7 @@
     <ClInclude Include="Staff.h" />
     <ClInclude Include="Surgeon.h" />
     <ClInclude Include="SurgeonResearcher.h" />
+    <ClInclude Include="TemplateArray.h" />
     <ClInclude Include="Ward.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
