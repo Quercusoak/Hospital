@@ -6,7 +6,8 @@
 #include <string>
 using namespace std;
 #pragma warning(disable: 4996)
-
+#include <vector>
+#include <string>
 
 class Person
 {
@@ -14,8 +15,10 @@ protected:
 	string name;
 
 	Person(const string);
-
+	Person(const Person&) = default;
+	Person(Person&&) = default;
 	virtual ~Person() = default;
+
 
 
 	void setName(const string name);

@@ -3,7 +3,7 @@
 
 #include <iostream>
 #pragma warning(disable: 4996)
-
+#include <string>
 #include "Date.h"
 
 class Article
@@ -15,13 +15,16 @@ private:
 
 public:
 	Article(const Date date, const string magaine, const string name) : m_publicationDate(date), magazineName(magaine), articleName(name)	{}
-	
+	Article(const Article&) = delete;
+	Article(Article&&) = delete;
+
 
 
 
 	const Date getDate()			const { return m_publicationDate; }
-	const char* getMagazineName()	const { return magazineName.c_str(); }
-	const char* getArticleName()	const { return articleName.c_str(); }
+	const string getMagazineName()	const { return magazineName; }
+	const string getArticleName()	const { return articleName; }
+
 
 
 	friend std::ostream& operator<<(std::ostream& os, const Article& article)
