@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "BaseFunc.h"
+#include <string>
 using namespace std;
 #pragma warning(disable: 4996)
 #include <vector>
@@ -14,18 +15,16 @@ protected:
 	string name;
 
 	Person(const string);
-	Person(const Person&);
-	Person(Person&&);
+	Person(const Person&) = default;
+	Person(Person&&) = default;
+	virtual ~Person() = default;
 
-	virtual ~Person() {};
 
-	const Person& operator=(const Person&);
-	const Person& operator=(Person&&);
 
 	void setName(const string name);
 
 public:
-	const string& getName()				const { return name; }
+	const char* getName()				const { return name.c_str(); }
 
 	virtual void toOS(std::ostream& os) const {}
 

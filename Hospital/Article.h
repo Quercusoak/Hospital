@@ -24,6 +24,7 @@ public:
 	const string getArticleName()	const { return articleName; }
 
 
+
 	friend std::ostream& operator<<(std::ostream& os, const Article& article)
 	{
 		os 

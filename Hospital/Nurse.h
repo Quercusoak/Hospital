@@ -12,7 +12,7 @@ public:
 	Nurse(const string name, float yrs_of_experience);
 	Nurse(Nurse&) = delete;
 	Nurse(Nurse&&);
-	virtual ~Nurse();
+	virtual ~Nurse() = default;
 
 	void setExperience(float);
 

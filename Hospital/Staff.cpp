@@ -17,7 +17,6 @@ Staff::Staff(const string name)
 //--------------------------------------------------------------------------------//
 Staff::Staff(Staff&& other) :Person(other.getName()), workerId(other.getWorkerID())
 {
-	other.name = nullptr;
 	counter++; //rvalue staff will decrement counter upon destruction, so we wish to increment it now
 }
 

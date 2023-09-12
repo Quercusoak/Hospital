@@ -18,11 +18,6 @@ void Nurse::setExperience(float experience)
 	this->yrs_of_experience = experience;
 }
 
-//---------------------------------------------------------------//
-Nurse::~Nurse()
-{
-}
-
 
 //---------------------------------------------------------------//
 float  Nurse::getExperience()

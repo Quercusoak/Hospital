@@ -19,7 +19,7 @@ ResearchCenter::~ResearchCenter()
 }
 
 //---------------------------------------------------------------//
-void ResearchCenter::AddResearcher(const char* name)
+void ResearchCenter::AddResearcher(const string name)
 {
 	if (num_researchers == max_researchers)
 	{

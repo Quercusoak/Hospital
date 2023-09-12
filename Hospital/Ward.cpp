@@ -2,11 +2,12 @@
 
 
 //---------------------------------------------------------------//
-Ward::Ward(const char* ward_name)
+Ward::Ward(const string ward_name)
 	
 {
-	name = new char[strlen(ward_name) + 1];
-	strcpy(name, ward_name);
+	
+
+	this->name = ward_name;
 
 	num_staff = 0;
 	max_staff = 1;
@@ -23,7 +24,6 @@ Ward::~Ward()
 {
 	unsigned int i;
 
-	delete[]name;
 
 	for (i = 0; i < num_staff; ++i)
 	{
