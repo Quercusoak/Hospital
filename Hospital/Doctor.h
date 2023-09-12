@@ -8,7 +8,7 @@
 class Doctor : virtual public Staff
 {
 protected:
-	string m_specialty;
+	char* m_specialty;
 
 public:
 	Doctor(const char* name, const char* specialty);
@@ -18,7 +18,7 @@ public:
 
 	void setSpecialty(const char* specialty);
 
-	const char* getSpecialty()		const { return m_specialty.c_str(); }
+	const char* getSpecialty()		const { return m_specialty; }
 
 
 	virtual void toOS(std::ostream& os) const override { os << ", Specialty - " << m_specialty; }
