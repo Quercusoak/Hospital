@@ -7,7 +7,7 @@
 class ResearcherDoctor : public Doctor, public Researcher
 {
 public:
-	ResearcherDoctor(const char* name, const char* specialty);
+	ResearcherDoctor(const string name, const string specialty);
 
 	ResearcherDoctor(Doctor&& other);
 
@@ -15,7 +15,7 @@ public:
 
 	virtual void toOS(std::ostream& os) const override;
 
-	virtual const char* type() const override { return "Researcher Doctor"; }
+	virtual const string type() const override { return "Researcher Doctor"; }
 
 };
 

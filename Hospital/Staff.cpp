@@ -7,7 +7,7 @@ unsigned int Staff::counter = 1000;
 
 
 //--------------------------------------------------------------------------------//
-Staff::Staff(const char* name)
+Staff::Staff(const string name)
 	:Person(name), workerId(counter)
 {
 	counter++;

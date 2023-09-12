@@ -9,7 +9,7 @@ class Staff : public Person
 protected:
 	unsigned int workerId;
 
-	Staff(const char*);
+	Staff(const string);
 
 private:
 	static unsigned int counter;
@@ -33,7 +33,7 @@ public:
 
 	virtual void toOS(std::ostream& os) const {}
 
-	virtual const char* type() const { return typeid(*this).name() + 6; }
+	virtual const string type() const { return typeid(*this).name() + 6; };
 	
 };
 

@@ -10,11 +10,11 @@ public:
 
 	virtual void toOS(std::ostream& os) const override;
 
-	SurgeonResearcher(const char* name, const char* specialty);
+	SurgeonResearcher(const string name, const string specialty);
 
 	SurgeonResearcher(Doctor&& other);
 
-	virtual const char* type() const override { return "Surgeon Researcher"; }
+	virtual const string type() const override { return "Surgeon Researcher"; }
 };
 
 

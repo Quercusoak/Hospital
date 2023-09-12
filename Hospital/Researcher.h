@@ -14,7 +14,7 @@ protected:
 	unsigned int m_numArticles;
 
 public:
-	Researcher(const char* name);
+	Researcher(const string name);
 	Researcher(const Researcher&) = delete;
 	Researcher(Researcher&&);
 	virtual ~Researcher();

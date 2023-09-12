@@ -9,7 +9,7 @@ private:
 	float yrs_of_experience;
 
 public:
-	Nurse(const char* name, float yrs_of_experience);
+	Nurse(const string name, float yrs_of_experience);
 	Nurse(Nurse&) = delete;
 	Nurse(Nurse&&);
 	virtual ~Nurse();

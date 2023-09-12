@@ -15,12 +15,6 @@ Ward::Ward(const char* ward_name)
 
 	num_doctors = 0;
 	num_surgeons = 0;
-
-	num_patients = 0;
-	max_patients_size = 1;
-	patients = new Patient * [max_patients_size];
-	patients[0] = nullptr;
-
 }
 
 //---------------------------------------------------------------//
@@ -44,20 +38,10 @@ Ward::~Ward()
 //---------------------------------------------------------------//
 void Ward::AddPatient(Patient& patient)
 {
-	bool check = true;
-	for (unsigned int i = 0; i < num_patients; i++)
-		if (&patient == patients[i]) check = false;
-	
-	if (check) {
-		if (num_patients == max_patients_size)
-		{
-			max_patients_size *= 2;
-			this->patients = (Patient**)rerealloc(this->patients, sizeof(Patient*), num_patients, max_patients_size);
-		}
+	if (patients.size() == patients.capacity())
+		patients.reserve(patients.capacity() * 2);
 
-		patients[num_patients] = &patient;
-		num_patients++;
-	}
+	patients.push_back(&patient);
 }
 
 
@@ -81,7 +65,7 @@ void Ward::AddStaff(Staff&& newStaff)
 }
 
 //----------------------------------------------------------------------------------------------------//
-void Ward::AddNurse(const char* name, float yrs_of_experience)
+void Ward::AddNurse(const string name, float yrs_of_experience)
 {
 	checkMaxSizeReached();
 
@@ -90,7 +74,7 @@ void Ward::AddNurse(const char* name, float yrs_of_experience)
 }
 
 //----------------------------------------------------------------------------------------------------//
-void Ward::AddDoctor(const char* name, const char* specialty)
+void Ward::AddDoctor(const string name, const string specialty)
 {
 	checkMaxSizeReached();
 
@@ -144,4 +128,15 @@ void Ward::checkMaxSizeReached()
 void Ward::operator+=(Staff&& other)
 {
 	AddStaff(std::move(other));
+}
+
+
+//----------------------------------------------------------------------------------------------------//
+//NOT THE RIGHT PLACE
+template <class T>
+void addArray(vector<T*>& arr, T& obj)
+{
+	if (arr.capacity() == arr.size())
+		arr.capacity() *= 2;
+	arr.push_back(obj);
 }

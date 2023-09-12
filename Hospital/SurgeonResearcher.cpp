@@ -1,7 +1,7 @@
 #include "SurgeonResearcher.h"
 
 
-SurgeonResearcher::SurgeonResearcher(const char* name, const char* specialty)
+SurgeonResearcher::SurgeonResearcher(const string name, const string specialty)
 	:Surgeon(name, specialty), Doctor(name, specialty), Researcher(name), Staff(name) 
 {}
 

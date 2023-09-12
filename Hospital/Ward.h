@@ -22,10 +22,7 @@ private:
 	unsigned int num_doctors;
 	unsigned int num_surgeons;
 
-
-	Patient** patients;
-	unsigned int num_patients;
-	unsigned int max_patients_size;
+	vector<Patient*> patients;
 
 
 public:
@@ -35,8 +32,8 @@ public:
 	~Ward();
 
 	void AddStaff(Staff&&);
-	void AddNurse(const char* name, float yrs_of_experience);
-	void AddDoctor(const char* name, const char* specialty);
+	void AddNurse(const string name, float yrs_of_experience);
+	void AddDoctor(const string name, const string specialty);
 	void AddDoctor(Doctor&&);
 
 
@@ -48,8 +45,8 @@ public:
 
 	
 	void AddPatient(Patient&);
-	const unsigned int getPatientsNum()		const { return num_patients; }
-	Patient* const* getPatients()			const { return patients; }
+	const unsigned int getPatientsNum()		const { return patients.size(); }
+	const vector<Patient*> getPatients()	const { return patients; }
 
 	void operator+=(Staff&& other);
 

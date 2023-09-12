@@ -2,7 +2,6 @@
 #define __DOCTOR_H
 
 #include "Staff.h"
-#include <string>
 
 
 class Doctor : virtual public Staff
@@ -11,19 +10,19 @@ protected:
 	string m_specialty;
 
 public:
-	Doctor(const char* name, const char* specialty);
+	Doctor(const string name, const string specialty);
 	Doctor(const Doctor&) = delete;
 	Doctor(Doctor&&);
-	virtual ~Doctor();
+	virtual ~Doctor() {};
 
-	void setSpecialty(const char* specialty);
+	void setSpecialty(const string specialty);
 
-	const char* getSpecialty()		const { return m_specialty.c_str(); }
+	const string getSpecialty()		const { return m_specialty.c_str(); }
 
 
 	virtual void toOS(std::ostream& os) const override { os << ", Specialty - " << m_specialty; }
 
-	virtual const char* type() const override { return typeid(*this).name() + 6; }
+	virtual const string type() const override { return typeid(*this).name() + 6; }
 
 	friend std::ostream& operator<<(std::ostream& os, const Doctor& doctor)
 	{

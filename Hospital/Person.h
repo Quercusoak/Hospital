@@ -5,26 +5,27 @@
 #include "BaseFunc.h"
 using namespace std;
 #pragma warning(disable: 4996)
-
+#include <vector>
+#include <string>
 
 class Person
 {
 protected:
-	char* name;
+	string name;
 
-	Person(const char*);
+	Person(const string);
 	Person(const Person&);
 	Person(Person&&);
 
-	virtual ~Person();
+	virtual ~Person() {};
 
 	const Person& operator=(const Person&);
 	const Person& operator=(Person&&);
 
-	void setName(const char* name);
+	void setName(const string name);
 
 public:
-	const char* getName()				const { return name; }
+	const string& getName()				const { return name; }
 
 	virtual void toOS(std::ostream& os) const {}
 

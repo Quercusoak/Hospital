@@ -2,44 +2,32 @@
 
 
 //---------------------------------------------------------------//
-void Person::setName(const char* name)
+void Person::setName(const string name)
 {
-
-	delete[](this->name);
-
-	this->name = new char[strlen(name) + 1];
-	strcpy(this->name, name);
-
+	this->name = name;
 }
 
 //---------------------------------------------------------------//
-Person::Person(const char* name)
-	:name(nullptr)
+Person::Person(const string name)
+	:name(name)
 {
 	setName(name);
-
 }
 
 //---------------------------------------------------------------//
 Person::Person(const Person& other)
-	:name(nullptr)
+	:name(name)
 {
 	*this = other;
 }
 
 //---------------------------------------------------------------//
 Person::Person(Person&& other)
-	:name(nullptr)
+	:name(other.name)
 {
 	*this = std::move(other);
 }
 
-//---------------------------------------------------------------//
-Person::~Person()
-{
-	delete[]name;
-
-}
 
 //---------------------------------------------------------------//
 const Person& Person::operator=(const Person& other)
