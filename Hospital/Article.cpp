@@ -3,13 +3,7 @@
 
 
 //---------------------------------------------------------------//
-Article::Article(Date date, const string magaine, const string name)
-	: m_publicationDate(date)
-{
-	setArticleName(name);
-	setMagazineName(magaine);
 
-}
 
 
 //---------------------------------------------------------------//

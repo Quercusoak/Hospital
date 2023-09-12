@@ -9,18 +9,14 @@
 class Article
 {
 private:
-	Date m_publicationDate; 
-	string magazineName;
-	string articleName;
+	const Date m_publicationDate; 
+	const string magazineName;
+	const string articleName;
 
 public:
-	Article(Date date,const string magaine,const string name);
+	Article(const Date date, const string magaine, const string name) : m_publicationDate(date), magazineName(magaine), articleName(name)	{}
 	
 
-
-	void setMagazineName(const string name) { this->magazineName = name; }
-	void setArticleName(const string name)	{ this->articleName = name; }
-	;
 
 
 	const Date getDate()			const { return m_publicationDate; }
