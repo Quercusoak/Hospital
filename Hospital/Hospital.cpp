@@ -5,15 +5,8 @@ Hospital::Hospital()
 {
 	num_wards = 0;
 	max_wards = 1;
-	wards = new Ward*[max_wards];
+	wards = new Ward * [max_wards];
 	wards[0] = nullptr;
-
-
-	num_patients = 0;
-	max_patients = 1;
-	patients = new Patient * [max_patients];
-	patients[0] = nullptr;
-
 }
 
 //----------------------------------------------------------------------------------------------------//
@@ -24,13 +17,8 @@ Hospital::~Hospital()
 	{
 		delete wards[i];
 	}
-	delete[] wards;
 
-	for  (i = 0; i < num_patients; i++)
-	{
-		delete patients[i];
-	}
-	delete[] patients;
+	delete[] wards;
 }
 
 //----------------------------------------------------------------------------------------------------//
@@ -47,26 +35,22 @@ void Hospital::AddWard(const char* ward_name)
 
 Patient* Hospital::searchPatientByID(unsigned int& id)
 {
-	for (unsigned int i = 0; i < num_patients; i++)
+	vector<Patient>::iterator i = patients.begin();
+	vector<Patient>::iterator end = patients.end();
+
+	for (; i != end; ++i)
 	{
-		if (patients[i]->getID() == id)
-			return patients[i];
+		if ((*i).getID() == id)
+			return &(*i);
 	}
 	return nullptr;
 }
 
 //----------------------------------------------------------------------------------------------------//
-Patient* Hospital::addPatient(const char* name, unsigned int id, Date birth_date, int gender)
+Patient* Hospital::addPatient(const string name, unsigned int id, Date birth_date, int gender)
 {
-	if (num_patients == max_patients)
-	{
-		max_patients *= 2;
-		patients = (Patient**)rerealloc(patients, sizeof(Patient*), num_patients, max_patients);
-	}
-
-	patients[num_patients] = new Patient(name, id, birth_date, (Patient::eGender)gender);
-	num_patients++;
-	return patients[num_patients - 1];
+	patients.push_back(Patient(name, id, birth_date, (Patient::eGender)gender));
+	return (&*(--patients.end()));
 }
 
 //----------------------------------------------------------------------------------------------------//

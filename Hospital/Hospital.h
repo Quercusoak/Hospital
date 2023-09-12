@@ -1,6 +1,7 @@
 #include "Ward.h"
 #include "ResearchCenter.h"
 
+
 class Hospital
 {
 private:
@@ -8,12 +9,9 @@ private:
 	unsigned int num_wards;
 	unsigned int max_wards;
 
-
 	ResearchCenter research_center;
 
-	Patient** patients;
-	unsigned int num_patients;
-	unsigned int max_patients;
+	vector<Patient> patients;
 
 
 public:
@@ -28,7 +26,7 @@ public:
 
 
 	Patient* searchPatientByID(unsigned int& id);
-	Patient* addPatient(const char* name, unsigned int id, Date birth_date, int gender);
+	Patient* addPatient(const string name, unsigned int id, Date birth_date, int gender);
 	
 	ResearchCenter& getResearchCenter() { return research_center; }
 

@@ -501,9 +501,7 @@ void searchPatient(Hospital& hospital)
 
 	//Patient's visits data from card:
 	for (unsigned int i = 0; i < patient->getNumVisits(); i++)
-		cout << *patient->getPatientCard()[i] << endl;
-
-	//printPatientCard(*patient);
+		cout << patient->getPatientCard()[i] << endl;
 
 	returningToMenu();
 
@@ -515,7 +513,6 @@ void showPatients(Hospital& hospital)
 {
 	Ward& ward = chooseWard(hospital);
 	unsigned int num_of_patients = ward.getPatientsNum();
-	Patient* patient;
 
 	if (num_of_patients == 0)
 	{
@@ -525,11 +522,17 @@ void showPatients(Hospital& hospital)
 
 	cout << "Patients in selected ward: " << endl;
 
-	for (unsigned int i = 0; i < num_of_patients; i++)
+
+	vector<Patient*> patients = ward.getPatients();
+
+	vector<Patient*>::iterator itr = patients.begin();
+	vector<Patient*>::iterator end = patients.end();
+
+	for (; itr != end; ++itr)
 	{
-		patient = ward.getPatients()[i];
-		cout << *patient << endl;
+		cout << *(*itr);
 	}
+
 
 	returningToMenu();
 
@@ -541,7 +544,7 @@ void printPatientCard(Patient& patient)
 	PatientCard* card;
 	for (unsigned int i = 0; i < patient.getNumVisits(); i++)
 	{
-		card = patient.getPatientCard()[i];
+		card = &patient.getPatientCard()[i];
 		cout << "Visit date: " << card->getDate().getDay() << "." << card->getDate().getMonth() << "." << card->getDate().getYear();
 		cout << ", cause: " << card->getPurpose() << ", attended by doctor " << card->getDoctor().getName() << endl;
 	}

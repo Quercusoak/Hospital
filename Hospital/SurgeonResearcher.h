@@ -14,7 +14,7 @@ public:
 
 	SurgeonResearcher(Doctor&& other);
 
-	virtual const char* type() const override { return "Surgeon Researcher"; }
+	virtual const string type() const override { return "Surgeon Researcher"; }
 };
 
 

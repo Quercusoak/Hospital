@@ -15,15 +15,15 @@ private:
 	unsigned int id;
 	Date date;
 	eGender gender;
-	PatientCard** patient_card;
+	vector<PatientCard> patient_card;
 	unsigned int num_visits;
 	unsigned int max_visits;
 
 
 public:
-	Patient(const char* name, unsigned int id, Date date, eGender);
+	Patient(const string name, unsigned int id, Date date, eGender);
 	Patient(Patient&) = delete;
-	Patient(Patient&&) = delete;
+	Patient(Patient&&);
 	virtual ~Patient();
 
 	void setID(unsigned int id);
@@ -34,11 +34,12 @@ public:
 	const char* getGender()				const { return genderStr[(int)gender]; }
 	const unsigned int getNumVisits()	const { return num_visits; }
 
-	PatientCard** getPatientCard()			  { return patient_card; }
+	vector<PatientCard> getPatientCard()			  { return patient_card; }
 
 	void AddVisit(Date date, const char* purpose_of_visit, Doctor& doctor);
 	void AddVisit(Date date, const char* purpose_of_visit, Surgeon& surgeon, int roomNumber, bool fasting);
 
+	void checkCapacity();
 
 	virtual void toOS(std::ostream& os) const override 
   {

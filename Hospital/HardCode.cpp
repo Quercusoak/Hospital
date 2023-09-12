@@ -91,9 +91,8 @@ void HardCoded(Hospital& hospital)
 
 	hospital.getResearchCenter().AddResearcher(RESEARCHER_1);
 	
-	Date newDate(1950, 5, 12);
 
-	Article* newOne = new Article(newDate, ARTICLE_1_PUBILCATOR, ARTICLE_1_NAME);
+	Article* newOne = new Article(Date(1950, 5, 12), ARTICLE_1_PUBILCATOR, ARTICLE_1_NAME);
 
 	hospital.getResearchCenter().getResearchers()[0]->addArticle(*newOne);
 
