@@ -31,9 +31,9 @@ public:
 	}
 
 
-	virtual void toOS(std::ostream& os) const {}
+	virtual void toOS(std::ostream& os)	const {}
 
-	virtual const string type() const { return typeid(*this).name() + 6; };
+	virtual const string type()			const { return typeid(*this).name() + 6; };
 	
 };
 

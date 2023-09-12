@@ -16,7 +16,7 @@ void ResearcherDoctor::toOS(std::ostream& os) const
 	Doctor::toOS(os);
 	if (this->getNumArticles() > 0)
 	{
-		os << endl << ", Number of written Articles:" << this->getNumArticles();
+		os << ", Number of written Articles:" << this->getNumArticles();
 		this->toOSArticles(os);
 	}
 }

@@ -22,15 +22,15 @@ public:
 
 	virtual void toOS(std::ostream& os) const override { os << ", Specialty - " << m_specialty; }
 
-	virtual const string type() const override { return typeid(*this).name() + 6; }
 
+	/*
 	friend std::ostream& operator<<(std::ostream& os, const Doctor& doctor)
 	{
 		os << "Name - " << doctor.name << ", worker id - " << doctor.workerId << ", Job - Doctor, Specialty - "
 			<< doctor.m_specialty << ".";
 		return os;
 	}
-
+	*/
 };
 
 
