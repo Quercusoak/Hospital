@@ -9,7 +9,7 @@ protected:
 	int num_surgeries;
 
 public:
-	Surgeon(const char* name, const char* specialty);
+	Surgeon(const string name, const string specialty);
 	Surgeon(Doctor&&);
 	virtual ~Surgeon() {};
 

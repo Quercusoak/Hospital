@@ -9,7 +9,7 @@ class Staff : public Person
 protected:
 	unsigned int workerId;
 
-	Staff(const char*);
+	Staff(const string);
 
 private:
 	static unsigned int counter;

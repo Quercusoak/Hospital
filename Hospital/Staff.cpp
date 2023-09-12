@@ -7,7 +7,7 @@ unsigned int Staff::counter = 1000;
 
 
 //--------------------------------------------------------------------------------//
-Staff::Staff(const char* name)
+Staff::Staff(const string name)
 	:Person(name), workerId(counter)
 {
 	counter++;
@@ -17,7 +17,6 @@ Staff::Staff(const char* name)
 //--------------------------------------------------------------------------------//
 Staff::Staff(Staff&& other) :Person(other.getName()), workerId(other.getWorkerID())
 {
-	other.name = nullptr;
 	counter++; //rvalue staff will decrement counter upon destruction, so we wish to increment it now
 }
 

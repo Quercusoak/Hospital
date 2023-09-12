@@ -2,11 +2,12 @@
 
 
 //---------------------------------------------------------------//
-Ward::Ward(const char* ward_name)
+Ward::Ward(const string ward_name)
 	
 {
-	name = new char[strlen(ward_name) + 1];
-	strcpy(name, ward_name);
+	
+
+	this->name = ward_name;
 
 	num_staff = 0;
 	max_staff = 1;
@@ -29,7 +30,6 @@ Ward::~Ward()
 {
 	unsigned int i;
 
-	delete[]name;
 
 	for (i = 0; i < num_staff; ++i)
 	{
@@ -81,7 +81,7 @@ void Ward::AddStaff(Staff&& newStaff)
 }
 
 //----------------------------------------------------------------------------------------------------//
-void Ward::AddNurse(const char* name, float yrs_of_experience)
+void Ward::AddNurse(const string name, float yrs_of_experience)
 {
 	checkMaxSizeReached();
 
@@ -90,7 +90,7 @@ void Ward::AddNurse(const char* name, float yrs_of_experience)
 }
 
 //----------------------------------------------------------------------------------------------------//
-void Ward::AddDoctor(const char* name, const char* specialty)
+void Ward::AddDoctor(const string name, const string specialty)
 {
 	checkMaxSizeReached();
 

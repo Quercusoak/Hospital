@@ -13,7 +13,9 @@ protected:
 
 public:
 	PatientCardOperation(Date date, const char* purpose_of_visit, Surgeon& doctor, unsigned int room_number, bool fasting);
-	virtual ~PatientCardOperation();
+	PatientCardOperation(const PatientCardOperation&) = default;
+	PatientCardOperation(PatientCardOperation&&) = default;
+	virtual ~PatientCardOperation() = default;
 
 
 	unsigned int getRoom_Number()		const { return room_number; }

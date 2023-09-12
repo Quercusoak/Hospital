@@ -1,7 +1,7 @@
 #include "Nurse.h"
 
 //---------------------------------------------------------------//
-Nurse::Nurse(const char* name, float yrs_of_experience)
+Nurse::Nurse(const string name, float yrs_of_experience)
 	: Staff(name), yrs_of_experience(yrs_of_experience)
 {
 }
@@ -16,11 +16,6 @@ Nurse::Nurse(Nurse&& other) :Staff(std::move(other))
 void Nurse::setExperience(float experience)
 {
 	this->yrs_of_experience = experience;
-}
-
-//---------------------------------------------------------------//
-Nurse::~Nurse()
-{
 }
 
 

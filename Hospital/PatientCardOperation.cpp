@@ -12,9 +12,3 @@ PatientCardOperation::PatientCardOperation(Date date, const char* purpose_of_vis
 }
 
 //---------------------------------------------------------------//
-PatientCardOperation::~PatientCardOperation()
-{
-
-}
-
-//---------------------------------------------------------------//

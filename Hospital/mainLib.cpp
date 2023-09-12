@@ -561,14 +561,21 @@ void showStaff(Hospital& hospital)
 			Ward& ward(*hospital.getWards()[i]); 
 			num_staff = ward.getNumStaff();
 
+			cout << "------------------------------------------------------------" << endl
+				<< ward.getName() << " ward:" << endl;
+
 			if (num_staff > 0)
 			{
-				cout << endl << ward.getName() << " ward:" << endl;
+				
 				for (j = 0; j < num_staff; j++)
 					cout << *ward.getStaff()[j] << endl;
 			}
+			else
+				cout << "No Staff In Ward" << endl;
 		}
 	}
+
+	cout << "------------------------------------------------------------";
 
 	returningToMenu();
 }
