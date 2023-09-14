@@ -189,7 +189,7 @@ void addPatient(Hospital& hospital)
 			{
 				cout << "Enter birth date in the format: year month day" << endl;
 				cin >> year >> month >> day;
-				DateExceptions(year, month, day);
+				DateExceptions check(year, month, day);
 				input = 0;
 			}
 			catch (string exception)
@@ -257,7 +257,7 @@ void addCard(Patient& patient, Ward& ward)
 		{
 			cout << "Enter date of visit in the format: year month day" << endl;
 			cin >> year >> month >> day;
-			DateExceptions(year, month, day);
+			DateExceptions check(year, month, day);
 			input = 0;
 		}
 		catch (string exception)
@@ -294,7 +294,7 @@ void addOperationCard(Patient& patient, Ward& ward)
 		{
 			cout << "Enter date of visit in the format: year month day" << endl;
 			cin >> year >> month >> day;
-			DateExceptions(year, month, day);
+			DateExceptions check(year, month, day);
 			input = 0;
 		}
 		catch (string exception)
@@ -482,7 +482,7 @@ void addResearcherArticle(Hospital& hospital)
 {
 
 	char magazineName[MAX_NAME_LENGTH], articleName[MAX_NAME_LENGTH];
-	unsigned short year, month, day, input;
+	unsigned short year, month, day, input = 1;
 	ResearchCenter& research_center = hospital.getResearchCenter();
 
 	bool check = research_center.getNum_researchers() > 0;
@@ -495,7 +495,7 @@ void addResearcherArticle(Hospital& hospital)
 			{
 				cout << "Please enter publication date, in format of \"year month day\":" << endl;
 				cin >> year >> month >> day;
-				DateExceptions(year, month, day);
+				DateExceptions check(year, month, day);
 				input = 0;
 			}
 			catch (string exception)
@@ -504,7 +504,7 @@ void addResearcherArticle(Hospital& hospital)
 			}
 		}
 		
-
+		cleanBuffer();
 		cout << "Please enter Magazine Name: ";
 		cin.getline(magazineName, MAX_NAME_LENGTH);
 		cout << "Please enter Article Name: ";

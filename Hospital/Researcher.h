@@ -4,26 +4,25 @@
 #include "BaseFunc.h"
 #include "Staff.h"
 #include "Article.h"
+#include <vector>
 
 class Researcher :virtual public Staff
 {
 protected:
-
-	Article** m_articles;
-	unsigned int m_maxArticles;
+	std::vector<Article*> m_articles;
 	unsigned int m_numArticles;
 
 public:
 	Researcher(const string name);
 	Researcher(const Researcher&) = delete;
-	Researcher(Researcher&&);
+	Researcher(Researcher&&) = default;
 	virtual ~Researcher();
 
 	void addArticle(Article& data);
 
 	int getNumArticles()					const { return m_numArticles; }
 	Article& getArticle(int placmeant)		const { return *m_articles[placmeant]; }
-	Article** getArticles()					const { return m_articles; }
+	std::vector<Article*> getArticles()					const { return m_articles; }
 
 
 	int operator>(const Researcher& other);
