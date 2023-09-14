@@ -42,12 +42,12 @@ public:
 	void checkCapacity();
 
 	virtual void toOS(std::ostream& os) const override 
-  {
+    {
 		os << ", Gender - " << getGender() << ", Id - " << id
 			<< ", Number of visits - " << num_visits;
 	}
 
-
+	/*
 	friend std::ostream& operator<<(std::ostream& os, const Patient& patient)
 	{
 		os << "Name - " << patient.name << ", Paitant, Gender - " << patient.getGender() << ", Id - " << patient.id
@@ -55,6 +55,7 @@ public:
 
 		return os;
 	}
+	*/
 };
 
 
