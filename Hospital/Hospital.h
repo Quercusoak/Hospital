@@ -1,10 +1,13 @@
 #include "Ward.h"
 #include "ResearchCenter.h"
-
+#include "TemplateArray.h"
 
 class Hospital
 {
 private:
+
+	TemplateArray<Ward> wards;
+
 	Ward** wards;
 	unsigned int num_wards;
 	unsigned int max_wards;

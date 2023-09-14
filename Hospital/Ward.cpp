@@ -130,13 +130,3 @@ void Ward::operator+=(Staff&& other)
 	AddStaff(std::move(other));
 }
 
-
-//----------------------------------------------------------------------------------------------------//
-//NOT THE RIGHT PLACE
-template <class T>
-void addArray(vector<T*>& arr, T& obj)
-{
-	if (arr.capacity() == arr.size())
-		arr.capacity() *= 2;
-	arr.push_back(obj);
-}
