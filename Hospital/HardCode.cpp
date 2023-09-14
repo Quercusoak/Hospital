@@ -89,7 +89,8 @@ void HardCoded(Hospital& hospital)
 	tmp = dynamic_cast<Doctor*>(hospital.getWards()[0]->getStaff()[1]);
 	newPatient->AddVisit(date2, PATIENT_1_REASON_VISIT2, *tmp);
 
-	hospital.getResearchCenter().AddResearcher(RESEARCHER_1);
+	Researcher* researcher = new Researcher(RESEARCHER_1);
+	hospital.getResearchCenter().AddResearcher(*researcher);
 	
 
 	Article* newOne = new Article(Date(1950, 5, 12), ARTICLE_1_PUBILCATOR, ARTICLE_1_NAME);

@@ -5,9 +5,6 @@
 ResearchCenter::ResearchCenter()
 {
 	num_researchers = 0;
-	max_researchers = 1;
-	researchers = new Researcher * [max_researchers];
-	researchers[0] = nullptr;
 }
 
 //---------------------------------------------------------------//
@@ -15,33 +12,18 @@ ResearchCenter::~ResearchCenter()
 {
 	for (int i = 0; i < num_researchers; i++)
 		delete researchers[i];
-	delete[]researchers;
+	researchers.clear();
 }
 
 //---------------------------------------------------------------//
-void ResearchCenter::AddResearcher(const string name)
+void ResearchCenter::AddResearcher(Researcher& other)
 {
-	if (num_researchers == max_researchers)
-	{
-		max_researchers *= 2;
-		researchers = (Researcher**)rerealloc(researchers, sizeof(Researcher*), num_researchers, max_researchers);
-	}
+	
 
-	researchers[num_researchers] = new Researcher(name);
+	researchers.push_back(&other);
 	num_researchers++;
 
 }
 
 
 //---------------------------------------------------------------//
-void ResearchCenter::AddResearcherDoctor(Researcher& other)
-{
-	if (num_researchers == max_researchers)
-	{
-		max_researchers *= 2;
-		researchers = (Researcher**)rerealloc(researchers, sizeof(Researcher*), num_researchers, max_researchers);
-	}
-
-	researchers[num_researchers] = &other;
-	num_researchers++;
-}

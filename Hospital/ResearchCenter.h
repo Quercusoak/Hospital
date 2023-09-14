@@ -6,9 +6,8 @@
 class ResearchCenter
 {
 private:
-	Researcher** researchers;
+	vector<Researcher*> researchers;
 	int num_researchers;
-	int max_researchers;
 
 public:
 	ResearchCenter();
@@ -16,11 +15,11 @@ public:
 	ResearchCenter(ResearchCenter&&) = delete;
 	~ResearchCenter();
 
-	void AddResearcher(const string name);
-	void AddResearcherDoctor(Researcher&);
+	void AddResearcher(Researcher& other);
+	
 
 
-	Researcher** getResearchers()	const { return researchers; }
+	vector<Researcher*> getResearchers()	const { return researchers; }
 	int getNum_researchers()		const { return num_researchers; }
 };
 

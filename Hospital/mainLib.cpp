@@ -144,11 +144,11 @@ void addDoctor(Hospital& hospital)
 			break;
 		case 3:
 			ward += ResearcherDoctor(name, specialty);
-			hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
+			hospital.getResearchCenter().AddResearcher(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
 			break;
 		case 4:
 			ward += SurgeonResearcher(name, specialty);
-			hospital.getResearchCenter().AddResearcherDoctor(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
+			hospital.getResearchCenter().AddResearcher(*dynamic_cast<Researcher*>(ward.getStaff()[ward.getNumStaff() - 1]));
 			break;
 		default:
 			is_dr_type = false;
@@ -470,8 +470,8 @@ void addResearcher(Hospital& hospital)
 	cleanBuffer();
 	cin.getline(name, MAX_NAME_LENGTH);
 
-
-	hospital.getResearchCenter().AddResearcher(name);
+	Researcher* researcher = new Researcher(name);
+	hospital.getResearchCenter().AddResearcher(*researcher);
 
 	actionDone("Adding a new researcher", name, ERR_ID_TAKEN, true);
 
@@ -674,34 +674,6 @@ void returningToMenu()
 	
 }
 
-/*
-//----------------------------------------------------------------------------------------------------//
-//Checks validity of date input for each date element.
-void checkDate(unsigned short* year, unsigned short* month, unsigned short* day)
-{
-
-	while (*year > CURRENT_YEAR || *year < LOWEST_YEAR) //Expected card date to be current or previous date
-	{
-		cout << "Year invalid. Retry: ";
-		cin >> *year;
-	}
-
-	while (*month > NUM_OF_MONTHS || *month < 1)
-	{
-		cout << "Month invalid. Retry.";
-		cin >> *month;
-	}
-
-	while (*day > MAX_DAYS || *day < 1)
-	{
-		cout << "Day invalid. Retry.";
-		cin >> *day;
-	}
-
-	cleanBuffer();
-}
-*/
-
 //----------------------------------------------------------------------------------------------------//
 float getExperience()
 {
@@ -760,7 +732,8 @@ void PrintResearcherDoctors(Hospital& hospital)
 		return;
 	}
 	
-	Researcher** researchers = research_center.getResearchers();
+	
+	vector<Researcher*> researchers = research_center.getResearchers();
 
 	cout << "Researcher Doctors: " << endl;
 
@@ -771,4 +744,5 @@ void PrintResearcherDoctors(Hospital& hospital)
 	}
 
 	returningToMenu();
+	
 }
