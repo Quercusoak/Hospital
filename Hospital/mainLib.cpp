@@ -166,7 +166,7 @@ void addDoctor(Hospital& hospital)
 //----------------------------------------------------------------------------------------------------//
 void addPatient(Hospital& hospital)
 {
-	unsigned int gender, id, input;
+	unsigned int gender, id, input = 1;
 	unsigned short year, month, day;
 	char name[MAX_NAME_LENGTH];
 	bool operation;
@@ -184,9 +184,20 @@ void addPatient(Hospital& hospital)
 	//if patient new - add patient to hospital:
 	if (patient == nullptr)
 	{
-		cout << "Enter birth date in the format: year month day" << endl;
-		cin >> year >> month >> day;
-		checkDate(&year, &month, &day); //check date validity
+		while (input) {
+			try
+			{
+				cout << "Enter birth date in the format: year month day" << endl;
+				cin >> year >> month >> day;
+				DateExceptions(year, month, day);
+				input = 0;
+			}
+			catch (string exception)
+			{
+				cout << exception << " Please retry." << endl;
+			}
+		}
+		//checkDate(&year, &month, &day); //check date validity
 		cout << "Choose gender: " << endl << "1 - male" << endl << "2 - female" << endl;
 		cin >> gender;
 
@@ -216,7 +227,7 @@ void addPatient(Hospital& hospital)
 
 		if (!check) {
 			if (patient == nullptr)
-				patient = hospital.addPatient(name, id, Date(year, month, day) , gender - 1);
+				patient = hospital.addPatient(name, id, Date(year, month, day), gender - 1);
 
 			if(operation)
 				addOperationCard(*patient, ward);
@@ -235,15 +246,25 @@ void addPatient(Hospital& hospital)
 //----------------------------------------------------------------------------------------------------//
 void addCard(Patient& patient, Ward& ward)
 {
-	unsigned short year, month, day;
+	unsigned short year, month, day, input = 1;
 	char purpose_of_visit[MAX_STRING_INPUT];
 
-	//visit date:
-	cout << "Enter date of visit in the format: year month day" << endl;
-	cin >> year >> month >> day;
-	checkDate(&year, &month, &day); //check date validity
-	Date date(year, month, day);
 
+	//visit date:
+	while (input)
+	{
+		try
+		{
+			cout << "Enter date of visit in the format: year month day" << endl;
+			cin >> year >> month >> day;
+			DateExceptions(year, month, day);
+			input = 0;
+		}
+		catch (string exception)
+		{
+			cout << exception << " Please retry." << endl;
+		}
+	}
 
 	//visit purpose:
 	cout << "Enter purpose of visit: ";
@@ -253,7 +274,7 @@ void addCard(Patient& patient, Ward& ward)
 	//Select a doctor in selected ward:
 	Doctor& doctor = chooseDoctor(ward);
 
-	patient.AddVisit(date, purpose_of_visit, doctor);
+	patient.AddVisit(Date(year, month, day), purpose_of_visit, doctor);
 	ward.AddPatient(patient);
 }
 
@@ -262,14 +283,25 @@ void addOperationCard(Patient& patient, Ward& ward)
 {
 	unsigned short year, month, day;
 	char purpose_of_visit[MAX_STRING_INPUT];
-	unsigned int room_number, input;
+	unsigned int room_number, input = 1;
 	bool fasting;
 
-
+	
 	//visit date:
-	cout << "Enter date of visit in the format: year month day" << endl;
-	cin >> year >> month >> day;
-	checkDate(&year, &month, &day); //check date validity
+	while (input)
+	{
+		try
+		{
+			cout << "Enter date of visit in the format: year month day" << endl;
+			cin >> year >> month >> day;
+			DateExceptions(year, month, day);
+			input = 0;
+		}
+		catch (string exception)
+		{
+			cout << exception << " Please retry." << endl;
+		}
+	}
 	Date date(year, month, day);
 
 
@@ -450,16 +482,28 @@ void addResearcherArticle(Hospital& hospital)
 {
 
 	char magazineName[MAX_NAME_LENGTH], articleName[MAX_NAME_LENGTH];
-	unsigned short year, month, day;
+	unsigned short year, month, day, input;
 	ResearchCenter& research_center = hospital.getResearchCenter();
 
 	bool check = research_center.getNum_researchers() > 0;
 	if (check) {
 		Researcher& researcher = chooseResearcher(research_center, NULL);
 
-		cout << "Please enter publication date, in format of \"year month day\":" << endl;
-		cin >> year >> month >> day;
-		checkDate(&year, &month, &day);
+		while (input)
+		{
+			try
+			{
+				cout << "Please enter publication date, in format of \"year month day\":" << endl;
+				cin >> year >> month >> day;
+				DateExceptions(year, month, day);
+				input = 0;
+			}
+			catch (string exception)
+			{
+				cout << exception << " Please retry." << endl;
+			}
+		}
+		
 
 		cout << "Please enter Magazine Name: ";
 		cin.getline(magazineName, MAX_NAME_LENGTH);
@@ -630,6 +674,7 @@ void returningToMenu()
 	
 }
 
+/*
 //----------------------------------------------------------------------------------------------------//
 //Checks validity of date input for each date element.
 void checkDate(unsigned short* year, unsigned short* month, unsigned short* day)
@@ -655,7 +700,7 @@ void checkDate(unsigned short* year, unsigned short* month, unsigned short* day)
 
 	cleanBuffer();
 }
-
+*/
 
 //----------------------------------------------------------------------------------------------------//
 float getExperience()

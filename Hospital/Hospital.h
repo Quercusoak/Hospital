@@ -6,7 +6,7 @@ class Hospital
 {
 private:
 
-	TemplateArray<Ward> wards;
+	//TemplateArray<Ward> wards;
 
 	Ward** wards;
 	unsigned int num_wards;
