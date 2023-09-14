@@ -2,7 +2,7 @@
 #define __DATE_H
 
 #include <iostream>
-#include <string.h>
+#include <string>
 using namespace std;
 #pragma warning(disable: 4996)
 
