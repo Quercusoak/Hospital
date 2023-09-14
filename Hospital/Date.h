@@ -2,9 +2,12 @@
 #define __DATE_H
 
 #include <iostream>
-#include <string.h>
+#include <string>
+#include "DateExceptions.h"
 using namespace std;
 #pragma warning(disable: 4996)
+
+
 
 class Date
 {
@@ -13,7 +16,7 @@ private:
 
 public:
 	Date();
-	Date(unsigned short year, unsigned short month, unsigned short day);
+	Date(unsigned short year, unsigned short month, unsigned short day) noexcept(false);
 
 	void setYear(unsigned short year);
 	void setMonth(unsigned short month);

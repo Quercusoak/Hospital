@@ -5,9 +5,7 @@
 
 #define MAX_NAME_LENGTH 100
 #define MAX_STRING_INPUT 120
-#define CURRENT_YEAR 2023
-#define LOWEST_YEAR 1900
-#define NUM_OF_MONTHS 12
+
 #define MAX_DAYS 31
 
 
@@ -103,7 +101,7 @@ void compareResearchers(Hospital& hospital);
 
 
 
-void checkDate(unsigned short* year, unsigned short* month, unsigned short* day);
+
 
 
 void actionDone(const char* actionName, const char* objectName, const char* reason = nullptr, bool check = true);

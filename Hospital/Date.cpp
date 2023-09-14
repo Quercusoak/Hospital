@@ -7,6 +7,8 @@ Date::Date()
 
 Date::Date(unsigned short year, unsigned short month, unsigned short day)
 {
+	DateExceptions(year, month, day);
+
 	setYear(year);
 	setMonth(month);
 	setDay(day);

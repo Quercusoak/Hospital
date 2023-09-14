@@ -75,6 +75,9 @@
     <ClCompile Include="PatientCardOperation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DateExceptions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Article.h">
@@ -138,6 +141,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TemplateArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DateExceptions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

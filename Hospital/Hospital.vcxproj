@@ -22,6 +22,7 @@
     <ClCompile Include="Article.cpp" />
     <ClCompile Include="BaseFunc.cpp" />
     <ClCompile Include="Date.cpp" />
+    <ClCompile Include="DateExceptions.cpp" />
     <ClCompile Include="Doctor.cpp" />
     <ClCompile Include="HardCode.cpp" />
     <ClCompile Include="Hospital.cpp" />
@@ -49,6 +50,7 @@
     <ClInclude Include="HardCode.h" />
     <ClInclude Include="Hospital.h" />
     <ClInclude Include="mainLib.h" />
+    <ClInclude Include="DateExceptions.h" />
     <ClInclude Include="Nurse.h" />
     <ClInclude Include="Patient.h" />
     <ClInclude Include="PatientCard.h" />
