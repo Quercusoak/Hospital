@@ -47,10 +47,10 @@ Patient* Hospital::searchPatientByID(unsigned int& id)
 }
 
 //----------------------------------------------------------------------------------------------------//
-Patient* Hospital::addPatient(const string name, unsigned int id, Date birth_date, int gender)
+Patient& Hospital::addPatient(const string name, unsigned int id, Date birth_date, int gender)
 {
-	patients.push_back(Patient(name, id, birth_date, (Patient::eGender)gender));
-	return (&*(--patients.end()));
+	patients.push_back(std::move(Patient(name, id, birth_date, (Patient::eGender)gender)));
+	return *(--patients.end());
 }
 
 //----------------------------------------------------------------------------------------------------//

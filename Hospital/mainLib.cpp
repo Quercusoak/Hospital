@@ -227,7 +227,7 @@ void addPatient(Hospital& hospital)
 
 		if (!check) {
 			if (patient == nullptr)
-				patient = hospital.addPatient(name, id, Date(year, month, day), gender - 1);
+				patient = &hospital.addPatient(name, id, Date(year, month, day), gender - 1);
 
 			if(operation)
 				addOperationCard(*patient, ward);
@@ -268,6 +268,7 @@ void addCard(Patient& patient, Ward& ward)
 
 	//visit purpose:
 	cout << "Enter purpose of visit: ";
+	cleanBuffer();
 	cin.getline(purpose_of_visit, MAX_STRING_INPUT);
 
 
@@ -307,6 +308,7 @@ void addOperationCard(Patient& patient, Ward& ward)
 
 	//visit purpose:
 	cout << "Enter purpose of visit: ";
+	cleanBuffer();
 	cin.getline(purpose_of_visit, MAX_STRING_INPUT);
 
 
@@ -545,7 +547,7 @@ void searchPatient(Hospital& hospital)
 
 	//Patient's visits data from card:
 	for (unsigned int i = 0; i < patient->getNumVisits(); i++)
-		cout << patient->getPatientCard()[i] << endl;
+		cout << *(patient->getPatientCard()[i]) << endl;
 
 	returningToMenu();
 
@@ -588,7 +590,7 @@ void printPatientCard(Patient& patient)
 	PatientCard* card;
 	for (unsigned int i = 0; i < patient.getNumVisits(); i++)
 	{
-		card = &patient.getPatientCard()[i];
+		card = patient.getPatientCard()[i];
 		cout << "Visit date: " << card->getDate().getDay() << "." << card->getDate().getMonth() << "." << card->getDate().getYear();
 		cout << ", cause: " << card->getPurpose() << ", attended by doctor " << card->getDoctor().getName() << endl;
 	}

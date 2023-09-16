@@ -1,8 +1,5 @@
 #include "PatientCard.h"
 
-
-
-
 //---------------------------------------------------------------//
 PatientCard::PatientCard(Date date, const string purpose_of_visit, Doctor& doctor)
 	: m_date(date.getYear(), date.getMonth(), date.getDay())
@@ -11,5 +8,10 @@ PatientCard::PatientCard(Date date, const string purpose_of_visit, Doctor& docto
 	this->m_doctor = &doctor;
 }
 
-
+////---------------------------------------------------------------//
+//PatientCard::PatientCard(PatientCard&& other) noexcept
+//{
+//	m_doctor = &other.getDoctor();
+//
+//}
 

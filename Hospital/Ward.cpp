@@ -38,10 +38,19 @@ Ward::~Ward()
 //---------------------------------------------------------------//
 void Ward::AddPatient(Patient& patient)
 {
-	if (patients.size() == patients.capacity())
-		patients.reserve(patients.capacity() * 2);
+	bool check = true;
+	for (auto& elem : patients)
+		if (elem == &patient) 
+			check = false;
 
-	patients.push_back(&patient);
+
+	if (check)
+	{
+		if (patients.size() == patients.capacity())
+			patients.reserve(patients.capacity() * 2);
+
+		patients.push_back(&patient);
+	}
 }
 
 

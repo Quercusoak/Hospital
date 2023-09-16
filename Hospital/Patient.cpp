@@ -7,36 +7,60 @@ Patient::Patient(const string name, unsigned int id, Date date, eGender gender)
 	setID(id);
 	setGender(gender);
 	setDate(date);
+	num_visits = 0;
+	max_visits = 1;
+	patient_card = new PatientCard * [max_visits];
+	patient_card[0] = nullptr;
+	cout << "Patient ctor " << id << endl;
 }
 
 //---------------------------------------------------------------//
-Patient::Patient(Patient&& other) :Person(std::move(other))
+Patient::Patient(Patient&& other) noexcept :Person(std::move(other))
 {
-
 	setID(other.getID());
 	setGender(other.gender);
 	setDate(other.date);
+	num_visits = other.num_visits;
+	max_visits = other.max_visits;
+	patient_card = other.patient_card;
+	other.patient_card = nullptr;
+	cout << "Patient move ctor " << id << endl;
 }
 
 //---------------------------------------------------------------//
 void Patient::AddVisit(Date date, const char* purpose_of_visit, Doctor& doctor)
 {
-	checkCapacity();
-	patient_card.push_back(PatientCard(date, purpose_of_visit, doctor));
+	if (num_visits == max_visits)
+	{
+		max_visits *= 2;
+		patient_card = (PatientCard**)rerealloc(patient_card, sizeof(PatientCard*), num_visits, max_visits);
+	}
+
+	patient_card[num_visits] = new PatientCard(date, purpose_of_visit, doctor);
+	num_visits++;
 }
 
 //---------------------------------------------------------------//
 void Patient::AddVisit(Date date, const char* purpose_of_visit, Surgeon& surgeon, int roomNumber, bool fasting)
 {
-	checkCapacity();
-	patient_card.push_back(PatientCardOperation(date, purpose_of_visit, surgeon, roomNumber, fasting));
+	if (num_visits == max_visits)
+	{
+		max_visits *= 2;
+		patient_card = (PatientCard**)rerealloc(patient_card, sizeof(PatientCard*), num_visits, max_visits);
+	}
+
+	patient_card[num_visits] = new PatientCardOperation(date, purpose_of_visit, surgeon, roomNumber, fasting);
+	num_visits++;
 }
 
 //---------------------------------------------------------------//
 void Patient::checkCapacity()
 {
-	if (patient_card.size() == patient_card.capacity())
-		patient_card.reserve(patient_card.capacity() * 2);
+	if (num_visits == max_visits)
+	{
+		max_visits *= 2;
+		patient_card = (PatientCard**)rerealloc(patient_card, sizeof(PatientCard*), num_visits, max_visits);
+	}
 }
 
 //---------------------------------------------------------------//
@@ -60,5 +84,14 @@ void Patient::setDate(Date date)
 //---------------------------------------------------------------//
 Patient::~Patient()
 {
-	patient_card.clear();
+	cout << "Patient dtor " << id << endl;
+	/*patient_card.clear();*/
+	if (patient_card != nullptr)
+	{
+		for (unsigned int i = 0; i < num_visits; i++)
+		{
+			delete patient_card[i];
+		}
+		delete[] patient_card;
+	}
 }

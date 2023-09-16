@@ -79,7 +79,7 @@ void HardCoded(Hospital& hospital)
 
 	Patient* newPatient;
 
-	newPatient = hospital.addPatient(PATIENT_1, PATIENT_1_ID, birth, 0);
+	newPatient = &hospital.addPatient(PATIENT_1, PATIENT_1_ID, birth, 0);
 
 	Doctor* tmp = dynamic_cast<Doctor*>(hospital.getWards()[0]->getStaff()[0]);
 	newPatient->AddVisit(date1, PATIENT_1_REASON_VISIT1, *tmp);
