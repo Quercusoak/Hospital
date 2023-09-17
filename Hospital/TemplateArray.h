@@ -10,17 +10,21 @@ template  <class  T>
 class TemplateArray
 {
 	int physSize, logiSize;
-	T* arr;
+	vector<T*> arr;
 
 public:
 	TemplateArray(int size) :physSize(size), logiSize(0) { arr = new T[size]; }
-	void addObject(vector<T*>& arr, T& obj);
+	~TemplateArray() { delete[]arr; }
+
+	void add(vector<T*>& arr, T& obj);
+	const int size()		const { return logiSize; }
+	const int capacity()	const { return physSize; }
 
 };
 
 //----------------------------------------------------------------------------------------------------//
 template <class T>
-void TemplateArray<T>::addObject(vector<T*>& arr, T& obj)
+void TemplateArray<T>::add(vector<T*>& arr, T& obj)
 {
 	if (arr.capacity() == arr.size())
 		arr.capacity() *= 2;

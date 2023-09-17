@@ -15,9 +15,19 @@ Staff::Staff(const string name)
 
 
 //--------------------------------------------------------------------------------//
-Staff::Staff(Staff&& other) :Person(other.getName()), workerId(other.getWorkerID())
+Staff::Staff(Staff&& other) noexcept :Person(other.getName()), workerId(other.getWorkerID())
 {
 	counter++; //rvalue staff will decrement counter upon destruction, so we wish to increment it now
+}
+
+
+//--------------------------------------------------------------------------------//
+Staff& Staff::operator=(Staff&& other) noexcept
+{
+	std::swap(name, other.name);
+	workerId = other.getWorkerID();
+	counter++; //rvalue staff will decrement counter upon destruction, so we wish to increment it now
+	return *this;
 }
 
 //--------------------------------------------------------------------------------//

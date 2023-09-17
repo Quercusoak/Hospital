@@ -29,7 +29,7 @@ public:
 
 
 	Patient* searchPatientByID(unsigned int& id);
-	Patient& addPatient(const string name, unsigned int id, Date birth_date, int gender);
+	Patient* addPatient(const string name, unsigned int id, Date birth_date, int gender);
 	
 	ResearchCenter& getResearchCenter() { return research_center; }
 

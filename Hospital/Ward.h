@@ -15,9 +15,7 @@ class Ward
 private:
 	string name;
 	
-	Staff** staff;
-	unsigned int num_staff;
-	unsigned int max_staff;
+	vector<Staff*> staff;
 
 	unsigned int num_doctors;
 	unsigned int num_surgeons;
@@ -37,9 +35,9 @@ public:
 	void AddDoctor(Doctor&&);
 
 
-	Staff** getStaff()						const { return staff; }
+	vector<Staff*>& getStaff()				{ return staff; }
 
-	const unsigned int getNumStaff()		const { return num_staff; }
+	const unsigned int getNumStaff()		const { return staff.size(); }
 	const unsigned int getDoctorsNum()		const { return num_doctors; }
 	const unsigned int getSurgeonsNum()		const { return num_surgeons; }
 

@@ -17,8 +17,19 @@ Hospital::~Hospital()
 	{
 		delete wards[i];
 	}
-
 	delete[] wards;
+
+
+	vector<Patient>::iterator itr = patients.begin();
+	for (auto& elem : patients)
+	{
+		if (itr != patients.end())
+			itr = patients.erase(itr);
+		else
+			patients.erase(itr);
+
+	}
+	patients.clear();
 }
 
 //----------------------------------------------------------------------------------------------------//
@@ -47,10 +58,10 @@ Patient* Hospital::searchPatientByID(unsigned int& id)
 }
 
 //----------------------------------------------------------------------------------------------------//
-Patient& Hospital::addPatient(const string name, unsigned int id, Date birth_date, int gender)
+Patient* Hospital::addPatient(const string name, unsigned int id, Date birth_date, int gender)
 {
 	patients.push_back(std::move(Patient(name, id, birth_date, (Patient::eGender)gender)));
-	return *(--patients.end());
+	return &*(--patients.end());
 }
 
 //----------------------------------------------------------------------------------------------------//

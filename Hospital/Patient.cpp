@@ -11,7 +11,6 @@ Patient::Patient(const string name, unsigned int id, Date date, eGender gender)
 	max_visits = 1;
 	patient_card = new PatientCard * [max_visits];
 	patient_card[0] = nullptr;
-	cout << "Patient ctor " << id << endl;
 }
 
 //---------------------------------------------------------------//
@@ -24,8 +23,23 @@ Patient::Patient(Patient&& other) noexcept :Person(std::move(other))
 	max_visits = other.max_visits;
 	patient_card = other.patient_card;
 	other.patient_card = nullptr;
-	cout << "Patient move ctor " << id << endl;
 }
+
+
+//---------------------------------------------------------------//
+Patient& Patient::operator=(Patient&& other) noexcept 
+{
+	std::swap(name, other.name);
+	setID(other.getID());
+	setGender(other.gender);
+	setDate(other.date);
+	num_visits = other.num_visits;
+	max_visits = other.max_visits;
+	patient_card = other.patient_card;
+	other.patient_card = nullptr;
+	return *this;
+}
+
 
 //---------------------------------------------------------------//
 void Patient::AddVisit(Date date, const char* purpose_of_visit, Doctor& doctor)
@@ -84,7 +98,6 @@ void Patient::setDate(Date date)
 //---------------------------------------------------------------//
 Patient::~Patient()
 {
-	cout << "Patient dtor " << id << endl;
 	/*patient_card.clear();*/
 	if (patient_card != nullptr)
 	{
