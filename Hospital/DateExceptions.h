@@ -1,10 +1,11 @@
 #ifndef __DATE_EXCEPTIONS_H
 #define __DATE_EXCEPTIONS_H
 
-
 #include <iostream>
 #include <string>
+using namespace std;
 #pragma warning(disable: 4996)
+#pragma warning(disable: 4267)
 
 #define CURRENT_YEAR 2023
 #define LOWEST_YEAR 1900
