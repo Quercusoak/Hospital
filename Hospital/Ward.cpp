@@ -2,7 +2,7 @@
 
 
 //---------------------------------------------------------------//
-Ward::Ward(const string ward_name)	
+Ward::Ward(const string ward_name)
 {
 	this->name = ward_name;
 
@@ -58,11 +58,7 @@ void Ward::AddPatient(Patient& patient)
 //---------------------------------------------------------------//
 void Ward::AddStaff(Staff&& newStaff)
 {
-
 	checkMaxSizeReached();
-
-	
-
 
 	Nurse* tmp = dynamic_cast<Nurse*>(&newStaff);
 	if (tmp)
@@ -137,3 +133,50 @@ void Ward::operator+=(Staff&& other)
 	AddStaff(std::move(other));
 }
 
+
+//---------------------------------------------------------------//
+Ward::Ward(Ward&& other) noexcept
+{
+	std::swap(this->name, other.name);
+
+	num_doctors = other.num_doctors;
+	num_surgeons = other.num_surgeons;
+
+
+	for (auto& elem : other.staff)
+	{
+		staff.push_back(elem);
+	}
+	other.staff.clear();
+
+	for (auto& elem : other.patients)
+	{
+		patients.push_back(elem);
+	}
+	other.patients.clear();
+}
+
+
+//---------------------------------------------------------------//
+Ward& Ward::operator=(Ward&& other) noexcept
+{
+	std::swap(this->name, other.name);
+
+	num_doctors = other.num_doctors;
+	num_surgeons = other.num_surgeons;
+
+
+	for (auto& elem : other.staff)
+	{
+		staff.push_back(elem);
+	}
+	other.staff.clear();
+
+	for (auto& elem : other.patients)
+	{
+		patients.push_back(elem);
+	}
+	other.patients.clear();
+
+	return *this;
+}

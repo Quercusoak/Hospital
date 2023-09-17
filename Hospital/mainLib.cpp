@@ -343,7 +343,7 @@ Ward& chooseWard(Hospital& hospital)
 		cin >> ward_num;
 	} while (ward_num < 1 || ward_num > num_of_wards_in_hospital);
 
-	return *hospital.getWards()[ward_num - 1];
+	return hospital.getWards()[ward_num - 1];
 }
 
 //----------------------------------------------------------------------------------------------------//
@@ -351,7 +351,7 @@ void showWards(Hospital& hospital)
 {
 	int wardNum = hospital.getWardsNum();
 	for (int i = 0; i < wardNum; i++)
-		cout << (i + 1) << ") " << hospital.getWards()[i]->getName() << endl;
+		cout << (i + 1) << ") " << hospital.getWards()[i].getName() << endl;
 }
 
 //----------------------------------------------------------------------------------------------------//
@@ -612,7 +612,7 @@ void showStaff(Hospital& hospital)
 		cout << "Current Staff members: " << endl;
 		for (i = 0; i < num_wards; i++)
 		{
-			Ward& ward(*hospital.getWards()[i]); 
+			Ward& ward(hospital.getWards()[i]); 
 			num_staff = ward.getNumStaff();
 
 			cout << "------------------------------------------------------------" << endl

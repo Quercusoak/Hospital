@@ -24,9 +24,12 @@ private:
 
 
 public:
-	Ward(const string ward_name);
+	Ward(const string ward_name ="");
 	Ward(const Ward&) = delete;
-	Ward(Ward&&) = delete;
+
+	Ward(Ward&&) noexcept;
+	Ward& operator=(Ward&&) noexcept;
+
 	~Ward();
 
 	void AddStaff(Staff&&);
