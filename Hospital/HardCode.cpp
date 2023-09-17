@@ -67,26 +67,26 @@ void HardCoded(Hospital& hospital)
 	hospital.AddWard(WARD3);
 
 
-	hospital.getWards()[0]->AddStaff(Doctor(DOC_1, DOC_1Specilaty));
-	hospital.getWards()[0]->AddStaff(Doctor(DOC_2, DOC_2Specilaty));
-	hospital.getWards()[2]->AddStaff(Doctor(DOC_3, DOC_3Specilaty));
+	hospital.getWards()[0].AddStaff(Doctor(DOC_1, DOC_1Specilaty));
+	hospital.getWards()[0].AddStaff(Doctor(DOC_2, DOC_2Specilaty));
+	hospital.getWards()[2].AddStaff(Doctor(DOC_3, DOC_3Specilaty));
 
-
-	hospital.getWards()[0]->AddStaff(Nurse(NURSE_1, NURSE_1_EXP));
-	hospital.getWards()[2]->AddStaff(Nurse(NURSE_2, NURSE_2_EXP));
-	hospital.getWards()[2]->AddStaff(Nurse(NURSE_3, NURSE_3_EXP));
+	
+	hospital.getWards()[0].AddStaff(Nurse(NURSE_1, NURSE_1_EXP));
+	hospital.getWards()[2].AddStaff(Nurse(NURSE_2, NURSE_2_EXP));
+	hospital.getWards()[2].AddStaff(Nurse(NURSE_3, NURSE_3_EXP));
 
 
 	Patient* newPatient;
 
 	newPatient = hospital.addPatient(PATIENT_1, PATIENT_1_ID, birth, 0);
 
-	vector<Staff*>::iterator staffMember = hospital.getWards()[0]->getStaff().begin();
+	vector<Staff*>::iterator staffMember = hospital.getWards()[0].getStaff().begin();
 
 	Doctor* tmp = dynamic_cast<Doctor*>(*staffMember);
 	newPatient->AddVisit(date1, PATIENT_1_REASON_VISIT1, *tmp);
 
-	hospital.getWards()[0]->AddPatient(*newPatient);
+	hospital.getWards()[0].AddPatient(*newPatient);
 
 	tmp = dynamic_cast<Doctor*>(*(++staffMember));
 	newPatient->AddVisit(date2, PATIENT_1_REASON_VISIT2, *tmp);
