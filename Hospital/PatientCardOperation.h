@@ -17,6 +17,8 @@ public:
 	PatientCardOperation(PatientCardOperation&&) = default;
 	virtual ~PatientCardOperation() = default;
 
+	PatientCardOperation& operator=(PatientCardOperation&& other) noexcept = default;
+
 
 	unsigned int getRoom_Number()		const { return room_number; }
 	bool isFasting()					const { return fasting; }
