@@ -19,8 +19,10 @@ public:
 	unsigned int getWorkerID()		const { return workerId; }
 
 	Staff(const Staff&) = delete;
-	Staff(Staff&&);
+	Staff(Staff&& other) noexcept;
 	virtual ~Staff();
+
+	Staff& operator=(Staff&& other) noexcept;
 
 
 	friend std::ostream& operator<<(std::ostream& os, const Staff& staff)

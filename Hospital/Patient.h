@@ -15,7 +15,9 @@ private:
 	unsigned int id;
 	Date date;
 	eGender gender;
-	vector<PatientCard> patient_card;
+
+	//vector<PatientCard> patient_card;
+	PatientCard** patient_card;
 	unsigned int num_visits;
 	unsigned int max_visits;
 
@@ -23,7 +25,8 @@ private:
 public:
 	Patient(const string name, unsigned int id, Date date, eGender);
 	Patient(Patient&) = delete;
-	Patient(Patient&&);
+	Patient(Patient&&) noexcept;
+	Patient& operator=(Patient&& other) noexcept;
 	virtual ~Patient();
 
 	void setID(unsigned int id);
@@ -34,7 +37,7 @@ public:
 	const char* getGender()				const { return genderStr[(int)gender]; }
 	const unsigned int getNumVisits()	const { return num_visits; }
 
-	vector<PatientCard> getPatientCard()			  { return patient_card; }
+	PatientCard** getPatientCard()			  { return patient_card; }
 
 	void AddVisit(Date date, const char* purpose_of_visit, Doctor& doctor);
 	void AddVisit(Date date, const char* purpose_of_visit, Surgeon& surgeon, int roomNumber, bool fasting);

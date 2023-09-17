@@ -1,9 +1,6 @@
 #ifndef __ARTICLE_H
 #define __ARTICLE_H
 
-#include <iostream>
-#pragma warning(disable: 4996)
-#include <string>
 #include "Date.h"
 
 class Article
