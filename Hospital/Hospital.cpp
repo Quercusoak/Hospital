@@ -20,7 +20,7 @@ Hospital::~Hospital()
 }
 
 //----------------------------------------------------------------------------------------------------//
-void Hospital::AddWard(const char* ward_name)
+void Hospital::AddWard(const string ward_name)
 {
 	wards.add(Ward(ward_name));
 }
