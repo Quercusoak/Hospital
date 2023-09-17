@@ -7,11 +7,3 @@ PatientCard::PatientCard(Date date, const string purpose_of_visit, Doctor& docto
 	setPurpose(purpose_of_visit);
 	this->m_doctor = &doctor;
 }
-
-////---------------------------------------------------------------//
-//PatientCard::PatientCard(PatientCard&& other) noexcept
-//{
-//	m_doctor = &other.getDoctor();
-//
-//}
-

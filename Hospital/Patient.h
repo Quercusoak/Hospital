@@ -16,10 +16,7 @@ private:
 	Date date;
 	eGender gender;
 
-	//vector<PatientCard> patient_card;
-	PatientCard** patient_card;
-	unsigned int num_visits;
-	unsigned int max_visits;
+	vector<PatientCard*> patient_card;
 
 
 public:
@@ -35,9 +32,9 @@ public:
 
 	unsigned int getID()				const { return id; }
 	const char* getGender()				const { return genderStr[(int)gender]; }
-	const unsigned int getNumVisits()	const { return num_visits; }
+	const unsigned int getNumVisits()	const { return patient_card.size(); }
 
-	PatientCard** getPatientCard()			  { return patient_card; }
+	vector<PatientCard*>& getPatientCard()			  { return patient_card; }
 
 	void AddVisit(Date date, const char* purpose_of_visit, Doctor& doctor);
 	void AddVisit(Date date, const char* purpose_of_visit, Surgeon& surgeon, int roomNumber, bool fasting);
@@ -47,18 +44,9 @@ public:
 	virtual void toOS(std::ostream& os) const override 
     {
 		os << ", Gender - " << getGender() << ", Id - " << id
-			<< ", Number of visits - " << num_visits;
+			<< ", Number of visits - " << patient_card.size();
 	}
 
-	/*
-	friend std::ostream& operator<<(std::ostream& os, const Patient& patient)
-	{
-		os << "Name - " << patient.name << ", Paitant, Gender - " << patient.getGender() << ", Id - " << patient.id
-			<< ", Number of visits - " << patient.num_visits;;
-
-		return os;
-	}
-	*/
 };
 
 

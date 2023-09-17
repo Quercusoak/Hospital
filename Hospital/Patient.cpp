@@ -7,10 +7,6 @@ Patient::Patient(const string name, unsigned int id, Date date, eGender gender)
 	setID(id);
 	setGender(gender);
 	setDate(date);
-	num_visits = 0;
-	max_visits = 1;
-	patient_card = new PatientCard * [max_visits];
-	patient_card[0] = nullptr;
 }
 
 //---------------------------------------------------------------//
@@ -19,10 +15,12 @@ Patient::Patient(Patient&& other) noexcept :Person(std::move(other))
 	setID(other.getID());
 	setGender(other.gender);
 	setDate(other.date);
-	num_visits = other.num_visits;
-	max_visits = other.max_visits;
-	patient_card = other.patient_card;
-	other.patient_card = nullptr;
+
+	for (auto& elem : other.patient_card)
+	{
+		patient_card.push_back(elem);
+	}
+	other.patient_card.clear();
 }
 
 
@@ -33,10 +31,13 @@ Patient& Patient::operator=(Patient&& other) noexcept
 	setID(other.getID());
 	setGender(other.gender);
 	setDate(other.date);
-	num_visits = other.num_visits;
-	max_visits = other.max_visits;
-	patient_card = other.patient_card;
-	other.patient_card = nullptr;
+	
+	for (auto& elem : other.patient_card)
+	{
+		patient_card.push_back(elem);
+	}
+	other.patient_card.clear();
+
 	return *this;
 }
 
@@ -44,37 +45,22 @@ Patient& Patient::operator=(Patient&& other) noexcept
 //---------------------------------------------------------------//
 void Patient::AddVisit(Date date, const char* purpose_of_visit, Doctor& doctor)
 {
-	if (num_visits == max_visits)
-	{
-		max_visits *= 2;
-		patient_card = (PatientCard**)rerealloc(patient_card, sizeof(PatientCard*), num_visits, max_visits);
-	}
-
-	patient_card[num_visits] = new PatientCard(date, purpose_of_visit, doctor);
-	num_visits++;
+	checkCapacity();
+	patient_card.push_back(new PatientCard(date, purpose_of_visit, doctor));
 }
 
 //---------------------------------------------------------------//
 void Patient::AddVisit(Date date, const char* purpose_of_visit, Surgeon& surgeon, int roomNumber, bool fasting)
 {
-	if (num_visits == max_visits)
-	{
-		max_visits *= 2;
-		patient_card = (PatientCard**)rerealloc(patient_card, sizeof(PatientCard*), num_visits, max_visits);
-	}
-
-	patient_card[num_visits] = new PatientCardOperation(date, purpose_of_visit, surgeon, roomNumber, fasting);
-	num_visits++;
+	checkCapacity();
+	patient_card.push_back(new PatientCardOperation(date, purpose_of_visit, surgeon, roomNumber, fasting));
 }
 
 //---------------------------------------------------------------//
 void Patient::checkCapacity()
 {
-	if (num_visits == max_visits)
-	{
-		max_visits *= 2;
-		patient_card = (PatientCard**)rerealloc(patient_card, sizeof(PatientCard*), num_visits, max_visits);
-	}
+	if (patient_card.size() == patient_card.capacity())
+		patient_card.reserve(patient_card.capacity() * 2);
 }
 
 //---------------------------------------------------------------//
@@ -98,13 +84,14 @@ void Patient::setDate(Date date)
 //---------------------------------------------------------------//
 Patient::~Patient()
 {
-	/*patient_card.clear();*/
-	if (patient_card != nullptr)
+	vector<PatientCard*>::iterator itr = patient_card.begin();
+	for (auto& elem : patient_card)
 	{
-		for (unsigned int i = 0; i < num_visits; i++)
-		{
-			delete patient_card[i];
-		}
-		delete[] patient_card;
+		if (itr != patient_card.end())
+			itr = patient_card.erase(itr);
+		else
+			patient_card.erase(itr);
 	}
+	patient_card.clear();
+
 }

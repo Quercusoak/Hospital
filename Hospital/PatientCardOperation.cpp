@@ -1,8 +1,5 @@
 #include "PatientCardOperation.h"
 
-
-
-
 //---------------------------------------------------------------//
 PatientCardOperation::PatientCardOperation(Date date, const char* purpose_of_visit, 
 	Surgeon& doctor, unsigned int room_number, bool fasting)
@@ -10,5 +7,3 @@ PatientCardOperation::PatientCardOperation(Date date, const char* purpose_of_vis
 {
 	doctor.addSurgery();
 }
-
-//---------------------------------------------------------------//

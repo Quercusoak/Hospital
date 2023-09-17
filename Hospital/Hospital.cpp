@@ -15,7 +15,6 @@ Hospital::~Hospital()
 			itr = patients.erase(itr);
 		else
 			patients.erase(itr);
-
 	}
 	patients.clear();
 }
