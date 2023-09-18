@@ -18,6 +18,7 @@ public:
 	PatientCard(PatientCard&&) = default;
 	virtual ~PatientCard() = default;
 
+	PatientCard& operator=(PatientCard&& other) noexcept = default;
 
 	void setPurpose(const string purpose)	{ this->m_purpose_of_visit = purpose; }
 

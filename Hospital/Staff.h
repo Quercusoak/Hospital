@@ -19,13 +19,16 @@ public:
 	unsigned int getWorkerID()		const { return workerId; }
 
 	Staff(const Staff&) = delete;
-	Staff(Staff&&);
+	Staff(Staff&& other) noexcept;
 	virtual ~Staff();
+
+	Staff& operator=(Staff&& other) noexcept;
+
+
 
 	virtual void toOS(std::ostream& os)	const {}
 
 	virtual void fromOs(std::istream& in) const {}
-
 
 	friend std::ostream& operator<<(std::ostream& os, const Staff& staff)
 	{		

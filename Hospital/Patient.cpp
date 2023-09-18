@@ -10,26 +10,50 @@ Patient::Patient(const string name, unsigned int id, Date date, eGender gender)
 }
 
 //---------------------------------------------------------------//
-Patient::Patient(Patient&& other) :Person(std::move(other))
+Patient::Patient(Patient&& other) noexcept :Person(std::move(other))
 {
-
 	setID(other.getID());
 	setGender(other.gender);
 	setDate(other.date);
+
+	for (auto& elem : other.patient_card)
+	{
+		patient_card.push_back(elem);
+	}
+	other.patient_card.clear();
 }
+
+
+//---------------------------------------------------------------//
+Patient& Patient::operator=(Patient&& other) noexcept 
+{
+	std::swap(name, other.name);
+	setID(other.getID());
+	setGender(other.gender);
+	setDate(other.date);
+	
+	for (auto& elem : other.patient_card)
+	{
+		patient_card.push_back(elem);
+	}
+	other.patient_card.clear();
+
+	return *this;
+}
+
 
 //---------------------------------------------------------------//
 void Patient::AddVisit(Date date, const char* purpose_of_visit, Doctor& doctor)
 {
 	checkCapacity();
-	patient_card.push_back(PatientCard(date, purpose_of_visit, doctor));
+	patient_card.push_back(new PatientCard(date, purpose_of_visit, doctor));
 }
 
 //---------------------------------------------------------------//
 void Patient::AddVisit(Date date, const char* purpose_of_visit, Surgeon& surgeon, int roomNumber, bool fasting)
 {
 	checkCapacity();
-	patient_card.push_back(PatientCardOperation(date, purpose_of_visit, surgeon, roomNumber, fasting));
+	patient_card.push_back(new PatientCardOperation(date, purpose_of_visit, surgeon, roomNumber, fasting));
 }
 
 //---------------------------------------------------------------//
@@ -60,5 +84,14 @@ void Patient::setDate(Date date)
 //---------------------------------------------------------------//
 Patient::~Patient()
 {
+	vector<PatientCard*>::iterator itr = patient_card.begin();
+	for (auto& elem : patient_card)
+	{
+		if (itr != patient_card.end())
+			itr = patient_card.erase(itr);
+		else
+			patient_card.erase(itr);
+	}
 	patient_card.clear();
+
 }

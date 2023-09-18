@@ -10,7 +10,7 @@ private:
 
 public:
 	Nurse(const string name, float yrs_of_experience);
-	Nurse(Nurse&) = delete;
+	Nurse(const Nurse&) = delete;
 	Nurse(Nurse&&);
 	virtual ~Nurse() = default;
 

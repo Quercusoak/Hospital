@@ -12,7 +12,7 @@ protected:
 public:
 	Doctor(const string name, const string specialty);
 	Doctor(const Doctor&) = delete;
-	Doctor(Doctor&&) = default;
+	Doctor(Doctor&&) noexcept;
 	virtual ~Doctor() = default;
 
 	void setSpecialty(const string specialty) { this->m_specialty = specialty; }

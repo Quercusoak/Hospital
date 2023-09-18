@@ -1,13 +1,7 @@
 #ifndef __DATE_H
 #define __DATE_H
 
-#include <iostream>
-#include <string>
 #include "DateExceptions.h"
-using namespace std;
-#pragma warning(disable: 4996)
-
-
 
 class Date
 {
