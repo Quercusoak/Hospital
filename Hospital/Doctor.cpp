@@ -8,3 +8,9 @@ Doctor::Doctor(const string name, const string specialty)
 {
 	setSpecialty(specialty);
 }
+
+//---------------------------------------------------------------//
+Doctor::Doctor(Doctor&& other) noexcept :Staff(std::move(other))
+{
+	std::swap(m_specialty, other.m_specialty);
+}

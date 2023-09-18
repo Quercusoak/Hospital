@@ -5,9 +5,9 @@ Date::Date()
 	year = month = day = 0;
 }
 
-Date::Date(unsigned short year, unsigned short month, unsigned short day)
+Date::Date(unsigned short year, unsigned short month, unsigned short day) noexcept(false)
 {
-	DateExceptions(year, month, day);
+	DateExceptions check(year, month, day);
 
 	setYear(year);
 	setMonth(month);
