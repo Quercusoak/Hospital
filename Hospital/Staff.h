@@ -29,7 +29,10 @@ public:
 
 	friend std::ostream& operator<<(std::ostream& os, const Staff& staff)
 	{		
-		os << staff.type()<< " " << staff.name << ", worker Id - " << staff.workerId;
+		if (typeid(os) == typeid(ofstream))
+			os << staff.name << endl << staff.workerId;
+		else 
+			os << staff.type()<< " " << staff.name << ", worker Id - " << staff.workerId;
 		staff.toOS(os);
 		return os;
 	}
