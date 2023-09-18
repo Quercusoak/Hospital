@@ -7,9 +7,9 @@ class Surgeon : virtual public Doctor
 {
 protected:
 	int num_surgeries;
-	Surgeon() = default;
 
 public:
+	Surgeon() = default;
 	Surgeon(const string name, const string specialty);
 	Surgeon(ifstream& in) { in >> *this; }
 	Surgeon(Doctor&&);

@@ -9,7 +9,7 @@ class Staff : public Person
 protected:
 	unsigned int workerId;
 
-	Staff() = default;
+	Staff() { counter++; }
 	Staff(const string);
 	Staff(ifstream& in) 
 	{

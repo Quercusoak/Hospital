@@ -436,7 +436,7 @@ void showSurgeons(Ward& ward)
 //----------------------------------------------------------------------------------------------------//
 Researcher& chooseResearcher(ResearchCenter& research_center, Researcher* chosen)
 {
-	unsigned int num, num_researchers = research_center.getNum_researchers();
+	unsigned int num, num_researchers = research_center.getResearchers().size();
 	if (chosen) num_researchers--;
 	do
 	{
@@ -457,7 +457,7 @@ Researcher& chooseResearcher(ResearchCenter& research_center, Researcher* chosen
 //----------------------------------------------------------------------------------------------------//
 void showResearchers(ResearchCenter& research_center, Researcher* chosen)
 {
-	unsigned int num_researchers = research_center.getNum_researchers();
+	unsigned int num_researchers = research_center.getResearchers().size();
 
 	for (unsigned int i = 0, k = 0; i < num_researchers; k++, i++)
 	{
@@ -492,7 +492,7 @@ void addResearcherArticle(Hospital& hospital)
 	unsigned short year, month, day, input = 1;
 	ResearchCenter& research_center = hospital.getResearchCenter();
 
-	bool check = research_center.getNum_researchers() > 0;
+	bool check = research_center.getResearchers().size() > 0;
 	if (check) {
 		Researcher& researcher = chooseResearcher(research_center, NULL);
 
@@ -638,7 +638,7 @@ void showStaff(Hospital& hospital)
 void showResearchers(Hospital& hospital)
 {
 	ResearchCenter& research_center = hospital.getResearchCenter();
-	unsigned int numToPrint = research_center.getNum_researchers();
+	unsigned int numToPrint = research_center.getResearchers().size();
 
 	cout << "Current Researchers: " << endl;
 
@@ -700,7 +700,7 @@ float getExperience()
 void compareResearchers(Hospital& hospital)
 {
 	ResearchCenter& RC = hospital.getResearchCenter();
-	int num_researchers = RC.getNum_researchers();
+	int num_researchers = RC.getResearchers().size();
 	bool check = true;
 	if (num_researchers > 1)
 	{
@@ -731,7 +731,7 @@ void compareResearchers(Hospital& hospital)
 void PrintResearcherDoctors(Hospital& hospital)
 {
 	ResearchCenter& research_center = hospital.getResearchCenter();
-	unsigned int num_researchers = research_center.getNum_researchers();
+	unsigned int num_researchers = research_center.getResearchers().size();
 	
 	if (num_researchers < 1)
 	{

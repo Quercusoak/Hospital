@@ -4,6 +4,8 @@
 #include "PatientCardOperation.h"
 #include "Person.h"
 
+#define OPRATION 1
+#define NORMAL 0
 
 class Patient : public Person
 {
@@ -41,11 +43,15 @@ public:
 
 	void checkCapacity();
 
-	virtual void toOS(std::ostream& os) const override 
-    {
+	virtual void toOS(std::ostream& os) const override
+	{
 		os << ", Gender - " << getGender() << ", Id - " << id
 			<< ", Number of visits - " << patient_card.size();
 	}
+
+
+
+
 
 };
 
