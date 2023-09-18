@@ -10,11 +10,14 @@ public:
 
 	virtual void toOS(std::ostream& os) const override;
 
-	virtual void fromOS(std::istream& in) override {}
+	virtual void fromOS(std::istream& in) override;
 
 
+	SurgeonResearcher() = default;
 
 	SurgeonResearcher(const string name, const string specialty);
+
+	SurgeonResearcher(ifstream& in) { in >> *this; }
 
 	SurgeonResearcher(Doctor&& other);
 

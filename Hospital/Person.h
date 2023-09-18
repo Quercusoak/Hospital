@@ -54,6 +54,7 @@ public:
 		in.getline(name, M_MAX_NAME_LENGTH);
 		person.name = name;
 
+		person.fromOS(in);
 		return in;
 	}
 

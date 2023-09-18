@@ -7,8 +7,8 @@ class Nurse : public Staff
 {
 private:
 	float yrs_of_experience = 0; 
-	Nurse() = default;
 public:
+	Nurse() = default;
 	Nurse(const string name, float yrs_of_experience);
 	Nurse(ifstream& in) { in >> *this; }
 	Nurse(const Nurse&) = delete;
@@ -30,6 +30,7 @@ public:
 	virtual void fromOS(std::istream& in) override
 	{
 		in >> yrs_of_experience;
+		in.get();
 	}
 
 	

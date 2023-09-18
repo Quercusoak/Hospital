@@ -39,5 +39,6 @@ void Surgeon::fromOS(std::istream& in)
 {
 	Doctor::fromOS(in);
 	in >> num_surgeries;
+	in.get();
 
 }

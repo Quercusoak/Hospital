@@ -8,9 +8,9 @@ class Doctor : virtual public Staff
 {
 protected:
 	string m_specialty;
-	Doctor() = default;
 
 public:
+	Doctor() = default;
 	Doctor(const string name, const string specialty);
 	Doctor(ifstream& in) { in >> *this; }
 	Doctor(const Doctor&) = delete;

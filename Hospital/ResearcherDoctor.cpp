@@ -17,10 +17,10 @@ void ResearcherDoctor::toOS(std::ostream& os) const
 {
 	Doctor::toOS(os);
 	if (typeid(os) == typeid(ofstream))
-		os << endl << this->m_articles.size() << endl;
+		os << endl << this->m_articles.size();
 	
 	else
-		os << ", Number of written Articles:" << this->m_articles.size();
+		os << ", " << endl << "Number of written Articles: " << this->m_articles.size();
 
 	if(this->m_articles.size())
 		this->toOSArticles(os);

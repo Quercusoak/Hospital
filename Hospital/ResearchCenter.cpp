@@ -21,7 +21,8 @@ void ResearchCenter::AddResearcher(Researcher& other)
 	
 
 	researchers.push_back(&other);
-	num_researchers++;
+	if(typeid(other) == typeid(Researcher))
+		num_researchers++;
 
 }
 
