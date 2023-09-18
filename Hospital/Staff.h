@@ -25,6 +25,11 @@ public:
 	Staff& operator=(Staff&& other) noexcept;
 
 
+
+	virtual void toOS(std::ostream& os)	const {}
+
+	virtual void fromOs(std::istream& in) const {}
+
 	friend std::ostream& operator<<(std::ostream& os, const Staff& staff)
 	{		
 		os << staff.type()<< " " << staff.name << ", worker Id - " << staff.workerId;
@@ -33,7 +38,6 @@ public:
 	}
 
 
-	virtual void toOS(std::ostream& os)	const {}
 
 	virtual const string type()			const { return typeid(*this).name() + 6; };
 	
