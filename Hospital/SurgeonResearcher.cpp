@@ -15,9 +15,20 @@ SurgeonResearcher::SurgeonResearcher(Doctor&& other)
 void SurgeonResearcher::toOS(std::ostream& os) const 
 {
 	Surgeon::toOS(os);
-	if (this->getNumArticles() > 0)
-	{
-		os << ", Number of written Articles:" << this->getNumArticles() ;
+	
+	if (typeid(os) == typeid(ofstream))
+		os << endl << this->m_articles.size() << endl;
+
+	else
+		os << ", Number of written Articles:" << this->m_articles.size();
+
+	if (this->m_articles.size())
 		this->toOSArticles(os);
-	}
+}
+
+//--------------------------------------------------------------------------------//
+void SurgeonResearcher::fromOS(std::istream& in)
+{
+	Surgeon::fromOS(in);
+	Researcher::fromOS(in);
 }

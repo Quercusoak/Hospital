@@ -13,9 +13,34 @@ int main()
 
 	cin >> intInput;
 
+
 	if (intInput)
 		HardCoded(hospital);
 
+
+	hospital.getWards()[0].AddStaff(Nurse("NURSE_3 free 35", 12));
+
+	Article* newOne = new Article(Date(1955, 5, 12), "ARTICLE_1_PUBILCATOR", "ARTICLE_1_NAME");
+
+	hospital.getResearchCenter().getResearchers()[0]->addArticle(*newOne);
+
+	vector<Staff*>::const_iterator itr = hospital.getWards()[0].getStaff().begin();
+	cout << **(itr) << endl;
+
+	vector<Researcher*>::const_iterator itr2 = hospital.getResearchCenter().getResearchers().begin();
+	cout << **(itr2) << endl;
+
+	ofstream outFile("test.txt", ios::out);
+
+	outFile << **itr << **itr2;
+	outFile.close();
+
+	ifstream inFile("test.txt");
+	hospital.getWards()[0].AddStaff(Surgeon(inFile));
+	Researcher* res = new Researcher(inFile);
+	hospital.getResearchCenter().AddResearcher(*res);
+
+	inFile.close();
 
 	cout << endl << "---Welcome to the hospital---" << endl;
 	while (loopCheck)

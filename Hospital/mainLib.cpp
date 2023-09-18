@@ -367,7 +367,7 @@ Doctor& chooseDoctor(Ward& ward)
 	} while (num < 1 || num > num_doctors);
 
 
-	vector<Staff*>::iterator itr = ward.getStaff().begin();
+	vector<Staff*>::const_iterator itr = ward.getStaff().begin();
 	for (i = 0; i < num; ++i, ++itr) {
 		if (!dynamic_cast<Doctor*>(*itr))
 			i--;
@@ -383,7 +383,7 @@ void showDoctors(Ward& ward)
 	unsigned int num_doctors = ward.getDoctorsNum();
 
 	unsigned int ret = 0;
-	vector<Staff*>::iterator itr = ward.getStaff().begin();
+	vector<Staff*>::const_iterator itr = ward.getStaff().begin();
 
 	for (; ret < num_doctors; ret++, ++itr)
 	{
@@ -407,7 +407,7 @@ Surgeon& chooseSurgeon(Ward& ward)
 	} while (num < 1 || num > num_surgeons);
 
 
-	vector<Staff*>::iterator itr = ward.getStaff().begin();
+	vector<Staff*>::const_iterator itr = ward.getStaff().begin();
 	for (i = 0; i < num; i++, ++itr) {
 		if (!dynamic_cast<Surgeon*>(*itr))
 			i--;
@@ -423,7 +423,7 @@ void showSurgeons(Ward& ward)
 	unsigned int num_surgeon = ward.getSurgeonsNum();
 
 	unsigned int ret = 0;
-	vector<Staff*>::iterator itr = ward.getStaff().begin();
+	vector<Staff*>::const_iterator itr = ward.getStaff().begin();
 	for (; ret < num_surgeon; ret++, ++itr)
 	{
 		if (dynamic_cast<Surgeon*>(*itr))
@@ -620,7 +620,7 @@ void showStaff(Hospital& hospital)
 
 			if (num_staff > 0)
 			{
-				vector<Staff*>::iterator itr = ward.getStaff().begin();
+				vector<Staff*>::const_iterator itr = ward.getStaff().begin();
 				for (j = 0; j < num_staff; ++j, ++itr)
 					cout << *(*itr) << endl;
 			}

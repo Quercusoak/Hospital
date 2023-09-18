@@ -38,7 +38,7 @@ public:
 	void AddDoctor(Doctor&&);
 
 
-	vector<Staff*>& getStaff()				{ return staff; }
+	const vector<Staff*>& getStaff()		{ return staff; }
 
 	const unsigned int getNumStaff()		const { return staff.size(); }
 	const unsigned int getDoctorsNum()		const { return num_doctors; }

@@ -12,6 +12,8 @@ protected:
 	string m_purpose_of_visit;
 	Doctor* m_doctor;
 
+	static const int M_MAX_NAME_LENGTH = 128;
+
 public:
 	PatientCard(Date date, const string purpose_of_visit, Doctor& doctor);
 	PatientCard(const PatientCard&) = default;

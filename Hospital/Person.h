@@ -14,6 +14,8 @@ class Person
 protected:
 	string name;
 
+	static const int M_MAX_NAME_LENGTH = 128;
+	Person() = default;
 	Person(const string);
 	Person(ifstream& in) { in >> *this; }
 	Person(const Person&) = default;
@@ -30,7 +32,7 @@ public:
 
 	virtual void toOS(std::ostream& os) const {}
 
-	virtual void fromOs(std::istream& in) const {}
+	virtual void fromOS(std::istream& in) {}
 
 
 
@@ -48,8 +50,9 @@ public:
 
 	friend std::istream& operator>>(std::istream& in, Person& person)
 	{
-		in >> person.name;
-		person.fromOs(in);
+		char name[M_MAX_NAME_LENGTH];
+		in.getline(name, M_MAX_NAME_LENGTH);
+		person.name = name;
 
 		return in;
 	}
