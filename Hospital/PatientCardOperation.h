@@ -12,7 +12,7 @@ protected:
 	bool fasting;
 
 public:
-	PatientCardOperation(Date date, const char* purpose_of_visit, Surgeon& doctor, unsigned int room_number, bool fasting);
+	PatientCardOperation(Date date, const string purpose_of_visit, Surgeon& doctor, unsigned int room_number, bool fasting);
 	PatientCardOperation(const PatientCardOperation&) = default;
 	PatientCardOperation(PatientCardOperation&&) = default;
 	virtual ~PatientCardOperation() = default;
