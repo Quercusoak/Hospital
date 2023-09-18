@@ -22,6 +22,10 @@ public:
 	Staff(Staff&&);
 	virtual ~Staff();
 
+	virtual void toOS(std::ostream& os)	const {}
+
+	virtual void fromOs(std::istream& in) const {}
+
 
 	friend std::ostream& operator<<(std::ostream& os, const Staff& staff)
 	{		
@@ -31,7 +35,6 @@ public:
 	}
 
 
-	virtual void toOS(std::ostream& os)	const {}
 
 	virtual const string type()			const { return typeid(*this).name() + 6; };
 	
