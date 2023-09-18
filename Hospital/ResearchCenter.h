@@ -19,8 +19,8 @@ public:
 	
 
 
-	vector<Researcher*> getResearchers()	const { return researchers; }
-	int getNum_researchers()		const { return num_researchers; }
+	const vector<Researcher*>& getResearchers()		{ return researchers; }
+	int getNum_researchers()			  const { return num_researchers; }
 };
 
 #endif __RESEARCH_CENTER_H

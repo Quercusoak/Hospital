@@ -15,6 +15,8 @@ public:
 
 	virtual void toOS(std::ostream& os) const override;
 
+	virtual void fromOS(std::istream& in) override {}
+
 	virtual const string type() const override { return "Researcher Doctor"; }
 
 };

@@ -6,12 +6,16 @@
 class Article
 {
 private:
-	const Date m_publicationDate; 
-	const string magazineName;
-	const string articleName;
+	Date m_publicationDate; 
+	string magazineName;
+	string articleName;
 
+	static const int M_MAX_NAME_LENGTH = 128;
+	
 public:
+	Article() = default;
 	Article(const Date date, const string magaine, const string name) : m_publicationDate(date), magazineName(magaine), articleName(name)	{}
+	Article(ifstream& in) { in >> *this; }
 	Article(const Article&) = delete;
 	Article(Article&&) = delete;
 
@@ -26,11 +30,30 @@ public:
 
 	friend std::ostream& operator<<(std::ostream& os, const Article& article)
 	{
-		os 
-			<< "Magazine Name - " << article.magazineName << "\n"
-			<< "Article Name - " << article.articleName << "\n"
-			<< "Date - " << article.m_publicationDate;
+		if (typeid(os) == typeid(ofstream))
+			os
+				<< article.magazineName << endl
+				<< article.articleName << endl
+				<< article.m_publicationDate;
+
+		else
+			os 
+				<< "Magazine Name - " << article.magazineName << "\n"
+				<< "Article Name - " << article.articleName << "\n"
+				<< "Date - " << article.m_publicationDate;
 		return os;
+	}
+
+	friend std::istream& operator>>(std::istream& in, Article& article)
+	{
+		char strInput[M_MAX_NAME_LENGTH];
+		in.getline(strInput, M_MAX_NAME_LENGTH);
+		article.magazineName = strInput;
+		in.getline(strInput, M_MAX_NAME_LENGTH);
+		article.articleName = strInput;
+		in >> article.m_publicationDate;
+		in.get();
+		return in;
 	}
 };
 
