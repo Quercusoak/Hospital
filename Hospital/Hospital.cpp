@@ -17,10 +17,7 @@ Hospital::~Hospital()
 			patients.erase(itr);
 	}
 
-	/*int size = patients.size();
-	for (int i = 0; i < size; i++) 
-		delete patients[i];*/
-
+	
 	patients.clear();
 }
 
