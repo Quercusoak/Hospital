@@ -9,7 +9,9 @@ protected:
 	int num_surgeries;
 
 public:
+	Surgeon() = default;
 	Surgeon(const string name, const string specialty);
+	Surgeon(ifstream& in) { in >> *this; }
 	Surgeon(Doctor&&);
 	virtual ~Surgeon() {};
 
@@ -19,6 +21,8 @@ public:
 	const int getNumSurgeriesPerformed() { return num_surgeries; }
 
 	virtual void toOS(std::ostream& os) const override;
+	virtual void fromOS(std::istream& in) override;
+
 	
 	virtual const string type() const override { return typeid(*this).name() + 6; }
 

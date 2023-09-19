@@ -5,6 +5,8 @@
 #include "Person.h"
 #include "Exceptions.h"
 
+#define OPRATION 1
+#define NORMAL 0
 
 class Patient : public Person
 {
@@ -42,11 +44,22 @@ public:
 
 	void checkCapacity();
 
-	virtual void toOS(std::ostream& os) const override 
-    {
+	virtual void toOS(std::ostream& os) const override
+	{
 		os << ", Gender - " << getGender() << ", Id - " << id
 			<< ", Number of visits - " << patient_card.size();
 	}
+
+	bool operator==(unsigned int id)
+	{
+		return this->id == id;
+	}
+	bool operator!=(unsigned int id)
+	{
+		return !(*this == id);
+	}
+	
+
 
 };
 

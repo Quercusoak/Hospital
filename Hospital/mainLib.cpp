@@ -13,11 +13,12 @@ int MenuOutPutInPut()
 	int ret;
 
 	cout << "---Main Menu---" << endl;
-	cout << "(0)- Exit program" << endl;
 	cout << "(1)- Add" << endl;
 	cout << "(2)- Show" << endl;
 	cout << "(3)- Search patient using his ID" << endl;
 	cout << "(4)- Compare two researchers" << endl;
+	cout << "(5)- Sort Researchers in Research center" << endl;
+	cout << "(0)- Exit program" << endl << endl;
 	cout << "Please chose an option from the Menu: ";
 
 
@@ -34,13 +35,13 @@ int MenuAdd()
 	int ret;
 
 	cout << "---Add Menu---" << endl
-		<< "(0)- return to main menu." << endl
 		<< "(1)- Add a new ward to hospital" << endl
 		<< "(2)- Add nurse to hospital" << endl
 		<< "(3)- Add doctor to hospital" << endl
 		<< "(4)- Add researcher to hospital" << endl
 		<< "(5)- Add article to researcher" << endl
-		<< "(6)- Add patient visit" << endl << endl
+		<< "(6)- Add patient visit" << endl
+		<< "(0)- return to main menu." << endl << endl
 		<< "Chose action to be done: ";
 
 	cin >> ret;
@@ -49,7 +50,6 @@ int MenuAdd()
 
 	return ret;
 }
-
 
 //----------------------------------------------------------------------------------------------------//
 int MenuPrint()
@@ -57,11 +57,11 @@ int MenuPrint()
 	int ret;
 
 	cout << "---Print Menu---" << endl
-		<< "(0)- return to main menu." << endl
 		<< "(1)- Show all patients conntected to a ward" << endl
 		<< "(2)- Show all hospital workers" << endl
 		<< "(3)- Show all hospital reserachers" << endl
 		<< "(4)- Show all researcher doctors" << endl
+		<< "(0)- return to main menu." << endl << endl
 		<< "Chose action to be done: ";
 
 	cin >> ret;
@@ -70,6 +70,26 @@ int MenuPrint()
 
 	return ret;
 }
+
+//----------------------------------------------------------------------------------------------------//
+int MenuResearcherSort()
+{
+	int ret;
+
+	cout << "---Sort Menu---" << endl
+		<< "(1)- Sort by Id." << endl
+		<< "(2)- Sort by Name." << endl
+		<< "(3)- Show all hospital reserachers" << endl
+		<< "(0)- return to main menu." << endl << endl
+		<< "Chose action to be done: ";
+
+	cin >> ret;
+
+	cout << endl;
+
+	return ret;
+}
+
 
 //----------------------------------------------------------------------------------------------------//
 void addWard(Hospital& hospital)
@@ -337,9 +357,8 @@ void addPatient(Hospital& hospital)
 
 
 		if (!check) {
-			if (patient == nullptr)
+			if (patient == nullptr) 
 				patient = hospital.addPatient(name, id, Date(year, month, day), gender - 1);
-
 
 			if(operation)
 				addOperationCard(*patient, ward);
@@ -520,7 +539,7 @@ Doctor& chooseDoctor(Ward& ward)
 	} while (num < 1 || num > num_doctors);
 
 
-	vector<Staff*>::iterator itr = ward.getStaff().begin();
+	vector<Staff*>::const_iterator itr = ward.getStaff().begin();
 	for (i = 0; i < num; ++i, ++itr) {
 		if (!dynamic_cast<Doctor*>(*itr))
 			i--;
@@ -536,7 +555,7 @@ void showDoctors(Ward& ward)
 	unsigned int num_doctors = ward.getDoctorsNum();
 
 	unsigned int ret = 0;
-	vector<Staff*>::iterator itr = ward.getStaff().begin();
+	vector<Staff*>::const_iterator itr = ward.getStaff().begin();
 
 	for (; ret < num_doctors; ret++, ++itr)
 	{
@@ -560,7 +579,7 @@ Surgeon& chooseSurgeon(Ward& ward)
 	} while (num < 1 || num > num_surgeons);
 
 
-	vector<Staff*>::iterator itr = ward.getStaff().begin();
+	vector<Staff*>::const_iterator itr = ward.getStaff().begin();
 	for (i = 0; i < num; i++, ++itr) {
 		if (!dynamic_cast<Surgeon*>(*itr))
 			i--;
@@ -576,7 +595,7 @@ void showSurgeons(Ward& ward)
 	unsigned int num_surgeon = ward.getSurgeonsNum();
 
 	unsigned int ret = 0;
-	vector<Staff*>::iterator itr = ward.getStaff().begin();
+	vector<Staff*>::const_iterator itr = ward.getStaff().begin();
 	for (; ret < num_surgeon; ret++, ++itr)
 	{
 		if (dynamic_cast<Surgeon*>(*itr))
@@ -589,7 +608,7 @@ void showSurgeons(Ward& ward)
 //----------------------------------------------------------------------------------------------------//
 Researcher& chooseResearcher(ResearchCenter& research_center, Researcher* chosen)
 {
-	unsigned int num, num_researchers = research_center.getNum_researchers();
+	unsigned int num, num_researchers = research_center.getResearchers().size();
 	if (chosen) num_researchers--;
 	do
 	{
@@ -610,7 +629,7 @@ Researcher& chooseResearcher(ResearchCenter& research_center, Researcher* chosen
 //----------------------------------------------------------------------------------------------------//
 void showResearchers(ResearchCenter& research_center, Researcher* chosen)
 {
-	unsigned int num_researchers = research_center.getNum_researchers();
+	unsigned int num_researchers = research_center.getResearchers().size();
 
 	for (unsigned int i = 0, k = 0; i < num_researchers; k++, i++)
 	{
@@ -645,7 +664,7 @@ void addResearcherArticle(Hospital& hospital)
 	unsigned short year, month, day, input = 1;
 	ResearchCenter& research_center = hospital.getResearchCenter();
 
-	bool check = research_center.getNum_researchers() > 0;
+	bool check = research_center.getResearchers().size() > 0;
 	if (check) {
 		Researcher& researcher = chooseResearcher(research_center, NULL);
 
@@ -757,14 +776,14 @@ void showPatients(Hospital& hospital)
 	cout << "Patients in selected ward: " << endl;
 
 
-	vector<Patient*> patients = ward.getPatients();
+	const vector<Patient*> patients = ward.getPatients();
 
-	vector<Patient*>::iterator itr = patients.begin();
-	vector<Patient*>::iterator end = patients.end();
+	vector<Patient*>::const_iterator itr = patients.begin();
+	vector<Patient*>::const_iterator end = patients.end();
 
 	for (; itr != end; ++itr)
 	{
-		cout << *(*itr);
+		cout << *(*itr) << endl;
 	}
 
 
@@ -803,7 +822,7 @@ void showStaff(Hospital& hospital)
 
 			if (num_staff > 0)
 			{
-				vector<Staff*>::iterator itr = ward.getStaff().begin();
+				vector<Staff*>::const_iterator itr = ward.getStaff().begin();
 				for (j = 0; j < num_staff; ++j, ++itr)
 					cout << *(*itr) << endl;
 			}
@@ -821,7 +840,7 @@ void showStaff(Hospital& hospital)
 void showResearchers(Hospital& hospital)
 {
 	ResearchCenter& research_center = hospital.getResearchCenter();
-	unsigned int numToPrint = research_center.getNum_researchers();
+	unsigned int numToPrint = research_center.getResearchers().size();
 
 	cout << "Current Researchers: " << endl;
 
@@ -867,7 +886,7 @@ void returningToMenu()
 void compareResearchers(Hospital& hospital)
 {
 	ResearchCenter& RC = hospital.getResearchCenter();
-	int num_researchers = RC.getNum_researchers();
+	int num_researchers = RC.getResearchers().size();
 	bool check = true;
 	if (num_researchers > 1)
 	{
@@ -877,6 +896,7 @@ void compareResearchers(Hospital& hospital)
 
 		cout << "Second researcher: ";
 		Researcher& second = chooseResearcher(RC, &first);
+
 
 		int res = first > second;
 		if (res > 0)
@@ -898,7 +918,7 @@ void compareResearchers(Hospital& hospital)
 void PrintResearcherDoctors(Hospital& hospital)
 {
 	ResearchCenter& research_center = hospital.getResearchCenter();
-	unsigned int num_researchers = research_center.getNum_researchers();
+	unsigned int num_researchers = research_center.getResearchers().size();
 	
 	if (num_researchers < 1)
 	{
@@ -920,3 +940,5 @@ void PrintResearcherDoctors(Hospital& hospital)
 	returningToMenu();
 	
 }
+
+//----------------------------------------------------------------------------------------------------//

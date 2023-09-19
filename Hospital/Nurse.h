@@ -6,10 +6,11 @@
 class Nurse : public Staff
 {
 private:
-	float yrs_of_experience;
-
+	float yrs_of_experience = 0; 
 public:
-	Nurse(const string name, float yrs_of_experience) noexcept(false);
+	Nurse() = default;
+	Nurse(const string name, float yrs_of_experience)noexcept(false);
+	Nurse(ifstream& in) { in >> *this; }
 	Nurse(const Nurse&) = delete;
 	Nurse(Nurse&&) noexcept;
 	virtual ~Nurse() = default;
@@ -18,7 +19,19 @@ public:
 
 	float getExperience();
 
-	virtual void toOS(std::ostream& os) const override { os << ", Experience - " << yrs_of_experience << " Years."; }
+	virtual void toOS(std::ostream& os) const override 
+	{
+		if (typeid(os) == typeid(ofstream))
+			os << " " << yrs_of_experience;
+		else
+			os << ", Experience - " << yrs_of_experience << " Years.";
+	}
+
+	virtual void fromOS(std::istream& in) override
+	{
+		in >> yrs_of_experience;
+		in.get();
+	}
 
 	
 

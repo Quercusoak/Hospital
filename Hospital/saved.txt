@@ -1,0 +1,69 @@
+4
+ER
+3
+Surgeon
+Doctor
+1000 All
+0
+Doctor
+Steve
+1001 ER
+Nurse
+Joy
+1003 9999
+
+ICU
+1
+ResearcherDoctor
+timmy
+1010 op
+0
+
+ion
+4
+Doctor
+Alex
+1002 Rehabilitation
+Nurse
+Clara
+1004 80
+Nurse
+Margaret
+1005 70
+SurgeonResearcher
+tep
+1008 tepm
+1
+2
+art1
+name1
+4 4 1920
+art 2
+mag 2
+5 5 1950
+
+
+ward1
+1
+Nurse
+jenny
+1009 12
+
+4
+Moshik
+1006 1
+News
+Veggies
+12 5 1950
+tim
+1007 1
+temp
+new
+4 4 1980
+imp
+1011 1
+make
+what
+5 5 1980
+Arthur
+1012 0

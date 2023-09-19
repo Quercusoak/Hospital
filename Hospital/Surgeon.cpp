@@ -11,7 +11,11 @@ Surgeon::Surgeon(const string name, const string specialty)
 //---------------------------------------------------------------//
 Surgeon::Surgeon(Doctor&& other) :Doctor(std::move(other)),Staff(std::move(other))
 {
-	num_surgeries = 0;
+	Surgeon* surgeon = dynamic_cast<Surgeon*>(&other);
+	if (surgeon)
+		num_surgeries = surgeon->num_surgeries;
+	else
+		num_surgeries = 0;
 }
 
 //---------------------------------------------------------------//
@@ -24,5 +28,17 @@ void Surgeon::operator++()
 void Surgeon::toOS(std::ostream& os) const
 {
 	Doctor::toOS(os);
-	os << ", Number of Surgeries Performed: " << num_surgeries;
+	if (typeid(os) == typeid(ofstream))
+		os << endl << num_surgeries;
+	else
+		os << ", Number of Surgeries Performed: " << num_surgeries;
+}
+
+// --------------------------------------------------------------------------------//
+void Surgeon::fromOS(std::istream& in)
+{
+	Doctor::fromOS(in);
+	in >> num_surgeries;
+	in.get();
+
 }
