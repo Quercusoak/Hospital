@@ -226,9 +226,10 @@ void addPatient(Hospital& hospital)
 
 
 		if (!check) {
-			if (patient == nullptr)
+			if (patient == nullptr) {
 				patient = hospital.addPatient(name, id, Date(year, month, day), gender - 1);
-
+			}
+				 
 			if(operation)
 				addOperationCard(*patient, ward);
 			else
@@ -574,14 +575,14 @@ void showPatients(Hospital& hospital)
 	cout << "Patients in selected ward: " << endl;
 
 
-	vector<Patient*> patients = ward.getPatients();
+	const vector<Patient*> patients = ward.getPatients();
 
-	vector<Patient*>::iterator itr = patients.begin();
-	vector<Patient*>::iterator end = patients.end();
+	vector<Patient*>::const_iterator itr = patients.begin();
+	vector<Patient*>::const_iterator end = patients.end();
 
 	for (; itr != end; ++itr)
 	{
-		cout << *(*itr);
+		cout << *(*itr) << endl;
 	}
 
 

@@ -10,7 +10,7 @@ private:
 
 	ResearchCenter research_center;
 
-	vector<Patient> patients;
+	vector<Patient*> patients;
 
 	static const int M_MAX_NAME_LENGTH = 128;
 
@@ -26,14 +26,9 @@ public:
 
 
 	Doctor* searchDoctorByID(const unsigned int& id) noexcept(false);
-	Patient* searchPatientByID(unsigned int& id);
+	Patient* searchPatientByID(const unsigned int& id);
 	Patient* addPatient(const string name, unsigned int id, Date birth_date, int gender);
-	Patient* addPatient(Patient& patient)
-	{
-		patients.push_back(std::move(patient));
-		delete &patient;
-		return &*(--patients.end());
-	}
+	
 
 	
 	ResearchCenter& getResearchCenter() { return research_center; }
