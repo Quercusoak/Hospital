@@ -57,9 +57,9 @@ int MenuPrint()
 	int ret;
 
 	cout << "---Print Menu---" << endl
-		<< "(1)- Show all patients conntected to a ward" << endl
+		<< "(1)- Show all patients connected to a ward" << endl
 		<< "(2)- Show all hospital workers" << endl
-		<< "(3)- Show all hospital reserachers" << endl
+		<< "(3)- Show all hospital researchers" << endl
 		<< "(4)- Show all researcher doctors" << endl
 		<< "(0)- return to main menu." << endl << endl
 		<< "Chose action to be done: ";
@@ -79,7 +79,7 @@ int MenuResearcherSort()
 	cout << "---Sort Menu---" << endl
 		<< "(1)- Sort by Id." << endl
 		<< "(2)- Sort by Name." << endl
-		<< "(3)- Show all hospital reserachers" << endl
+		<< "(3)- Show all hospital researchers" << endl
 		<< "(0)- return to main menu." << endl << endl
 		<< "Chose action to be done: ";
 
@@ -158,7 +158,7 @@ void addDoctor(Hospital& hospital)
 	char specialty[MAX_STRING_INPUT];
 	char name[MAX_NAME_LENGTH];
 	bool check = false;
-	unsigned int dr_type;
+	unsigned int dr_type, input = 1;
 	string error;
 
 	if (hospital.getWardsNum() <= 0)
@@ -168,12 +168,40 @@ void addDoctor(Hospital& hospital)
 	}
 	else
 	{
-		cout << "Enter new doctor's name: ";
 		cleanBuffer();
-		cin.getline(name, MAX_NAME_LENGTH);
 
-		cout << "Enter new doctor's specialty: ";
-		cin.getline(specialty, MAX_STRING_INPUT);
+		while (input)
+		{
+			try
+			{
+				cout << "Enter new doctor's name: ";
+				cin.getline(name, MAX_NAME_LENGTH);
+				StringException c(name);
+				input = 0;
+			}
+			catch (string& e)
+			{
+				cout << "A person must have a name - " << e << endl;
+			}
+		}
+
+
+		input = 1;
+		while (input)
+		{
+			try
+			{
+				cout << "Enter new doctor's specialty: ";
+				cin.getline(specialty, MAX_STRING_INPUT);
+				StringException c(specialty);
+				input = 0;
+			}
+			catch (string& e)
+			{
+				cout << "A person must have a name - " << e << endl;
+			}
+		}
+
 
 		Ward& ward = chooseWard(hospital, name);
 
