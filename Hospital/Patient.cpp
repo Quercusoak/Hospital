@@ -1,11 +1,17 @@
 #include "Patient.h"
 
 //---------------------------------------------------------------//
-Patient::Patient(const string name, unsigned int id, Date date, eGender gender)
+Patient::Patient(const string name, unsigned int id, Date date, unsigned int gender) noexcept(false)
 	:Person(name)
-{
+{	
+	if (id < 1)
+		throw string("ID invalid.");
+
+	if (gender != 0 && gender != 1)
+		throw string("Gender must be one of the binary options.");
+
 	setID(id);
-	setGender(gender);
+	setGender((Patient::eGender)gender);
 	setDate(date);
 }
 
@@ -43,17 +49,31 @@ Patient& Patient::operator=(Patient&& other) noexcept
 
 
 //---------------------------------------------------------------//
-void Patient::AddVisit(Date date, const char* purpose_of_visit, Doctor& doctor)
+void Patient::AddVisit(Date date, const string purpose_of_visit, Doctor& doctor)
 {
 	checkCapacity();
+	try
+	{
 	patient_card.push_back(new PatientCard(date, purpose_of_visit, doctor));
+	}
+	catch (string& e)
+	{
+		cout << e << endl;
+	}
 }
 
 //---------------------------------------------------------------//
-void Patient::AddVisit(Date date, const char* purpose_of_visit, Surgeon& surgeon, int roomNumber, bool fasting)
+void Patient::AddVisit(Date date, const string purpose_of_visit, Surgeon& surgeon, int roomNumber, bool fasting)
 {
 	checkCapacity();
+	try
+	{
 	patient_card.push_back(new PatientCardOperation(date, purpose_of_visit, surgeon, roomNumber, fasting));
+	}
+	catch (string& e)
+	{
+		cout << e << endl;
+	}
 }
 
 //---------------------------------------------------------------//

@@ -13,19 +13,18 @@ private:
 	static const int M_MAX_NAME_LENGTH = 128;
 	
 public:
+
 	Article() = default;
 	Article(const Date date, const string magaine, const string name) : m_publicationDate(date), magazineName(magaine), articleName(name)	{}
 	Article(ifstream& in) { in >> *this; }
+
 	Article(const Article&) = delete;
 	Article(Article&&) = delete;
-
-
 
 
 	const Date getDate()			const { return m_publicationDate; }
 	const string getMagazineName()	const { return magazineName; }
 	const string getArticleName()	const { return articleName; }
-
 
 
 	friend std::ostream& operator<<(std::ostream& os, const Article& article)

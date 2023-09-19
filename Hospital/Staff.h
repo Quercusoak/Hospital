@@ -10,12 +10,13 @@ protected:
 	unsigned int workerId;
 
 	Staff() { counter++; }
-	Staff(const string);
+	Staff(const string) noexcept(false);
 	Staff(ifstream& in) 
 	{
 		in >> *this;
 		counter++; // expectd to work before any other adding, and therefor, older id counter is trusted
 	}
+
 
 private:
 	static unsigned int counter;

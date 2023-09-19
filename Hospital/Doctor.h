@@ -10,14 +10,15 @@ protected:
 	string m_specialty;
 
 public:
+
 	Doctor() = default;
-	Doctor(const string name, const string specialty);
+	Doctor(const string name, const string specialty)noexcept(false);
 	Doctor(ifstream& in) { in >> *this; }
+
 	Doctor(const Doctor&) = delete;
 	Doctor(Doctor&&) noexcept;
 	virtual ~Doctor() = default;
 
-	void setSpecialty(const string specialty) { this->m_specialty = specialty; }
 
 	const char* getSpecialty()			const { return m_specialty.c_str(); }
 
@@ -37,7 +38,6 @@ public:
 		in.getline(strInput, M_MAX_NAME_LENGTH);
 		m_specialty = strInput;
 	}
-
 	
 };
 

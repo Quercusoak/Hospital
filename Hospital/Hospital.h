@@ -11,7 +11,7 @@ private:
 
 	ResearchCenter research_center;
 
-	vector<Patient*> patients;
+	vector<Patient> patients;
 
 	static const int M_MAX_NAME_LENGTH = 128;
 
@@ -21,7 +21,7 @@ public:
 	Hospital(Hospital&&) = delete;
 	~Hospital();
 
-	void AddWard(const string ward_name);
+	void AddWard(const string ward_name) noexcept(false);
 	const unsigned int getWardsNum()			const { return wards.size(); }
 	TemplateArray<Ward>& getWards()				 { return wards; }
 
