@@ -13,11 +13,11 @@ int MenuOutPutInPut()
 	int ret;
 
 	cout << "---Main Menu---" << endl;
-	cout << "(0)- Exit program" << endl;
 	cout << "(1)- Add" << endl;
 	cout << "(2)- Show" << endl;
 	cout << "(3)- Search patient using his ID" << endl;
-	cout << "(4)- Compare two researchers" << endl;
+	cout << "(4)- Compare two researchers" << endl << endl;
+	cout << "(0)- Exit program" << endl;
 	cout << "Please chose an option from the Menu: ";
 
 
@@ -34,13 +34,13 @@ int MenuAdd()
 	int ret;
 
 	cout << "---Add Menu---" << endl
-		<< "(0)- return to main menu." << endl
 		<< "(1)- Add a new ward to hospital" << endl
 		<< "(2)- Add nurse to hospital" << endl
 		<< "(3)- Add doctor to hospital" << endl
 		<< "(4)- Add researcher to hospital" << endl
 		<< "(5)- Add article to researcher" << endl
 		<< "(6)- Add patient visit" << endl << endl
+		<< "(0)- return to main menu." << endl
 		<< "Chose action to be done: ";
 
 	cin >> ret;
@@ -57,11 +57,11 @@ int MenuPrint()
 	int ret;
 
 	cout << "---Print Menu---" << endl
-		<< "(0)- return to main menu." << endl
 		<< "(1)- Show all patients conntected to a ward" << endl
 		<< "(2)- Show all hospital workers" << endl
 		<< "(3)- Show all hospital reserachers" << endl
-		<< "(4)- Show all researcher doctors" << endl
+		<< "(4)- Show all researcher doctors" << endl << endl
+		<< "(0)- return to main menu." << endl
 		<< "Chose action to be done: ";
 
 	cin >> ret;
