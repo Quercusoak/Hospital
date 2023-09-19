@@ -49,8 +49,15 @@ public:
 			<< ", Number of visits - " << patient_card.size();
 	}
 
-
-
+	bool operator==(unsigned int id)
+	{
+		return this->id == id;
+	}
+	bool operator!=(unsigned int id)
+	{
+		return !(*this == id);
+	}
+	
 
 
 };

@@ -8,7 +8,7 @@ Hospital::Hospital()
 //----------------------------------------------------------------------------------------------------//
 Hospital::~Hospital()
 {
-	vector<Patient>::iterator itr = patients.begin();
+	vector<Patient*>::iterator itr = patients.begin();
 	for (auto& elem : patients)
 	{
 		if (itr != patients.end())
@@ -45,24 +45,22 @@ Doctor* Hospital::searchDoctorByID(const unsigned int& id) noexcept(false)
 
 //----------------------------------------------------------------------------------------------------//
 
-Patient* Hospital::searchPatientByID(unsigned int& id)
+Patient* Hospital::searchPatientByID(const unsigned int& id)
 {
-	vector<Patient>::iterator i = patients.begin();
-	vector<Patient>::iterator end = patients.end();
-
-	for (; i != end; ++i)
-	{
-		if ((*i).getID() == id)
-			return &(*i);
-	}
-	return nullptr;
+	
+	vector<Patient*>::iterator found = find_if(patients.begin(), patients.end(), [id](Patient* patient) -> bool {return *patient == id; });
+	
+	if (found == patients.end() || &found == NULL)
+		return nullptr;
+	
+	return (*found);
 }
 
 //----------------------------------------------------------------------------------------------------//
 Patient* Hospital::addPatient(const string name, unsigned int id, Date birth_date, int gender)
 {
-	patients.push_back(std::move(Patient(name, id, birth_date, (Patient::eGender)gender)));
-	return &*(--patients.end());
+	patients.push_back(new Patient(name, id, birth_date, (Patient::eGender)gender));
+	return *(--patients.end());
 }
 
 //----------------------------------------------------------------------------------------------------//
