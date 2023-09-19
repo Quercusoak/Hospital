@@ -32,4 +32,6 @@ void ResearcherDoctor::fromOS(std::istream& in)
 {
 	Doctor::fromOS(in);
 	Researcher::fromOS(in);
+	in.get();
+
 }
