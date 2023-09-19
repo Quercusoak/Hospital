@@ -11,7 +11,7 @@ private:
 
 	ResearchCenter research_center;
 
-	vector<Patient*> patients;
+	vector<Patient> patients;
 
 	static const int M_MAX_NAME_LENGTH = 128;
 
