@@ -9,10 +9,10 @@ private:
 	float yrs_of_experience = 0; 
 public:
 	Nurse() = default;
-	Nurse(const string name, float yrs_of_experience);
+	Nurse(const string name, float yrs_of_experience)noexcept(false);
 	Nurse(ifstream& in) { in >> *this; }
 	Nurse(const Nurse&) = delete;
-	Nurse(Nurse&&);
+	Nurse(Nurse&&) noexcept;
 	virtual ~Nurse() = default;
 
 	void setExperience(float);

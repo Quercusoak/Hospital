@@ -1,13 +1,17 @@
 #include "Nurse.h"
 
 //---------------------------------------------------------------//
-Nurse::Nurse(const string name, float yrs_of_experience)
-	: Staff(name), yrs_of_experience(yrs_of_experience)
+Nurse::Nurse(const string name, float yrs_of_experience) noexcept(false)
+	: Staff(name)
 {
+	if (yrs_of_experience < 0)
+		throw string("Nurse's years of experience cannot be negative value. Retry:");
+
+	this->yrs_of_experience = yrs_of_experience;
 }
 
 //---------------------------------------------------------------//
-Nurse::Nurse(Nurse&& other) :Staff(std::move(other))
+Nurse::Nurse(Nurse&& other) noexcept :Staff(std::move(other))
 {
 	yrs_of_experience = other.getExperience();
 }

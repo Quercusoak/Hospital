@@ -1,22 +1,19 @@
 #ifndef __PERSON_H
 #define __PERSON_H
 
-#include <fstream>
 #include "BaseFunc.h"
-#include <string>
+#include "Exceptions.h"
 #include <vector>
+#include <fstream>
 
-using namespace std;
-#pragma warning(disable: 4996)
 
 class Person
 {
 protected:
 	string name;
-
 	static const int M_MAX_NAME_LENGTH = 128;
 	Person() = default;
-	Person(const string);
+	Person(const string) noexcept(false);
 	Person(ifstream& in) { in >> *this; }
 	Person(const Person&) = default;
 	Person(Person&&) = default;

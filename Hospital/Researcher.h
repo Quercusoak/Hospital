@@ -13,7 +13,7 @@ protected:
 	Researcher() = default;
 
 public:
-	Researcher(const string name);
+	Researcher(const string name) noexcept(false);
 	Researcher(ifstream& in) { in >> *this; }
 	Researcher(const Researcher&) = delete;
 	Researcher(Researcher&&) = default;

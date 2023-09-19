@@ -94,38 +94,61 @@ int MenuResearcherSort()
 //----------------------------------------------------------------------------------------------------//
 void addWard(Hospital& hospital)
 {
+	bool check = false;
 	char name[MAX_NAME_LENGTH];
-	cout << "Enter new ward: ";
 	cleanBuffer();
-	cin.getline(name, MAX_NAME_LENGTH);
+	
+	while (!check)
+	{
+		try
+		{
+			cout << "Enter new ward: ";
+			cin.getline(name, MAX_NAME_LENGTH);
 
-	hospital.AddWard(name);
-	actionDone("Adding a new ward", name);
+			hospital.AddWard(name);
+			check = true;
+		}
+		catch (const string e)
+		{
+			cout << e << endl;
+		}
+	}
+	actionDone("Adding a new ward", name,"",check);
 }
 
 //----------------------------------------------------------------------------------------------------//
-//Initializes new nurse and adds to nurses array in hospital, and then in selected ward (by ref) 
 void addNurse(Hospital& hospital)
 {
 	float exp;
 	char name[MAX_NAME_LENGTH];
+	bool check = false;
 
 	if (hospital.getWardsNum() > 0)
 	{
-		cout << "Enter new nurse's name: ";
-		cleanBuffer();
-		cin.getline(name, MAX_NAME_LENGTH);
+		while (!check)
+		{
+			try
+			{
+				cout << "Enter new nurse's name: ";
+				cleanBuffer();
+				cin.getline(name, MAX_NAME_LENGTH);
 
-		exp = getExperience();
+				cout << "Enter nurse's years of experience: ";
+				cin >> exp;
 
-
-		cout << endl << "Assign " << name << " to a ward: " << endl;
-		chooseWard(hospital) += Nurse(name, exp);
-
-		actionDone("Adding a new nurse", name, "", true);
+				chooseWard(hospital, name) += Nurse(name, exp);
+				check = true;
+			}
+			catch (const string e)
+			{
+				cout << e << endl;
+			}
+		}
 	}
 	else
-		actionDone("Adding a new nurse", "", ERR_NO_WARDS, false);
+		name[0] = '\0';
+
+	actionDone("Adding a new nurse", name, ERR_NO_WARDS, check);
 }
 
 //----------------------------------------------------------------------------------------------------//
@@ -134,10 +157,16 @@ void addDoctor(Hospital& hospital)
 {
 	char specialty[MAX_STRING_INPUT];
 	char name[MAX_NAME_LENGTH];
-	bool is_dr_type = true;
+	bool check = false;
 	unsigned int dr_type;
+	string error;
 
-	if (hospital.getWardsNum() > 0)
+	if (hospital.getWardsNum() <= 0)
+	{
+		error = ERR_NO_WARDS;
+		name[0] = '\0';
+	}
+	else
 	{
 		cout << "Enter new doctor's name: ";
 		cleanBuffer();
@@ -146,57 +175,111 @@ void addDoctor(Hospital& hospital)
 		cout << "Enter new doctor's specialty: ";
 		cin.getline(specialty, MAX_STRING_INPUT);
 
-
-		cout << endl << "Assign " << name << " to a ward: " << endl;
-		Ward& ward = chooseWard(hospital);
+		Ward& ward = chooseWard(hospital, name);
 
 
 		cout << "Select for Dr " << name << ":\n1)Doctor \n2)Surgeon \n3)Researcher Doctor \n4)Researcher Surgeon" << endl;
 		cin >> dr_type;
 
+
 		switch (dr_type)
 		{
 		case 1:
-			ward += Doctor(name, specialty);
+			try
+			{
+				ward += Doctor(name, specialty);
+				check = true;
+			}
+			catch (const string e)
+			{
+				error = e;
+			}
 			break;
 		case 2:
-			ward += Surgeon(name, specialty);
+			try
+			{
+				ward += Surgeon(name, specialty);
+				check = true;
+			}
+			catch (const string e)
+			{
+				error = e;
+			}
 			break;
 		case 3:
-			ward += ResearcherDoctor(name, specialty);
-			hospital.getResearchCenter().AddResearcher(*dynamic_cast<Researcher*>(*(--ward.getStaff().end())));
+			try
+			{
+				ward += ResearcherDoctor(name, specialty);
+				hospital.getResearchCenter().AddResearcher(*dynamic_cast<Researcher*>(*(--ward.getStaff().end())));
+				check = true;
+			}
+			catch (const string e)
+			{
+				error = e;
+			}
 			break;
 		case 4:
-			ward += SurgeonResearcher(name, specialty);
-			hospital.getResearchCenter().AddResearcher(*dynamic_cast<Researcher*>(*(--ward.getStaff().end())));
+			try
+			{
+				ward += SurgeonResearcher(name, specialty);
+				hospital.getResearchCenter().AddResearcher(*dynamic_cast<Researcher*>(*(--ward.getStaff().end())));
+				check = true;
+			}
+			catch (const string e)
+			{
+				error = e;
+			}
 			break;
 		default:
-			is_dr_type = false;
+			error = INCORRECT_DR_TYPE;
 			break;
 		}
-
-
-		actionDone("Adding a new doctor", name, INCORRECT_DR_TYPE, is_dr_type);
 	}
-	else
-		actionDone("Adding a new doctor", "", ERR_NO_WARDS, false);
-
+	actionDone("Adding a new doctor", name, error, check);
 }
 
 //----------------------------------------------------------------------------------------------------//
 void addPatient(Hospital& hospital)
 {
 	unsigned int gender, id, input = 1;
+	int _id;
 	unsigned short year, month, day;
 	char name[MAX_NAME_LENGTH];
-	bool operation;
-
-	cout << "Enter patient's name: ";
+	bool operation = false;
 	cleanBuffer();
-	cin.getline(name, MAX_NAME_LENGTH);
 
-	cout << "Enter patient's id: ";
-	cin >> id;
+	while (input)
+	{
+		try
+		{
+			cout << "Enter patient's name: ";
+			cin.getline(name, MAX_NAME_LENGTH);
+
+			StringException c(name);
+			input = 0;
+		}
+		catch (string& e)
+		{
+			cout << "A person must have a name - " << e << endl;
+		}
+	}
+
+	input = 1;
+	while (input) 
+	{
+		try
+		{
+			cout << "Enter patient's id: ";
+			cin >> _id;
+			IdException e(_id);
+			input = 0;
+		}
+		catch (string exception)
+		{
+			cout << exception << " Please retry." << endl;
+		}
+	}
+	id = _id;
 
 	//Search if patient already exists:
 	Patient* patient = hospital.searchPatientByID(id);
@@ -204,7 +287,9 @@ void addPatient(Hospital& hospital)
 	//if patient new - add patient to hospital:
 	if (patient == nullptr)
 	{
-		while (input) {
+		input = 1;
+		while (input) 
+		{
 			try
 			{
 				cout << "Enter birth date in the format: year month day" << endl;
@@ -217,10 +302,22 @@ void addPatient(Hospital& hospital)
 				cout << exception << " Please retry." << endl;
 			}
 		}
-		//checkDate(&year, &month, &day); //check date validity
-		cout << "Choose gender: " << endl << "1 - male" << endl << "2 - female" << endl;
-		cin >> gender;
 
+		input = 1;
+		while (input) 
+		{
+			try
+			{
+				cout << "Choose gender: " << endl << "1 - male" << endl << "2 - female" << endl;
+				cin >> gender;
+				BoolException c(gender - 1);
+				input = 0;
+			}
+			catch (string& exception)
+			{
+				cout << exception << endl;
+			}
+		}
 	}
 
 	//add visit to patient's card
@@ -230,11 +327,25 @@ void addPatient(Hospital& hospital)
 	if (!check) {
 		Ward& ward = chooseWard(hospital);
 
-		cout << "Is the visit for an operation?" << endl
-			<< "1) No" << endl
-			<< "2) Yes" << endl;
 
-		cin >> input;
+		while (!operation)
+		{
+			try
+			{
+				cout << "Is the visit for an operation?" << endl
+					<< "1) No" << endl
+					<< "2) Yes" << endl;
+
+				cin >> input;
+				BoolException c(input - 1);
+				operation = true;
+			}
+			catch (string& exception)
+			{
+				cout << exception << " Please retry." << endl;
+			}
+		}
+
 		operation = input - 1;
 
 
@@ -246,10 +357,9 @@ void addPatient(Hospital& hospital)
 
 
 		if (!check) {
-			if (patient == nullptr) {
+			if (patient == nullptr) 
 				patient = hospital.addPatient(name, id, Date(year, month, day), gender - 1);
-			}
-				 
+
 			if(operation)
 				addOperationCard(*patient, ward);
 			else
@@ -286,11 +396,24 @@ void addCard(Patient& patient, Ward& ward)
 			cout << exception << " Please retry." << endl;
 		}
 	}
+	cleanBuffer();
 
 	//visit purpose:
-	cout << "Enter purpose of visit: ";
-	cleanBuffer();
-	cin.getline(purpose_of_visit, MAX_STRING_INPUT);
+	input = 1;
+	while (input)
+	{
+		try
+		{
+			cout << "Enter purpose of visit: ";
+			cin.getline(purpose_of_visit, MAX_STRING_INPUT);
+			StringException e(purpose_of_visit);
+			input = 0;
+		}
+		catch (string& exception)
+		{
+			cout << "Must provide purpose for hospital visit - "  << exception << " Please retry." << endl;
+		}
+	}
 
 
 	//Select a doctor in selected ward:
@@ -306,9 +429,8 @@ void addOperationCard(Patient& patient, Ward& ward)
 	unsigned short year, month, day;
 	char purpose_of_visit[MAX_STRING_INPUT];
 	unsigned int room_number, input = 1;
-	bool fasting;
+	bool fasting = false;
 
-	
 	//visit date:
 	while (input)
 	{
@@ -324,13 +446,26 @@ void addOperationCard(Patient& patient, Ward& ward)
 			cout << exception << " Please retry." << endl;
 		}
 	}
-	Date date(year, month, day);
 
 
 	//visit purpose:
-	cout << "Enter purpose of visit: ";
+	input = 1;
 	cleanBuffer();
-	cin.getline(purpose_of_visit, MAX_STRING_INPUT);
+
+	while (input)
+	{
+		try
+		{
+			cout << "Enter purpose of visit: ";
+			cin.getline(purpose_of_visit, MAX_STRING_INPUT);
+			StringException c(purpose_of_visit);
+			input = 0;
+		}
+		catch (string& exception)
+		{
+			cout << "Must provide purpose for hospital visit - " << exception << " Please retry." << endl;
+		}
+	}
 
 
 	//Select a doctor in selected ward:
@@ -341,21 +476,37 @@ void addOperationCard(Patient& patient, Ward& ward)
 	cin >> room_number;
 
 
-	cout << "Was fasting necessary for operation?" << endl
-		<< "1) No" << endl
-		<< "2) Yes" << endl;
-	
-	cin >> input;
+	while (!fasting)
+	{
+		try
+		{
+			cout << "Was fasting necessary for operation?" << endl
+				<< "1) No" << endl
+				<< "2) Yes" << endl;
+
+			cin >> input;
+			BoolException c(input - 1);
+			fasting = true;
+		}
+		catch (string& exception)
+		{
+			cout << exception << " Please retry." << endl;
+		}
+	}
 	fasting = input - 1;
 
-	patient.AddVisit(date, purpose_of_visit, surgeon, room_number, fasting);
+
+	patient.AddVisit(Date(year, month, day), purpose_of_visit, surgeon, room_number, fasting);
 	ward.AddPatient(patient);
 }
 
 //----------------------------------------------------------------------------------------------------//
-Ward& chooseWard(Hospital& hospital)
+Ward& chooseWard(Hospital& hospital, const char* name)
 {
 	unsigned int ward_num, num_of_wards_in_hospital = hospital.getWardsNum();
+
+	if (name != nullptr)
+		cout << endl << "Assign " << name << " to a ward: " << endl;
 
 	do
 	{
@@ -531,18 +682,48 @@ void addResearcherArticle(Hospital& hospital)
 				cout << exception << " Please retry." << endl;
 			}
 		}
-		
-		cleanBuffer();
-		cout << "Please enter Magazine Name: ";
-		cin.getline(magazineName, MAX_NAME_LENGTH);
-		cout << "Please enter Article Name: ";
-		cin.getline(articleName, MAX_NAME_LENGTH);
 
-		Date publicationDate(year, month, day);
-		Article* article = new Article(publicationDate, magazineName, articleName);
+		cleanBuffer();
+		input = 1;
+
+		while (input)
+		{
+			try
+			{
+				cout << "Please enter Magazine Name: ";
+				cin.getline(magazineName, MAX_NAME_LENGTH);
+				StringException c(magazineName);
+				input = 0;
+			}
+			catch (string& exception)
+			{
+				cout << exception << " Please retry." << endl;
+			}
+		}
+
+
+		input = 1;
+
+		while (input)
+		{
+			try
+			{
+				cout << "Please enter Article Name: ";
+				cin.getline(articleName, MAX_NAME_LENGTH);
+				StringException c(articleName);
+				input = 0;
+			}
+			catch (string& exception)
+			{
+				cout << exception << " Please retry." << endl;
+			}
+		}
+
+
+		Article* article = new Article(Date(year, month, day), magazineName, articleName);
 		researcher.addArticle(*article);
 
-		actionDone("Adding Article to researcher", articleName);
+		actionDone("Adding Article to researcher", articleName, "", true);
 	}
 	else
 		actionDone("Adding Article to researcher", "There is no researcher in system",
@@ -677,7 +858,7 @@ void printDate(const Date& date)
 }
 
 //----------------------------------------------------------------------------------------------------//
-void actionDone(const char* actionName, const char* objectName, const char* reason, bool check)
+void actionDone(const string actionName, const string objectName, const string reason, bool check)
 {
 	if (check)
 		cout << "\n"
@@ -698,22 +879,6 @@ void actionDone(const char* actionName, const char* objectName, const char* reas
 void returningToMenu()
 {
 	cout << endl << "Returning to menu..." << endl << endl;
-		
-	
-}
-
-//----------------------------------------------------------------------------------------------------//
-float getExperience()
-{
-	float exp;
-	cout << "Enter new nurse's years of experience: ";
-	cin >> exp;
-
-	while (exp < 0) {
-		cout << "Incorrect Value, please reenter nurse's years of experience: ";
-		cin >> exp;
-	}
-	return exp;
 }
 
 
