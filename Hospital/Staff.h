@@ -9,7 +9,7 @@ class Staff : public Person
 protected:
 	unsigned int workerId;
 
-	Staff(const string);
+	Staff(const string) noexcept(false);
 
 private:
 	static unsigned int counter;

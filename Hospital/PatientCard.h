@@ -13,7 +13,7 @@ protected:
 	Doctor* m_doctor;
 
 public:
-	PatientCard(Date date, const string purpose_of_visit, Doctor& doctor);
+	PatientCard(Date date, const string purpose_of_visit, Doctor& doctor) noexcept(false);
 	PatientCard(const PatientCard&) = default;
 	PatientCard(PatientCard&&) = default;
 	virtual ~PatientCard() = default;

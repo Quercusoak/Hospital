@@ -32,9 +32,9 @@ public:
 
 	~Ward();
 
-	void AddStaff(Staff&&);
+	void AddStaff(Staff&&) noexcept(false);
 	void AddNurse(const string name, float yrs_of_experience);
-	void AddDoctor(const string name, const string specialty);
+	void AddDoctor(const string name, const string specialty) noexcept(false);
 	void AddDoctor(Doctor&&);
 
 
@@ -49,7 +49,7 @@ public:
 	const unsigned int getPatientsNum()		const { return patients.size(); }
 	const vector<Patient*> getPatients()	const { return patients; }
 
-	void operator+=(Staff&& other);
+	void operator+=(Staff&& other) noexcept(false);
 
 	const char* getName()	const { return name.c_str(); }
 

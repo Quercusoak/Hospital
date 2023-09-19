@@ -49,7 +49,7 @@ void addResearcherArticle(Hospital& hospital);
 
 
 
-Ward& chooseWard(Hospital&);
+Ward& chooseWard(Hospital& hospital, const char* name = nullptr);
 
 
 Doctor& chooseDoctor(Ward&);
@@ -94,8 +94,6 @@ void printPatientCard(Patient& patient); //
 void searchPatient(Hospital& hospital);
 
 
-float getExperience();
-
 
 void compareResearchers(Hospital& hospital);
 
@@ -104,7 +102,7 @@ void compareResearchers(Hospital& hospital);
 
 
 
-void actionDone(const char* actionName, const char* objectName, const char* reason = nullptr, bool check = true);
+void actionDone(const string actionName, const string objectName, const string reason = nullptr, bool check = true);
 
 void returningToMenu();
 

@@ -3,6 +3,7 @@
 
 #include "PatientCardOperation.h"
 #include "Person.h"
+#include "Exceptions.h"
 
 
 class Patient : public Person
@@ -20,7 +21,7 @@ private:
 
 
 public:
-	Patient(const string name, unsigned int id, Date date, eGender);
+	Patient(const string name, unsigned int id, Date date, unsigned int) noexcept(false);
 	Patient(Patient&) = delete;
 	Patient(Patient&&) noexcept;
 	Patient& operator=(Patient&& other) noexcept;
@@ -36,8 +37,8 @@ public:
 
 	vector<PatientCard*>& getPatientCard()			  { return patient_card; }
 
-	void AddVisit(Date date, const char* purpose_of_visit, Doctor& doctor);
-	void AddVisit(Date date, const char* purpose_of_visit, Surgeon& surgeon, int roomNumber, bool fasting);
+	void AddVisit(Date date, const string purpose_of_visit, Doctor& doctor);
+	void AddVisit(Date date, const string purpose_of_visit, Surgeon& surgeon, int roomNumber, bool fasting);
 
 	void checkCapacity();
 

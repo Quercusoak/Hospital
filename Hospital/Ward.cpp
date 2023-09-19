@@ -56,7 +56,7 @@ void Ward::AddPatient(Patient& patient)
 
 
 //---------------------------------------------------------------//
-void Ward::AddStaff(Staff&& newStaff)
+void Ward::AddStaff(Staff&& newStaff) 
 {
 	checkMaxSizeReached();
 
@@ -77,20 +77,34 @@ void Ward::AddNurse(const string name, float yrs_of_experience)
 {
 	checkMaxSizeReached();
 
-	staff.push_back(new Nurse(name, yrs_of_experience));
+	try
+	{
+		staff.push_back(new Nurse(name, yrs_of_experience));
+	}
+	catch (const string e)
+	{
+		cout << e << endl;
+	}
 }
 
 //----------------------------------------------------------------------------------------------------//
-void Ward::AddDoctor(const string name, const string specialty)
+void Ward::AddDoctor(const string name, const string specialty) noexcept(false)
 {
 	checkMaxSizeReached();
 
+	try
+	{
 	staff.push_back(new Doctor(name, specialty));
 	num_doctors++;
+	}
+	catch (const string e)
+	{
+		cout << e << endl;
+	}
 }
 
 //----------------------------------------------------------------------------------------------------//
-void Ward::AddDoctor(Doctor&& doctor)
+void Ward::AddDoctor(Doctor&& doctor) 
 {
 	checkMaxSizeReached();
 
@@ -128,7 +142,7 @@ void Ward::checkMaxSizeReached()
 
 
 //----------------------------------------------------------------------------------------------------//
-void Ward::operator+=(Staff&& other)
+void Ward::operator+=(Staff&& other) noexcept(false)
 {
 	AddStaff(std::move(other));
 }

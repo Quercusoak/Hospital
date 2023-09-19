@@ -13,7 +13,7 @@ protected:
 	unsigned int m_numArticles;
 
 public:
-	Researcher(const string name);
+	Researcher(const string name) noexcept(false);
 	Researcher(const Researcher&) = delete;
 	Researcher(Researcher&&) = default;
 	virtual ~Researcher();

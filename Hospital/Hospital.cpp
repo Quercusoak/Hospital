@@ -20,8 +20,11 @@ Hospital::~Hospital()
 }
 
 //----------------------------------------------------------------------------------------------------//
-void Hospital::AddWard(const string ward_name)
+void Hospital::AddWard(const string ward_name) noexcept(false)
 {
+	if (ward_name == "")
+		throw string("Ward name is a required field.");
+
 	wards.add(Ward(ward_name));
 }
 
@@ -41,8 +44,16 @@ Patient* Hospital::searchPatientByID(unsigned int& id)
 }
 
 //----------------------------------------------------------------------------------------------------//
-Patient* Hospital::addPatient(const string name, unsigned int id, Date birth_date, int gender)
+Patient* Hospital::addPatient(const string name, unsigned int id, Date birth_date, int gender) noexcept(false)
 {
-	patients.push_back(std::move(Patient(name, id, birth_date, (Patient::eGender)gender)));
+
+	try
+	{
+		patients.push_back(std::move(Patient(name, id, birth_date, gender)));
+	}
+	catch (string& e)
+	{
+		cout << e << endl;
+	}
 	return &*(--patients.end());
 }

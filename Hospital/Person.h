@@ -1,20 +1,16 @@
 #ifndef __PERSON_H
 #define __PERSON_H
 
-#include <iostream>
 #include "BaseFunc.h"
-#include <string>
-using namespace std;
-#pragma warning(disable: 4996)
+#include "Exceptions.h"
 #include <vector>
-#include <string>
 
 class Person
 {
 protected:
 	string name;
 
-	Person(const string);
+	Person(const string) noexcept(false);
 	Person(const Person&) = default;
 	Person(Person&&) = default;
 	virtual ~Person() = default;

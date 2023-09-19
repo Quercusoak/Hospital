@@ -1,7 +1,7 @@
 #include "Researcher.h"
 
 //---------------------------------------------------------------//
-Researcher::Researcher(const string name): Staff(name)
+Researcher::Researcher(const string name) noexcept(false) : Staff(name)
 {
 	m_numArticles = 0;
 

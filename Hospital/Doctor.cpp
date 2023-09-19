@@ -2,11 +2,13 @@
 #include "Doctor.h"
 
 //---------------------------------------------------------------//
-Doctor::Doctor(const string name, const string specialty)
+Doctor::Doctor(const string name, const string specialty) noexcept(false)
 	: Staff(name)
-
 {
-	setSpecialty(specialty);
+	if (specialty == "")
+		throw string("Doctor's erea of specialty cannot be empty.");
+
+	m_specialty = specialty;
 }
 
 //---------------------------------------------------------------//

@@ -19,7 +19,7 @@ public:
 	Hospital(Hospital&&) = delete;
 	~Hospital();
 
-	void AddWard(const string ward_name);
+	void AddWard(const string ward_name) noexcept(false);
 	const unsigned int getWardsNum()			const { return wards.size(); }
 	TemplateArray<Ward>& getWards()				 { return wards; }
 
