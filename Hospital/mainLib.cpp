@@ -16,8 +16,9 @@ int MenuOutPutInPut()
 	cout << "(1)- Add" << endl;
 	cout << "(2)- Show" << endl;
 	cout << "(3)- Search patient using his ID" << endl;
-	cout << "(4)- Compare two researchers" << endl << endl;
-	cout << "(0)- Exit program" << endl;
+	cout << "(4)- Compare two researchers" << endl;
+	cout << "(5)- Sort Researchers in Research center" << endl;
+	cout << "(0)- Exit program" << endl << endl;
 	cout << "Please chose an option from the Menu: ";
 
 
@@ -39,8 +40,8 @@ int MenuAdd()
 		<< "(3)- Add doctor to hospital" << endl
 		<< "(4)- Add researcher to hospital" << endl
 		<< "(5)- Add article to researcher" << endl
-		<< "(6)- Add patient visit" << endl << endl
-		<< "(0)- return to main menu." << endl
+		<< "(6)- Add patient visit" << endl
+		<< "(0)- return to main menu." << endl << endl
 		<< "Chose action to be done: ";
 
 	cin >> ret;
@@ -49,7 +50,6 @@ int MenuAdd()
 
 	return ret;
 }
-
 
 //----------------------------------------------------------------------------------------------------//
 int MenuPrint()
@@ -60,8 +60,8 @@ int MenuPrint()
 		<< "(1)- Show all patients conntected to a ward" << endl
 		<< "(2)- Show all hospital workers" << endl
 		<< "(3)- Show all hospital reserachers" << endl
-		<< "(4)- Show all researcher doctors" << endl << endl
-		<< "(0)- return to main menu." << endl
+		<< "(4)- Show all researcher doctors" << endl
+		<< "(0)- return to main menu." << endl << endl
 		<< "Chose action to be done: ";
 
 	cin >> ret;
@@ -70,6 +70,26 @@ int MenuPrint()
 
 	return ret;
 }
+
+//----------------------------------------------------------------------------------------------------//
+int MenuResearcherSort()
+{
+	int ret;
+
+	cout << "---Sort Menu---" << endl
+		<< "(1)- Sort by Id." << endl
+		<< "(2)- Sort by Name." << endl
+		<< "(3)- Show all hospital reserachers" << endl
+		<< "(0)- return to main menu." << endl << endl
+		<< "Chose action to be done: ";
+
+	cin >> ret;
+
+	cout << endl;
+
+	return ret;
+}
+
 
 //----------------------------------------------------------------------------------------------------//
 void addWard(Hospital& hospital)
@@ -712,6 +732,7 @@ void compareResearchers(Hospital& hospital)
 		cout << "Second researcher: ";
 		Researcher& second = chooseResearcher(RC, &first);
 
+
 		int res = first > second;
 		if (res > 0)
 			cout << "Researcher " << first.getName() << " has written more articles." << endl;
@@ -754,3 +775,5 @@ void PrintResearcherDoctors(Hospital& hospital)
 	returningToMenu();
 	
 }
+
+//----------------------------------------------------------------------------------------------------//

@@ -19,7 +19,7 @@ timmy
 1010 op
 0
 
-bilitation
+ation
 4
 Doctor
 Alex
@@ -49,7 +49,7 @@ Nurse
 jenny
 1009 12
 
-3
+4
 Moshik
 1006 1
 News
@@ -65,3 +65,5 @@ imp
 make
 what
 5 5 1980
+Arthur
+1012 0

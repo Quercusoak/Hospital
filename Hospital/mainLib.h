@@ -9,7 +9,13 @@
 #define MAX_DAYS 31
 
 
+enum class MainMenu { Exit, Add, show, SearchById, CompareTowResearcher, SortResearchers };
 
+enum class MenuAdd { Back, Ward, Nurse, Doctor, Researcher, Article, Patient };
+
+enum class MenuPrint { Back, WardPatients, Workers, Reserachers, ResearcherDoctors };
+
+enum class MenuResearcherSort { Back, ID, Name, Reserachers };
 
 int MenuOutPutInPut();
 
@@ -19,6 +25,8 @@ int MenuAdd();
 
 int MenuPrint();
 
+
+int MenuResearcherSort();
 
 
 
@@ -98,6 +106,7 @@ float getExperience();
 
 
 void compareResearchers(Hospital& hospital);
+
 
 
 

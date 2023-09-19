@@ -26,5 +26,27 @@ void ResearchCenter::AddResearcher(Researcher& other)
 
 }
 
-
 //---------------------------------------------------------------//
+void ResearchCenter::sortResearchers(unsigned int func)
+{
+	
+	switch (func) 
+	{
+	case BY_NAME:
+		sort(researchers.begin(), researchers.end(), [](Researcher* first, Researcher* second) 
+			{
+				if (strcmp(first->getName(), second->getName()) >= 0)
+					return false;
+				else
+					return true;
+			});
+		break;
+
+	case BY_ID:
+		sort(researchers.begin(), researchers.end(), [](Researcher* first, Researcher* second) {return first->getWorkerID() < second->getWorkerID(); });
+		break;
+
+	default:
+		break;
+	}
+}
