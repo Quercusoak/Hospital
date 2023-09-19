@@ -13,13 +13,26 @@ Joy
 1003 9999
 
 ICU
-1
+2
 ResearcherDoctor
 timmy
 1010 op
-0
+1
+timmy1
+timmy2
+4 4 1920
 
-n
+SurgeonResearcher
+tim
+1013 top
+0
+1
+mag
+meg
+4 4 1920
+
+
+Rehabilitation
 4
 Doctor
 Alex
@@ -34,13 +47,16 @@ SurgeonResearcher
 tep
 1008 tepm
 1
-2
+3
 art1
 name1
 4 4 1920
 art 2
 mag 2
 5 5 1950
+mag1
+name1
+4 4 1920
 
 
 ward1

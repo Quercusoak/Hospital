@@ -212,55 +212,55 @@ void addDoctor(Hospital& hospital)
 
 		switch (dr_type)
 		{
-		case 1:
-			try
-			{
-				ward += Doctor(name, specialty);
-				check = true;
-			}
+			case (int)(AddDoctor::Doctor) :
+				try
+				{
+					ward += Doctor(name, specialty);
+					check = true;
+				}
 			catch (const string e)
-			{
-				error = e;
-			}
+				{
+					error = e;
+				}
 			break;
-		case 2:
-			try
-			{
-				ward += Surgeon(name, specialty);
-				check = true;
-			}
-			catch (const string e)
-			{
-				error = e;
-			}
-			break;
-		case 3:
-			try
-			{
-				ward += ResearcherDoctor(name, specialty);
-				hospital.getResearchCenter().AddResearcher(*dynamic_cast<Researcher*>(*(--ward.getStaff().end())));
-				check = true;
-			}
-			catch (const string e)
-			{
-				error = e;
-			}
-			break;
-		case 4:
-			try
-			{
-				ward += SurgeonResearcher(name, specialty);
-				hospital.getResearchCenter().AddResearcher(*dynamic_cast<Researcher*>(*(--ward.getStaff().end())));
-				check = true;
-			}
-			catch (const string e)
-			{
-				error = e;
-			}
-			break;
-		default:
-			error = INCORRECT_DR_TYPE;
-			break;
+			case (int)(AddDoctor::Surgeon) :
+				try
+				{
+					ward += Surgeon(name, specialty);
+					check = true;
+				}
+				catch (const string e)
+					{
+						error = e;
+					}
+				break;
+			case (int)(AddDoctor::ResearcherDoctor) :
+				try
+				{
+					ward += ResearcherDoctor(name, specialty);
+					hospital.getResearchCenter().AddResearcher(*dynamic_cast<Researcher*>(*(--ward.getStaff().end())));
+					check = true;
+				}
+				catch (const string e)
+				{
+					error = e;
+				}
+				break;
+			case (int)(AddDoctor::SurgeonResearcher) :
+				try
+				{
+					ward += SurgeonResearcher(name, specialty);
+					hospital.getResearchCenter().AddResearcher(*dynamic_cast<Researcher*>(*(--ward.getStaff().end())));
+					check = true;
+				}
+				catch (const string e)
+				{
+					error = e;
+				}
+				break;
+			default:
+				error = INCORRECT_DR_TYPE;
+				break;
 		}
 	}
 	actionDone("Adding a new doctor", name, error, check);

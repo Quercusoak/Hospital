@@ -17,6 +17,9 @@ enum class MenuPrint { Back, WardPatients, Workers, Reserachers, ResearcherDocto
 
 enum class MenuResearcherSort { Back, ID, Name, Reserachers };
 
+enum class AddDoctor { Doctor = 1, Surgeon, ResearcherDoctor, SurgeonResearcher };
+
+
 int MenuOutPutInPut();
 
 
