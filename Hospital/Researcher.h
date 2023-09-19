@@ -28,6 +28,8 @@ public:
 
 	int operator>(const Researcher& other);
 
+
+
 	virtual void toOS(std::ostream& os) const override
 	{
 

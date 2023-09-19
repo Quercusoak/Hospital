@@ -2,6 +2,11 @@
 #define __RESEARCH_CENTER_H
 
 #include "Researcher.h"
+#include <algorithm>
+
+#define BY_NAME 0
+#define BY_ID 1
+
 
 class ResearchCenter
 {
@@ -17,6 +22,7 @@ public:
 
 	void AddResearcher(Researcher& other);
 	
+	void sortResearchers(unsigned int func);
 
 
 	const vector<Researcher*>& getResearchers()		{ return researchers; }

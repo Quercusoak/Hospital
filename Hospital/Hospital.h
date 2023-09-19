@@ -1,6 +1,7 @@
 #include "Ward.h"
 #include "ResearchCenter.h"
 #include "TemplateArray.h"
+#include <algorithm>
 
 class Hospital
 {
