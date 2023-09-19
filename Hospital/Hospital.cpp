@@ -8,14 +8,8 @@ Hospital::Hospital()
 //----------------------------------------------------------------------------------------------------//
 Hospital::~Hospital()
 {
-	vector<Patient*>::iterator itr = patients.begin();
-	for (auto& elem : patients)
-	{
-		if (itr != patients.end())
-			itr = patients.erase(itr);
-		else
-			patients.erase(itr);
-	}
+	int size = patients.size();
+	for (int i = 0; i < size; i++) delete patients[i];
 	patients.clear();
 }
 

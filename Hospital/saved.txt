@@ -19,7 +19,7 @@ timmy
 1010 op
 0
 
-ation
+ion
 4
 Doctor
 Alex
