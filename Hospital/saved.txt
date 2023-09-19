@@ -1,4 +1,4 @@
-3
+4
 ER
 3
 Surgeon
@@ -13,9 +13,13 @@ Joy
 1003 9999
 
 ICU
+1
+ResearcherDoctor
+timmy
+1010 op
 0
 
-Rehabilitation
+ehabilitation
 4
 Doctor
 Alex
@@ -30,9 +34,22 @@ SurgeonResearcher
 tep
 1008 tepm
 1
-0
-
 2
+art1
+name1
+4 4 1920
+art 2
+mag 2
+5 5 1950
+
+
+ward1
+1
+Nurse
+jenny
+1009 12
+
+3
 Moshik
 1006 1
 News
@@ -43,3 +60,8 @@ tim
 temp
 new
 4 4 1980
+imp
+1011 1
+make
+what
+5 5 1980

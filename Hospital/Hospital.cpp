@@ -114,7 +114,7 @@ void Hospital::loadHospital(const char* fileName)
 		
 	}
 	
-	
+
 
 	unsigned int numOfResearchers;
 	inFile >> numOfResearchers;
