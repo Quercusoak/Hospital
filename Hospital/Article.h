@@ -16,8 +16,8 @@ public:
 	Article() = default;
 	Article(const Date date, const string magaine, const string name) : m_publicationDate(date), magazineName(magaine), articleName(name)	{}
 	Article(ifstream& in) { in >> *this; }
-	Article(const Article&) = default;
-	Article(Article&&) = default;
+	Article(const Article&) = delete;
+	Article(Article&&) = delete;
 
 
 
